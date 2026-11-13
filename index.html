@@ -379,6 +379,10 @@ html,body,*{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none
 input,textarea,select{-webkit-user-select:text;user-select:text}
 .txt,.txt *,ul.ingr,ul.ingr *{-webkit-user-select:text;user-select:text;-webkit-touch-callout:default}
 #pmask{touch-action:none}
+/* ===== Barra in basso: base come Telegram + regolazione manuale ===== */
+#tabbar{bottom:calc(8px + env(safe-area-inset-bottom,0px) - var(--bary,0px))}
+html.sa #tabbar{bottom:calc(max(6px, env(safe-area-inset-bottom,0px) - 10px) - var(--fix,0px) - var(--bary,0px))}
+html.sa #toast{bottom:calc(84px + env(safe-area-inset-bottom,0px) - var(--fix,0px) - var(--bary,0px))}
 </style>
 </head>
 <body>
@@ -405,6 +409,7 @@ var SA=false;try{SA=!!(navigator.standalone||(window.matchMedia&&matchMedia("(di
 if(SA)document.documentElement.classList.add("sa");
 function calibrate(){
   var fix=0;
+  document.documentElement.style.setProperty("--bary",(settings.bary||0)+"px");
   try{
     if(SA){
       if(settings.bar==="low")fix=48;
@@ -421,7 +426,7 @@ window.addEventListener("resize",calibrate);
 window.addEventListener("orientationchange",function(){setTimeout(calibrate,300)});
 window.addEventListener("pageshow",calibrate);
 var SK="quaderno-impostazioni-v1";
-var settings={theme:"auto",size:"n",bar:"auto",sort:"az",serv:0,awake:true};
+var settings={theme:"auto",size:"n",bar:"auto",bary:0,sort:"az",serv:0,awake:true};
 var wl=null;
 function loadSettings(){try{var o=JSON.parse(localStorage.getItem(SK)||"null");if(o&&typeof o==="object")Object.keys(settings).forEach(function(k){if(k in o)settings[k]=o[k]})}catch(e){}}
 function saveSettings(){lsSet(SK,settings)}
@@ -458,13 +463,25 @@ function importBackup(txt){
   return n;
 }
 function seg(k,opts){return '<div class="seg">'+opts.map(function(o){var on=String(settings[k])===String(o[0]);return '<button class="chipb'+(on?" on":"")+'" data-act="set" data-k="'+k+'" data-v="'+o[0]+'" aria-pressed="'+on+'">'+o[1]+'</button>'}).join("")+'</div>'}
+function diag(){
+  try{
+    var pr=document.createElement("div");
+    pr.style.cssText="position:fixed;left:0;bottom:0;width:0;visibility:hidden;height:env(safe-area-inset-bottom,0px)";
+    document.body.appendChild(pr);var sb=pr.offsetHeight;document.body.removeChild(pr);
+    var pt=document.createElement("div");
+    pt.style.cssText="position:fixed;left:0;top:0;width:0;visibility:hidden;height:env(safe-area-inset-top,0px)";
+    document.body.appendChild(pt);var st=pt.offsetHeight;document.body.removeChild(pt);
+    var port=window.innerHeight>=window.innerWidth,sh=port?Math.max(screen.width,screen.height):Math.min(screen.width,screen.height);
+    return "Schermo "+sh+" · finestra "+window.innerHeight+" · margine alto "+st+", basso "+sb+" · modalità app: "+(SA?"sì":"no")+" · correzione "+(document.documentElement.style.getPropertyValue("--fix")||"0px")+" · spostamento "+(settings.bary||0)+"px";
+  }catch(e){return ""}
+}
 function setHTML(){
   var canWake=!!navigator.wakeLock,on=!!settings.awake;
   return '<div class="sheet"><div class="head"><h2>Impostazioni</h2></div>'+
   '<div class="sct">Aspetto</div><div class="setc">'+
     '<div class="srow col"><div class="sl">Tema</div>'+seg("theme",[["auto","Automatico"],["light","Chiaro"],["dark","Scuro"]])+'</div>'+
     '<div class="srow col"><div class="sl">Dimensione del testo</div>'+seg("size",[["n","Normale"],["l","Grande"]])+'</div>'+
-    '<div class="srow col"><div class="sl">Barra in basso</div><div class="sh">Se sull’iPhone la barra non è proprio in fondo, prova «Più in basso».</div>'+seg("bar",[["auto","Automatica"],["std","Standard"],["low","Più in basso"]])+'</div>'+
+    '<div class="srow col"><div class="sl">Posizione della barra</div><div class="sh">Se la barra è troppo in alto o troppo in basso, spostala qui. Ogni tocco sposta di pochi millimetri.</div><div class="acts"><button class="b" data-act="bary" data-d="8">Più in basso</button><button class="b" data-act="bary" data-d="-8">Più in alto</button><button class="b" data-act="bary" data-d="0">Ripristina</button></div><div class="sl" style="margin-top:12px">Correzione automatica</div>'+seg("bar",[["auto","Attiva"],["std","Spenta"]])+'<div class="sh" style="margin-top:10px">'+esc(diag())+'</div></div>'+
   '</div>'+
   '<div class="sct">Ricette</div><div class="setc">'+
     '<div class="srow col"><div class="sl">Ordine della lista</div>'+seg("sort",[["az","A–Z"],["recent","Ultime modificate"]])+'</div>'+
@@ -703,6 +720,7 @@ document.addEventListener("click",function(e){
   if(a==="phlib"){$("#ph-lib").click();return}
   if(a==="phrm"){collect();editing.photo="";render(true);saveDraft();return}
   if(a==="share"){var rs2=cur();if(!rs2)return;var tx2=recipeText(rs2);if(navigator.share){navigator.share({title:rs2.title||"Ricetta",text:tx2}).catch(function(e){if(e&&e.name==="AbortError")return;copyText(tx2,"Condivisione non disponibile: testo copiato.")})}else copyText(tx2,"Testo della ricetta copiato.");return}
+  if(a==="bary"){var dd=parseInt(el.dataset.d,10)||0;settings.bary=dd===0?0:Math.max(-60,Math.min(160,(settings.bary||0)+dd));saveSettings();calibrate();render();return}
   if(a==="pmclose"){closeMenu();return}
   if(a==="pmset"){var rr=recipes.find(function(q){return q.id===el.dataset.id});closeMenu();if(rr){rr.group=el.dataset.g||"";persist(rr);render();flash(rr.group?"Aggiunta a «"+rr.group+"».":"Tolta dal gruppo.")}return}
   if(a==="back")return go("list");
