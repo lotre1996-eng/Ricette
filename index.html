@@ -310,6 +310,75 @@ body.dragging .gch{position:fixed;left:0;right:0;top:0;z-index:60;padding:calc(e
 #tabind{width:calc((100% - 8px)/4)}
 .tb{font-size:10.5px}
 .bar{flex-wrap:wrap}
+/* ===== iPhone a schermo intero: alto e barra in basso ===== */
+:root{padding:0}
+html{scroll-padding-top:0}
+.view{padding-top:calc(env(safe-area-inset-top,0px) + 30px)}
+.top{margin-top:calc(-1*(env(safe-area-inset-top,0px) + 30px));padding-top:calc(env(safe-area-inset-top,0px) + 30px)}
+html.sa #pager,html.sa #v-recipe{bottom:calc(-1*var(--fix,0px))}
+html.sa #tabbar{bottom:calc(8px + env(safe-area-inset-bottom,0px) - var(--fix,0px))}
+html.sa #toast{bottom:calc(90px + env(safe-area-inset-bottom,0px) - var(--fix,0px))}
+/* ===== Tutto un po' più piccolo + menu a pressione lunga ===== */
+body{font-size:16px}
+.head h2{font-size:30px}
+h2.t{font-size:26px}
+h3{font-size:18px}
+.hdr h2{font-size:17px}
+.top{padding-left:14px;padding-right:14px}
+.row{padding-left:14px}
+.rtx{padding:9px 14px 9px 0;gap:2px}
+.av{width:48px;height:48px;margin-right:11px;font-size:21px}
+.rt{font-size:16px}
+.row .rs{font-size:12.5px}
+.rsub{font-size:13.5px}
+.gtools{padding:8px 14px;font-size:13px}
+.gtools button.b{font-size:13px}
+.gemp{padding:10px 14px 0}
+#search{padding:10px 16px 10px 40px;font-size:16px;background-position:14px center;background-size:16px}
+.gchw{height:38px;margin-top:10px}
+.gchip{height:32px;padding:0 13px;font-size:13.5px}
+button.b{padding:9px 15px;font-size:14px}
+.plus{width:40px;height:40px}
+.back{padding:8px 14px;font-size:15px}
+input,select,textarea{padding:10px 12px;font-size:16px;border-radius:14px}
+textarea{border-radius:18px}
+#search,#g-new{border-radius:999px}
+#tabbar{width:min(370px,calc(100% - 28px));border-radius:26px}
+#tabind{border-radius:22px}
+.tb{padding:6px 0 5px;font-size:10px;gap:2px}
+.tb svg{width:20px;height:20px}
+.sl{font-size:15px}
+.sh{font-size:12.5px}
+.sct{font-size:12px;margin:18px 6px 6px}
+.srow{padding:11px 0}
+.setc{border-radius:20px}
+.seg .chipb{padding:7px 12px;font-size:13px}
+.sw{width:48px;height:30px}
+.sw::after{width:24px;height:24px}
+.sw.on::after{transform:translateX(18px)}
+.phv{width:84px;height:84px}
+.rph{max-height:220px}
+ul.ingr{padding:2px 14px}
+ul.ingr li{padding:9px 0}
+.txt{padding:12px 14px}
+.sp{padding:10px 14px}
+html.big body{font-size:18px}
+html.big .rt{font-size:19px}
+html.big .sl{font-size:17px}
+#pmask{position:fixed;inset:0;z-index:79;background:rgba(0,0,0,.08)}
+#pmenu{position:fixed;z-index:80;min-width:170px;max-width:230px;max-height:50vh;overflow-y:auto;padding:6px;border-radius:18px;background:var(--rc);-webkit-backdrop-filter:blur(26px) saturate(190%);backdrop-filter:blur(26px) saturate(190%);border:1px solid var(--sep);box-shadow:0 14px 40px rgba(0,0,0,.28)}
+.pmh{padding:6px 12px 4px;font:600 11px/1.2 var(--sf);letter-spacing:.05em;text-transform:uppercase;color:var(--soft)}
+.pmn{padding:8px 12px 10px;font:400 13px/1.35 var(--sf);color:var(--soft)}
+button.pm{display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;text-align:left;padding:9px 12px;border:0;background:none;border-radius:10px;font:500 15px/1.2 var(--sf);color:var(--ink);cursor:pointer}
+button.pm:active{background:var(--press)}
+button.pm.pmx{color:var(--danger)}
+.pmc{color:var(--accent);font-weight:700}
+.row.pressed{background:var(--press)}
+/* ===== Niente selezione accidentale del testo ===== */
+html,body,*{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+input,textarea,select{-webkit-user-select:text;user-select:text}
+.txt,.txt *,ul.ingr,ul.ingr *{-webkit-user-select:text;user-select:text;-webkit-touch-callout:default}
+#pmask{touch-action:none}
 </style>
 </head>
 <body>
@@ -332,8 +401,27 @@ function saveLocal(){lsSet(LS,recipes)}
 function upsert(r){var i=recipes.findIndex(function(x){return x.id===r.id});if(i<0)recipes.push(r);else recipes[i]=r}
 function persist(r){upsert(r);saveLocal()}
 function removeR(id){recipes=recipes.filter(function(x){return x.id!==id});saveLocal()}
+var SA=false;try{SA=!!(navigator.standalone||(window.matchMedia&&matchMedia("(display-mode: standalone)").matches))}catch(e){}
+if(SA)document.documentElement.classList.add("sa");
+function calibrate(){
+  var fix=0;
+  try{
+    if(SA){
+      if(settings.bar==="low")fix=48;
+      else if(settings.bar!=="std"){
+        var port=window.innerHeight>=window.innerWidth,sh=Math.max(screen.width,screen.height),sw=Math.min(screen.width,screen.height);
+        var d=Math.round((port?sh:sw)-window.innerHeight);
+        fix=(d>=8&&d<=120)?d:0;
+      }
+    }
+  }catch(e){}
+  document.documentElement.style.setProperty("--fix",fix+"px");
+}
+window.addEventListener("resize",calibrate);
+window.addEventListener("orientationchange",function(){setTimeout(calibrate,300)});
+window.addEventListener("pageshow",calibrate);
 var SK="quaderno-impostazioni-v1";
-var settings={theme:"auto",size:"n",sort:"az",serv:0,awake:true};
+var settings={theme:"auto",size:"n",bar:"auto",sort:"az",serv:0,awake:true};
 var wl=null;
 function loadSettings(){try{var o=JSON.parse(localStorage.getItem(SK)||"null");if(o&&typeof o==="object")Object.keys(settings).forEach(function(k){if(k in o)settings[k]=o[k]})}catch(e){}}
 function saveSettings(){lsSet(SK,settings)}
@@ -343,6 +431,7 @@ function applySettings(){
   h.classList.toggle("big",settings.size==="l");
   var m=document.querySelectorAll('meta[name="theme-color"]');
   if(m.length===2){var c=settings.theme==="light"?["#F5F5F7","#F5F5F7"]:settings.theme==="dark"?["#1C1C1E","#1C1C1E"]:["#F5F5F7","#1C1C1E"];m[0].setAttribute("content",c[0]);m[1].setAttribute("content",c[1])}
+  calibrate();
   wakeUpdate();
 }
 async function wakeUpdate(){
@@ -375,6 +464,7 @@ function setHTML(){
   '<div class="sct">Aspetto</div><div class="setc">'+
     '<div class="srow col"><div class="sl">Tema</div>'+seg("theme",[["auto","Automatico"],["light","Chiaro"],["dark","Scuro"]])+'</div>'+
     '<div class="srow col"><div class="sl">Dimensione del testo</div>'+seg("size",[["n","Normale"],["l","Grande"]])+'</div>'+
+    '<div class="srow col"><div class="sl">Barra in basso</div><div class="sh">Se sull’iPhone la barra non è proprio in fondo, prova «Più in basso».</div>'+seg("bar",[["auto","Automatica"],["std","Standard"],["low","Più in basso"]])+'</div>'+
   '</div>'+
   '<div class="sct">Ricette</div><div class="setc">'+
     '<div class="srow col"><div class="sl">Ordine della lista</div>'+seg("sort",[["az","A–Z"],["recent","Ultime modificate"]])+'</div>'+
@@ -443,7 +533,7 @@ function groupBarHTML(){
   if(sel&&!names.some(function(g){return g.toLowerCase()===sel.toLowerCase()}))sel="";
   var h='<div class="gchw"><div class="gch" aria-label="Gruppi"><button class="gchip add" data-act="newg">+ Nuova</button><button class="gchip'+(!sel?" on":"")+'" data-act="gsel" data-g="" data-drop="">Tutte le ricette</button>'+names.map(function(g){return '<button class="gchip'+(g.toLowerCase()===sel.toLowerCase()?" on":"")+'" data-act="gsel" data-g="'+esc(g)+'" data-drop="'+esc(g)+'">'+esc(g)+'</button>'}).join("")+'</div></div>';
   if(addingG)h+='<div class="gnew"><input id="g-new" placeholder="Nome del gruppo, per esempio salse" aria-label="Nome del gruppo" maxlength="40"><button class="b p" data-act="gsave">Crea</button><button class="b" data-act="gcancel">Annulla</button></div>';
-  else if(names.length)h+='<p class="ghint">Tieni premuta una ricetta e trascinala su un gruppo.</p>';
+  else if(names.length)h+='<p class="ghint">Tieni premuta una ricetta per aggiungerla a un gruppo.</p>';
   return h;
 }
 function avatar(r){
@@ -481,7 +571,7 @@ function rowsHTML(){
     rows+='<div class="gtools"><span>'+esc(sel)+' · '+cnt+(cnt===1?" ricetta":" ricette")+'</span>'+(sure?'<span><button class="b d sure" data-act="gdel" data-g="'+esc(sel)+'">Conferma: elimina</button><button class="b" data-act="wipeno">Annulla</button></span>':'<button class="b d" data-act="gdel0">Elimina gruppo</button>')+'</div>';
   }
   rows+=res.map(rw).join("");
-  if(sel&&!res.length&&!ql)rows+='<div class="gemp">Gruppo vuoto. Trascina qui le ricette.</div>';
+  if(sel&&!res.length&&!ql)rows+='<div class="gemp">Gruppo vuoto. Tieni premuta una ricetta in «Tutte le ricette» per aggiungerla.</div>';
   return rows||(recipes.length?'<div class="empty">Nessuna ricetta trovata.</div>':'<div class="empty">Nessuna ricetta ancora. Tocca «Nuova» qui sotto per scrivere la prima.</div>');
 }
 function listHTML(){
@@ -570,6 +660,7 @@ function newDraft(){return{id:uid(),isNew:true,title:"",serv:settings.serv||0,st
 function loadDraft(){try{var d=JSON.parse(localStorage.getItem("quaderno-bozza-v1")||"null");if(d&&d.isNew&&Array.isArray(d.ingredients)&&d.ingredients.length)return d}catch(e){}return null}
 function dropDraft(){try{localStorage.removeItem("quaderno-bozza-v1")}catch(e){}}
 function go(v,top){
+  closeMenu();
   if(view==="form"&&v!=="form"&&editing&&$("#f-title"))collect();
   var ti=TABS.indexOf(v);
   if(ti>=0)tab=v;
@@ -612,6 +703,8 @@ document.addEventListener("click",function(e){
   if(a==="phlib"){$("#ph-lib").click();return}
   if(a==="phrm"){collect();editing.photo="";render(true);saveDraft();return}
   if(a==="share"){var rs2=cur();if(!rs2)return;var tx2=recipeText(rs2);if(navigator.share){navigator.share({title:rs2.title||"Ricetta",text:tx2}).catch(function(e){if(e&&e.name==="AbortError")return;copyText(tx2,"Condivisione non disponibile: testo copiato.")})}else copyText(tx2,"Testo della ricetta copiato.");return}
+  if(a==="pmclose"){closeMenu();return}
+  if(a==="pmset"){var rr=recipes.find(function(q){return q.id===el.dataset.id});closeMenu();if(rr){rr.group=el.dataset.g||"";persist(rr);render();flash(rr.group?"Aggiunta a «"+rr.group+"».":"Tolta dal gruppo.")}return}
   if(a==="back")return go("list");
   if(a==="new")return go("form");
   if(a==="edit"&&r){editing=JSON.parse(JSON.stringify(r));if(!editing.ingredients.length)editing.ingredients.push({q:"",u:"",n:""});return go("form",true)}
@@ -628,60 +721,53 @@ document.addEventListener("click",function(e){
     persist(out);selId=out.id;scaleTo=0;dropDraft();go("recipe",true);editing=newDraft();$("#v-form").innerHTML=formHTML();flash("Ricetta salvata.");
   }
 });
-var drag=null,dragT=null,ds=null,suppress=false,scrollRaf=0;
-function endDrag(drop){
-  if(!drag)return;
-  var d=drag;drag=null;cancelAnimationFrame(scrollRaf);
-  if(d.ghost.parentNode)d.ghost.parentNode.removeChild(d.ghost);
-  d.el.classList.remove("drag");document.body.classList.remove("dragging");
-  var o=document.querySelector("[data-drop].over");if(o)o.classList.remove("over");
-  if(drop&&d.target!==null){
-    var r=recipes.find(function(x){return x.id===d.id});
-    if(r&&(r.group||"").trim().toLowerCase()!==d.target.toLowerCase()){r.group=d.target;persist(r);render();flash(d.target?"Spostata in «"+d.target+"».":"Tolta dal gruppo.")}
-  }
-  suppress=true;setTimeout(function(){suppress=false},400);
+var suppress=false,pmT=null,pmS=null;
+function closeMenu(){
+  var m=document.getElementById("pmenu"),k=document.getElementById("pmask");
+  if(m&&m.parentNode)m.parentNode.removeChild(m);
+  if(k&&k.parentNode)k.parentNode.removeChild(k);
+  var p=document.querySelector(".row.pressed");if(p)p.classList.remove("pressed");
 }
-function dragPoint(x,y){
-  if(!drag)return;
-  drag.x=x;drag.y=y;
-  drag.ghost.style.left=(x-drag.dx)+"px";drag.ghost.style.top=(y-drag.dy)+"px";
-  var el=document.elementFromPoint(x,y),g=el&&el.closest?el.closest("[data-drop]"):null;
-  var o=document.querySelector("[data-drop].over");if(o&&o!==g)o.classList.remove("over");
-  if(g){g.classList.add("over");drag.target=g.getAttribute("data-drop")}else drag.target=null;
-}
-function autoScroll(){
-  if(!drag)return;
-  var v=$("#v-list"),h=window.innerHeight,y=drag.y,s=0;
-  if(y<90)s=-Math.ceil((90-y)/5);else if(y>h-90)s=Math.ceil((y-(h-90))/5);
-  if(s){v.scrollTop+=s;dragPoint(drag.x,drag.y)}
-  scrollRaf=requestAnimationFrame(autoScroll);
-}
-function startDrag(row,x,y){
-  var rc=row.getBoundingClientRect(),gh=row.cloneNode(true);
-  gh.classList.add("ghost");gh.removeAttribute("data-act");gh.style.width=rc.width+"px";
-  document.body.appendChild(gh);row.classList.add("drag");document.body.classList.add("dragging");
-  drag={id:row.dataset.id,el:row,ghost:gh,dx:x-rc.left,dy:y-rc.top,x:x,y:y,target:null};
-  try{if(navigator.vibrate)navigator.vibrate(15)}catch(e){}
-  dragPoint(x,y);autoScroll();
+function clearSel(){try{var sl=window.getSelection&&window.getSelection();if(sl&&sl.removeAllRanges)sl.removeAllRanges()}catch(e){}}
+function openMenu(row,x,y){
+  var r=recipes.find(function(q){return q.id===row.dataset.id});if(!r)return;
+  closeMenu();
+  var cur=(r.group||"").trim().toLowerCase(),names=groupNames();
+  var h='<div class="pmh">Aggiungi a un gruppo</div>';
+  if(!names.length)h+='<div class="pmn">Non hai ancora gruppi. Creane uno con «+ Nuova».</div>';
+  names.forEach(function(g){var on=g.toLowerCase()===cur;h+='<button class="pm" data-act="pmset" data-id="'+esc(r.id)+'" data-g="'+esc(g)+'">'+esc(g)+(on?'<span class="pmc">✓</span>':'')+'</button>'});
+  if(cur)h+='<button class="pm pmx" data-act="pmset" data-id="'+esc(r.id)+'" data-g="">Togli dal gruppo</button>';
+  var mask=document.createElement("div");mask.id="pmask";mask.setAttribute("data-act","pmclose");
+  var m=document.createElement("div");m.id="pmenu";m.setAttribute("role","menu");m.innerHTML=h;
+  document.body.appendChild(mask);document.body.appendChild(m);
+  row.classList.add("pressed");
+  clearSel();setTimeout(clearSel,120);setTimeout(clearSel,450);
+  var vw=window.innerWidth,vh=window.innerHeight,w=m.offsetWidth,hh=m.offsetHeight;
+  var left=x>vw/2?x-w-14:x+14;
+  left=Math.max(12,Math.min(vw-w-12,left));
+  var top=Math.max(12,Math.min(vh-hh-110,y-20));
+  m.style.left=left+"px";m.style.top=top+"px";
+  try{if(navigator.vibrate)navigator.vibrate(12)}catch(e){}
+  suppress=true;setTimeout(function(){suppress=false},450);
 }
 document.addEventListener("pointerdown",function(e){
   var row=e.target.closest&&e.target.closest("#rows .row");
   if(!row||view!=="list")return;
   if(e.pointerType==="mouse"&&e.button!==0)return;
-  ds={x:e.clientX,y:e.clientY};clearTimeout(dragT);
-  dragT=setTimeout(function(){dragT=null;startDrag(row,ds.x,ds.y)},380);
+  pmS={x:e.clientX,y:e.clientY};clearTimeout(pmT);
+  pmT=setTimeout(function(){pmT=null;openMenu(row,pmS.x,pmS.y)},450);
 });
 document.addEventListener("pointermove",function(e){
-  if(drag){dragPoint(e.clientX,e.clientY);return}
-  if(dragT&&ds&&(Math.abs(e.clientX-ds.x)>10||Math.abs(e.clientY-ds.y)>10)){clearTimeout(dragT);dragT=null}
+  if(pmT&&pmS&&(Math.abs(e.clientX-pmS.x)>10||Math.abs(e.clientY-pmS.y)>10)){clearTimeout(pmT);pmT=null}
 });
-function pend(e){clearTimeout(dragT);dragT=null;if(drag)endDrag(e.type==="pointerup")}
-document.addEventListener("pointerup",pend);
-document.addEventListener("pointercancel",pend);
-document.addEventListener("touchmove",function(e){if(drag)e.preventDefault()},{passive:false});
+function pmEnd(){clearTimeout(pmT);pmT=null}
+document.addEventListener("pointerup",pmEnd);
+document.addEventListener("pointercancel",pmEnd);
 document.addEventListener("contextmenu",function(e){if(e.target.closest&&e.target.closest("#rows .row"))e.preventDefault()});
+document.addEventListener("selectstart",function(e){var t=e.target&&e.target.nodeType===3?e.target.parentNode:e.target;if(!(t&&t.closest&&t.closest("input,textarea,select,.txt,ul.ingr")))e.preventDefault()});
 document.addEventListener("click",function(e){if(suppress){e.stopPropagation();e.preventDefault()}},true);
 document.addEventListener("keydown",function(e){if(e.target&&e.target.id==="g-new"&&e.key==="Enter"){e.preventDefault();var b=document.querySelector('[data-act="gsave"]');if(b)b.click()}});
+$("#v-list").addEventListener("scroll",closeMenu,{passive:true});
 var pgT=null;
 $("#pager").addEventListener("scroll",function(){
   var pg=this,p=pg.scrollLeft/(pg.clientWidth||1);p=Math.max(0,Math.min(TABS.length-1,p));
