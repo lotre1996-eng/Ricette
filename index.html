@@ -387,18 +387,33 @@ html.sa #toast{bottom:calc(84px + env(safe-area-inset-bottom,0px) - var(--fix,0p
 html.sa #pager,html.sa #v-recipe{bottom:0}
 html.sa #tabbar{bottom:max(0px,calc(max(8px,env(safe-area-inset-bottom,0px) - 8px) - var(--bary,0px)))}
 html.sa #toast{bottom:calc(78px + max(0px,env(safe-area-inset-bottom,0px) - 8px))}
+/* ===== Scheda Menù ===== */
+#v-dish{z-index:12;transform:translateX(100%)}
+#v-dish.on{transform:none}
+#pager #v-menu{background:var(--pgl);padding-left:0;padding-right:0}
+button.b.p.wide{width:100%;margin-top:12px;padding:11px 16px;font-size:15px}
+#tabbar{grid-template-columns:repeat(5,1fr);width:min(400px,calc(100% - 16px))}
+#tabind{width:calc((100% - 8px)/5)}
+.tb span{white-space:nowrap}
+#dsearch{margin-bottom:8px}
+#dsearch,#g-new{border-radius:999px;padding:12px 18px}
+#dsearch{width:100%;box-sizing:border-box;background-color:var(--sbg);border:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;border-radius:999px;padding:12px 18px 12px 44px;font-size:17px;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%238E8E93' stroke-width='2.2' stroke-linecap='round'><circle cx='11' cy='11' r='7'/><path d='M20 20l-3.5-3.5'/></svg>");background-repeat:no-repeat;background-position:16px center}
+#dsearch::-webkit-search-cancel-button{-webkit-appearance:none}
+#dsearch{padding:10px 16px 10px 40px;font-size:16px;background-position:14px center;background-size:16px}
+#dsearch,#g-new{border-radius:999px}
 </style>
 </head>
 <body>
-<div id="pager"><section class="view grid" id="v-list" aria-label="Elenco ricette"></section><section class="view grid" id="v-form" aria-label="Scrivi ricetta"></section><section class="view grid" id="v-shop" aria-label="Lista della spesa"></section><section class="view grid" id="v-set" aria-label="Impostazioni"></section></div>
+<div id="pager"><section class="view grid" id="v-list" aria-label="Elenco ricette"></section><section class="view grid" id="v-menu" aria-label="Menù"></section><section class="view grid" id="v-form" aria-label="Scrivi ricetta"></section><section class="view grid" id="v-shop" aria-label="Lista della spesa"></section><section class="view grid" id="v-set" aria-label="Impostazioni"></section></div>
 <section class="view grid" id="v-recipe" aria-label="Ricetta"></section>
-<nav id="tabbar" class="off" aria-label="Sezioni"><span id="tabind"></span><button class="tb on" data-act="tabgo" data-t="list" aria-label="Ricette"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M4 21.5V5.5"/><path d="M9 8h7"/></svg><span>Ricette</span></button><button class="tb" data-act="tabgo" data-t="form" aria-label="Nuova ricetta"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg><span>Nuova</span></button><button class="tb" data-act="tabgo" data-t="shop" aria-label="Spesa"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3.5h3l2.4 11.2a1.5 1.5 0 0 0 1.5 1.2h8.2a1.5 1.5 0 0 0 1.5-1.1L21 8H6.2"/></svg><span>Spesa</span></button><button class="tb" data-act="tabgo" data-t="settings" aria-label="Impostazioni"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg><span>Impostazioni</span></button></nav>
+<section class="view grid" id="v-dish" aria-label="Piatto"></section>
+<nav id="tabbar" class="off" aria-label="Sezioni"><span id="tabind"></span><button class="tb on" data-act="tabgo" data-t="list" aria-label="Ricette"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M4 21.5V5.5"/><path d="M9 8h7"/></svg><span>Ricette</span></button><button class="tb" data-act="tabgo" data-t="menu" aria-label="Menù"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10"/><path d="M17 3c-2 1.5-3 4-3 7 0 2 1 3 3 3v8"/></svg><span>Menù</span></button><button class="tb" data-act="tabgo" data-t="form" aria-label="Nuova ricetta"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg><span>Nuova</span></button><button class="tb" data-act="tabgo" data-t="shop" aria-label="Spesa"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3.5h3l2.4 11.2a1.5 1.5 0 0 0 1.5 1.2h8.2a1.5 1.5 0 0 0 1.5-1.1L21 8H6.2"/></svg><span>Spesa</span></button><button class="tb" data-act="tabgo" data-t="settings" aria-label="Impostazioni"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg><span>Impostazioni</span></button></nav>
 <div id="toast" role="status"></div>
 <script>
 (function(){
 var UNITS=["g","kg","ml","l","cucchiai","cucchiaini","tazze","pizzico","pezzi","spicchi","q.b."];
 var LS="quaderno-ricette-v1";
-var TABS=["list","form","shop","settings"],tab="list",recipes=[],selId=null,editing=null,sure=false,view="list",sq="",collapsed={},gsel="",groups=[],addingG=false,flt="tutte",scaleTo=0,shop={entries:[],checked:{}};
+var TABS=["list","menu","form","shop","settings"],dishes=[],dedit=null,dq="",DK="quaderno-menu-v1",tab="list",recipes=[],selId=null,editing=null,sure=false,view="list",sq="",collapsed={},gsel="",groups=[],addingG=false,flt="tutte",scaleTo=0,shop={entries:[],checked:{}};
 function $(s){return document.querySelector(s)}
 function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,6)}
@@ -439,7 +454,7 @@ async function wakeUpdate(){
     else if(!want&&wl){var x=wl;wl=null;await x.release()}
   }catch(e){wl=null}
 }
-function backupObj(){return{app:"quaderno-ricette",v:1,recipes:recipes,groups:groups,shop:shop}}
+function backupObj(){return{app:"quaderno-ricette",v:1,recipes:recipes,groups:groups,shop:shop,dishes:dishes}}
 function importBackup(txt){
   var o=JSON.parse(txt),rs=Array.isArray(o)?o:(o&&o.recipes);
   if(!Array.isArray(rs))throw new Error("x");
@@ -452,7 +467,8 @@ function importBackup(txt){
   });
   if(o&&Array.isArray(o.groups))o.groups.forEach(function(g){g=String(g||"").trim();if(g&&!groups.some(function(x){return x.toLowerCase()===g.toLowerCase()}))groups.push(g)});
   if(o&&o.shop&&Array.isArray(o.shop.entries)&&!shop.entries.length)shop={entries:o.shop.entries,checked:o.shop.checked||{}};
-  saveLocal();persistGroups();persistShop();
+  if(o&&Array.isArray(o.dishes))o.dishes.forEach(function(d){if(!d||typeof d!=="object"||!d.id)return;var i=dishes.findIndex(function(x){return x.id===d.id});if(i<0){dishes.push(d);n++}else if((d.updated||0)>(dishes[i].updated||0)){dishes[i]=d;n++}});
+  saveLocal();persistGroups();persistShop();saveDishes();
   return n;
 }
 function seg(k,opts){return '<div class="seg">'+opts.map(function(o){var on=String(settings[k])===String(o[0]);return '<button class="chipb'+(on?" on":"")+'" data-act="set" data-k="'+k+'" data-v="'+o[0]+'" aria-pressed="'+on+'">'+o[1]+'</button>'}).join("")+'</div>'}
@@ -484,7 +500,7 @@ function setHTML(){
     '<div class="srow"><div><div class="sl">Schermo sempre acceso</div><div class="sh">'+(canWake?"Resta acceso mentre guardi una ricetta, utile mentre cucini.":"Questo browser non lo permette.")+'</div></div><button class="sw'+(on?" on":"")+'" role="switch" aria-checked="'+on+'" aria-label="Schermo sempre acceso" data-act="swap"></button></div>'+
   '</div>'+
   '<div class="sct">Dati</div><div class="setc">'+
-    '<div class="srow col"><div class="sl">'+recipes.length+(recipes.length===1?" ricetta":" ricette")+', '+groupNames().length+(groupNames().length===1?" gruppo":" gruppi")+'</div><div class="sh">Sono salvati solo su questo dispositivo. Ogni tanto fai un backup: se il browser cancella i dati, puoi ripristinarli da qui.</div><div class="acts"><button class="b" data-act="bkcopy">Copia backup</button></div></div>'+
+    '<div class="srow col"><div class="sl">'+recipes.length+(recipes.length===1?" ricetta":" ricette")+', '+groupNames().length+(groupNames().length===1?" gruppo":" gruppi")+', '+dishes.length+(dishes.length===1?" piatto":" piatti")+'</div><div class="sh">Sono salvati solo su questo dispositivo. Ogni tanto fai un backup: se il browser cancella i dati, puoi ripristinarli da qui.</div><div class="acts"><button class="b" data-act="bkcopy">Copia backup</button></div></div>'+
     '<div class="srow col"><div class="sl">Ripristina da backup</div><div class="sh">Incolla qui il backup copiato. Le ricette si aggiungono a quelle che hai, senza cancellare niente.</div><textarea id="bk-text" placeholder="Incolla il backup" aria-label="Backup da importare"></textarea><div class="acts"><button class="b" data-act="bkimp">Importa</button></div></div>'+
     '<div class="srow col"><div class="sl">Cancella tutti i dati</div><div class="sh">Toglie ricette, gruppi e lista della spesa da questo dispositivo.</div><div class="acts">'+(sure?'<button class="b d sure" data-act="wipe">Conferma: cancella tutto</button><button class="b" data-act="wipeno">Annulla</button>':'<button class="b d" data-act="wipe0">Cancella tutto</button>')+'</div></div>'+
   '</div>'+
@@ -641,18 +657,40 @@ function formHTML(){
   '<label class="l" for="f-notes">Note</label><textarea id="f-notes" style="min-height:80px">'+esc(d.notes)+'</textarea>'+
   '<div class="actions"><button class="b p" data-act="save">Salva ricetta</button><button class="b" data-act="cancel">'+(d.isNew?"Svuota":"Annulla")+'</button></div></div>';
 }
+function saveDishes(){lsSet(DK,dishes)}
+function dishRows(){
+  var q=(dq||"").trim().toLowerCase();
+  var l=dishes.slice().sort(function(a,b){return (b.updated||0)-(a.updated||0)});
+  if(q)l=l.filter(function(d){return ((d.title||"")+" "+(d.desc||"")).toLowerCase().indexOf(q)>=0});
+  if(!l.length)return dishes.length?'<div class="empty">Nessun piatto trovato.</div>':'<div class="empty">Nessun piatto ancora. Tocca «+ Nuovo piatto» per segnare il primo.</div>';
+  return l.map(function(d){return '<button class="row" data-act="dopen" data-id="'+esc(d.id)+'">'+avatar(d)+'<span class="rtx"><span class="rline"><span class="rt">'+esc(d.title||"Senza nome")+'</span></span><span class="rsub">'+(d.desc&&d.desc.trim()?esc(d.desc.replace(/\s+/g," ")):"Nessuna descrizione")+'</span></span></button>'}).join("");
+}
+function menuHTML(){
+  return '<div class="sheet"><div class="top"><div class="hdr"><h2>Menù</h2></div><input id="dsearch" type="search" placeholder="Cerca un piatto" aria-label="Cerca un piatto" value="'+esc(dq)+'"><button class="b p wide" data-act="dnew">+ Nuovo piatto</button></div><div id="drows">'+dishRows()+'</div></div>';
+}
+function collectDish(){if(!dedit)return;var t=$("#d-title"),x=$("#d-desc");if(t)dedit.title=t.value;if(x)dedit.desc=x.value}
+function dishHTML(){
+  var d=dedit;if(!d)return "";
+  return '<div class="sheet"><div class="fbar"><button class="back glass" data-act="dback">‹ Menù</button><button class="b p" data-act="dsave">Salva</button></div><h2 class="t">'+(d.isNew?"Nuovo piatto":"Modifica piatto")+'</h2>'+
+  '<div class="phb"><div class="phv">'+(d.photo?'<img src="'+esc(d.photo)+'" alt="">':CAM)+'</div><div class="pha"><button class="b" data-act="dphcam">Scatta foto</button><button class="b" data-act="dphlib">Libreria</button>'+(d.photo?'<button class="b d" data-act="dphrm">Rimuovi</button>':'')+'</div><input type="file" id="dph-cam" accept="image/*" capture="environment" hidden><input type="file" id="dph-lib" accept="image/*" hidden></div>'+
+  '<label class="l" for="d-title">Nome del piatto</label><input id="d-title" placeholder="Per esempio risotto ai funghi" value="'+esc(d.title)+'">'+
+  '<label class="l" for="d-desc">Descrizione</label><textarea id="d-desc" rows="4" placeholder="Due righe per ricordarti com’è">'+esc(d.desc)+'</textarea>'+
+  '<div class="actions">'+(d.isNew?'':(sure?'<button class="b d sure" data-act="ddel">Conferma: elimina piatto</button><button class="b" data-act="dno">Annulla</button>':'<button class="b d" data-act="ddel0">Elimina piatto</button>'))+'</div></div>';
+}
 function collect(){
   var d=editing;d.title=$("#f-title").value.trim();d.serv=parseInt($("#f-serv").value,10)||0;d.steps=$("#f-steps").value;d.notes=$("#f-notes").value;
   d.ingredients=[].map.call(document.querySelectorAll(".ing"),function(r){return{m:r.querySelector(".im").value.trim(),q:r.querySelector(".iq").value.trim(),u:r.querySelector(".iu").value,n:r.querySelector(".in").value.trim()}});
 }
 function render(withForm){
   var bk0=$("#bk-text"),bv=bk0?bk0.value:"",ssc=$("#v-set").scrollTop,gc0=document.querySelector(".gch"),gx=gc0?gc0.scrollLeft:0;
-  var sl=$("#v-list").scrollTop,sf=$("#v-form").scrollTop,ss=$("#v-shop").scrollTop;
+  var sm=$("#v-menu").scrollTop,sl=$("#v-list").scrollTop,sf=$("#v-form").scrollTop,ss=$("#v-shop").scrollTop;
   $("#v-list").innerHTML=listHTML();
   $("#v-recipe").innerHTML=recipeHTML();
   if(withForm)$("#v-form").innerHTML=formHTML();
   $("#v-shop").innerHTML=shopHTML();
-  $("#v-list").scrollTop=sl;$("#v-form").scrollTop=sf;$("#v-shop").scrollTop=ss;
+  $("#v-menu").innerHTML=menuHTML();
+  if(view==="dish")$("#v-dish").innerHTML=dishHTML();
+  $("#v-menu").scrollTop=sm;$("#v-list").scrollTop=sl;$("#v-form").scrollTop=sf;$("#v-shop").scrollTop=ss;
   $("#pager").classList.add("on");
   $("#tabbar").classList.toggle("off",TABS.indexOf(view)<0);
   $("#v-set").innerHTML=setHTML();
@@ -660,6 +698,7 @@ function render(withForm){
   $("#v-set").scrollTop=ssc;
   var gc1=document.querySelector(".gch");if(gc1)gc1.scrollLeft=gx;
   $("#v-recipe").classList.toggle("on",view==="recipe");
+  $("#v-dish").classList.toggle("on",view==="dish");
 }
 function setPage(i,smooth){var p=$("#pager");p.scrollTo({left:i*p.clientWidth,behavior:smooth?"smooth":"auto"})}
 function tabUI(p){
@@ -678,7 +717,7 @@ function go(v,top){
   view=v;sure=false;render(v==="form");
   if(ti>=0)setPage(ti,true);else if(v==="recipe"){tab="list";setPage(0,false)}
   wakeUpdate();
-  if(top){var el=$(v==="form"?"#v-form":v==="recipe"?"#v-recipe":v==="settings"?"#v-set":v==="shop"?"#v-shop":"#v-list");if(el)el.scrollTop=0}
+  if(top){var el=$(v==="form"?"#v-form":v==="recipe"?"#v-recipe":v==="settings"?"#v-set":v==="menu"?"#v-menu":v==="dish"?"#v-dish":v==="shop"?"#v-shop":"#v-list");if(el)el.scrollTop=0}
 }
 document.addEventListener("click",function(e){
   var el=e.target.closest("[data-act]");if(!el)return;
@@ -705,15 +744,25 @@ document.addEventListener("click",function(e){
   if(a==="set"){var k2=el.dataset.k,v2=el.dataset.v;settings[k2]=(k2==="serv")?(parseInt(v2,10)||0):v2;saveSettings();applySettings();render();return}
   if(a==="swap"){settings.awake=!settings.awake;saveSettings();wakeUpdate();render();return}
   if(a==="bkcopy"){copyText(JSON.stringify(backupObj()),"Backup copiato.");return}
-  if(a==="bkimp"){var tx=($("#bk-text").value||"").trim();if(!tx){flash("Incolla prima il backup.");return}try{var n2=importBackup(tx);render(false);flash(n2?"Importate "+n2+(n2===1?" ricetta.":" ricette."):"Nessuna ricetta nuova da importare.")}catch(x){flash("Il backup non è valido.")}return}
+  if(a==="bkimp"){var tx=($("#bk-text").value||"").trim();if(!tx){flash("Incolla prima il backup.");return}try{var n2=importBackup(tx);render(false);flash(n2?"Importati "+n2+(n2===1?" elemento.":" elementi."):"Niente di nuovo da importare.")}catch(x){flash("Il backup non è valido.")}return}
   if(a==="wipe0"){sure=true;render();return}
   if(a==="wipeno"){sure=false;render();return}
-  if(a==="wipe"){recipes=[];groups=[];shop={entries:[],checked:{}};saveLocal();persistGroups();persistShop();dropDraft();sure=false;editing=newDraft();render(true);flash("Dati cancellati.");return}
+  if(a==="wipe"){recipes=[];groups=[];dishes=[];saveDishes();shop={entries:[],checked:{}};saveLocal();persistGroups();persistShop();dropDraft();sure=false;editing=newDraft();render(true);flash("Dati cancellati.");return}
   if(a==="phcam"){$("#ph-cam").click();return}
   if(a==="phlib"){$("#ph-lib").click();return}
   if(a==="phrm"){collect();editing.photo="";render(true);saveDraft();return}
   if(a==="share"){var rs2=cur();if(!rs2)return;var tx2=recipeText(rs2);if(navigator.share){navigator.share({title:rs2.title||"Ricetta",text:tx2}).catch(function(e){if(e&&e.name==="AbortError")return;copyText(tx2,"Condivisione non disponibile: testo copiato.")})}else copyText(tx2,"Testo della ricetta copiato.");return}
   if(a==="bary"){var dd=parseInt(el.dataset.d,10)||0;settings.bary=dd===0?0:Math.max(-60,Math.min(160,(settings.bary||0)+dd));saveSettings();calibrate();render();return}
+  if(a==="dnew"){dedit={id:uid(),isNew:true,title:"",desc:"",photo:""};return go("dish",true)}
+  if(a==="dopen"){var dd0=dishes.find(function(x){return x.id===el.dataset.id});if(!dd0)return;dedit=JSON.parse(JSON.stringify(dd0));return go("dish",true)}
+  if(a==="dback"){dedit=null;sure=false;return go("menu")}
+  if(a==="dphcam"){$("#dph-cam").click();return}
+  if(a==="dphlib"){$("#dph-lib").click();return}
+  if(a==="dphrm"){collectDish();dedit.photo="";$("#v-dish").innerHTML=dishHTML();return}
+  if(a==="dsave"){collectDish();var nm=(dedit.title||"").trim();if(!nm){flash("Dai un nome al piatto.");return}var od={id:dedit.id,title:nm,desc:(dedit.desc||"").trim(),photo:dedit.photo||"",updated:Date.now()};var di=dishes.findIndex(function(x){return x.id===od.id});if(di<0)dishes.push(od);else dishes[di]=od;saveDishes();dedit=null;sure=false;go("menu");flash("Piatto salvato.");return}
+  if(a==="ddel0"){collectDish();sure=true;$("#v-dish").innerHTML=dishHTML();return}
+  if(a==="dno"){sure=false;$("#v-dish").innerHTML=dishHTML();return}
+  if(a==="ddel"){dishes=dishes.filter(function(x){return x.id!==dedit.id});saveDishes();dedit=null;sure=false;go("menu");flash("Piatto eliminato.");return}
   if(a==="pmclose"){closeMenu();return}
   if(a==="pmset"){var rr=recipes.find(function(q){return q.id===el.dataset.id});closeMenu();if(rr){rr.group=el.dataset.g||"";persist(rr);render();flash(rr.group?"Aggiunta a «"+rr.group+"».":"Tolta dal gruppo.")}return}
   if(a==="back")return go("list");
@@ -813,9 +862,16 @@ document.addEventListener("change",function(e){
   var f=t.files&&t.files[0];if(!f)return;
   readPhoto(f,function(url){collect();editing.photo=url;render(true);saveDraft();flash("Foto aggiunta.")});
 });
+document.addEventListener("change",function(e){
+  var t=e.target;if(!t||(t.id!=="dph-cam"&&t.id!=="dph-lib"))return;
+  var f=t.files&&t.files[0];if(!f||!dedit)return;
+  readPhoto(f,function(url){collectDish();dedit.photo=url;$("#v-dish").innerHTML=dishHTML();flash("Foto aggiunta.")});
+});
+document.addEventListener("input",function(e){if(e.target.id==="dsearch"){dq=e.target.value;$("#drows").innerHTML=dishRows()}});
 document.addEventListener("input",function(e){if(e.target.id==="search"){sq=e.target.value;$("#rows").innerHTML=rowsHTML()}});
 recipes=loadLocal();
 try{var gj=JSON.parse(localStorage.getItem("quaderno-gruppi-v1")||"null");if(Array.isArray(gj))groups=gj}catch(e){}
+try{var dj=JSON.parse(localStorage.getItem(DK)||"null");if(Array.isArray(dj))dishes=dj}catch(e){}
 try{var sj=JSON.parse(localStorage.getItem("quaderno-spesa-v1")||"null");if(sj&&sj.entries)shop=sj}catch(e){}
 try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist()}catch(e){}
 loadSettings();applySettings();
