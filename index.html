@@ -778,7 +778,7 @@ document.addEventListener("click",function(e){
     collect();
     if(!editing.title){flash("Scrivi il nome della ricetta.");$("#f-title").focus();return}
     var out={id:editing.id,title:editing.title,serv:editing.serv,steps:editing.steps,notes:editing.notes,group:editing.group||"",photo:editing.photo||"",updated:Date.now(),ingredients:editing.ingredients.filter(function(i){return i.n||i.q})};
-    persist(out);selId=out.id;scaleTo=0;dropDraft();go("recipe",true);editing=newDraft();$("#v-form").innerHTML=formHTML();flash("Ricetta salvata.");
+    var wasNew=!!(editing&&editing.isNew);persist(out);selId=out.id;scaleTo=0;dropDraft();if(wasNew)gsel="";go(wasNew?"list":"recipe",true);if(wasNew)setPage(0,false);editing=newDraft();$("#v-form").innerHTML=formHTML();flash("Ricetta salvata.");
   }
 });
 var suppress=false,pmT=null,pmS=null;
