@@ -401,19 +401,56 @@ button.b.p.wide{width:100%;margin-top:12px;padding:11px 16px;font-size:15px}
 #dsearch::-webkit-search-cancel-button{-webkit-appearance:none}
 #dsearch{padding:10px 16px 10px 40px;font-size:16px;background-position:14px center;background-size:16px}
 #dsearch,#g-new{border-radius:999px}
+ul.ingr .ide{display:block;margin-top:2px;font:400 12.5px/1.35 var(--sf);color:var(--soft);font-style:normal}
+html.big ul.ingr .ide{font-size:14px}
+/* ===== Allergeni ===== */
+.al{display:inline-grid;place-items:center;min-width:17px;height:17px;padding:0 4px;border-radius:9px;background:rgba(247,188,36,.26);color:var(--accent);font:700 10.5px/1 var(--sf);box-sizing:border-box}
+.alb{display:inline-flex;flex-wrap:wrap;gap:3px;vertical-align:middle}
+ul.ingr .alb{margin-left:7px}
+.rline .alb{flex:0 1 auto;justify-content:flex-end;max-width:48%;margin-left:6px}
+.rline .rsub{flex:1;min-width:0}
+.alsum{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;margin:2px 0 10px}
+.alc{display:inline-flex;align-items:center;gap:5px;font:500 13px/1 var(--sf);color:var(--ink)}
+.alx{font:600 12px/1 var(--sf);color:var(--soft)}
+.alm,.alnone{font:400 12px/1 var(--sf);color:var(--soft)}
+.alv{display:inline-flex;flex-wrap:wrap;gap:3px}
+.ing .ial{grid-area:auto;grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:2px}
+.alt0{padding:4px 10px;font-size:12px;margin-left:auto}
+.alp{flex-basis:100%;display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.alp .chipb{padding:6px 10px;font-size:13px;display:inline-flex;align-items:center;gap:5px}
+.leg{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)}
+.leg .al{min-width:26px;height:26px;border-radius:13px;font-size:13px;flex:0 0 auto}
+/* ===== Piatti composti da ricette ===== */
+#v-pick{z-index:13;transform:translateX(100%);background:var(--pgl);padding-left:0;padding-right:0}
+#v-pick.on{transform:none}
+.dcmp{margin-top:14px}
+.dcmp>.sl{display:block;margin-bottom:8px}
+.dcr{display:flex;align-items:center;gap:10px;background:var(--rc);border:1px solid var(--sep);border-radius:16px;padding:6px 6px 6px 8px;margin-bottom:8px}
+.dcr .av{width:36px;height:36px;margin:0;font-size:16px}
+.dcl{flex:1;min-width:0;text-align:left;background:none;border:0;padding:6px 0;font:600 15px/1.2 var(--sf);color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer}
+.dcr .b.rm{width:34px;height:34px;padding:0;border-radius:50%}
+.pck{flex:0 0 auto;width:24px;height:24px;border-radius:50%;border:2px solid var(--fb);display:grid;place-items:center;font:700 14px/1 var(--sf);color:#3A2800;margin-left:auto;box-sizing:border-box}
+.pck.on{background:linear-gradient(180deg,#FFE681,#F7BC24);border-color:transparent}
+#psearch{margin-bottom:8px}
+#psearch,#g-new{border-radius:999px;padding:12px 18px}
+#psearch{width:100%;box-sizing:border-box;background-color:var(--sbg);border:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;border-radius:999px;padding:12px 18px 12px 44px;font-size:17px;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%238E8E93' stroke-width='2.2' stroke-linecap='round'><circle cx='11' cy='11' r='7'/><path d='M20 20l-3.5-3.5'/></svg>");background-repeat:no-repeat;background-position:16px center}
+#psearch::-webkit-search-cancel-button{-webkit-appearance:none}
+#psearch{padding:10px 16px 10px 40px;font-size:16px;background-position:14px center;background-size:16px}
+#psearch,#g-new{border-radius:999px}
 </style>
 </head>
 <body>
 <div id="pager"><section class="view grid" id="v-list" aria-label="Elenco ricette"></section><section class="view grid" id="v-menu" aria-label="Menù"></section><section class="view grid" id="v-form" aria-label="Scrivi ricetta"></section><section class="view grid" id="v-shop" aria-label="Lista della spesa"></section><section class="view grid" id="v-set" aria-label="Impostazioni"></section></div>
 <section class="view grid" id="v-recipe" aria-label="Ricetta"></section>
 <section class="view grid" id="v-dish" aria-label="Piatto"></section>
+<section class="view grid" id="v-pick" aria-label="Aggiungi ricette"></section>
 <nav id="tabbar" class="off" aria-label="Sezioni"><span id="tabind"></span><button class="tb on" data-act="tabgo" data-t="list" aria-label="Ricette"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M4 21.5V5.5"/><path d="M9 8h7"/></svg><span>Ricette</span></button><button class="tb" data-act="tabgo" data-t="menu" aria-label="Menù"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10"/><path d="M17 3c-2 1.5-3 4-3 7 0 2 1 3 3 3v8"/></svg><span>Menù</span></button><button class="tb" data-act="tabgo" data-t="form" aria-label="Nuova ricetta"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg><span>Nuova</span></button><button class="tb" data-act="tabgo" data-t="shop" aria-label="Spesa"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3.5h3l2.4 11.2a1.5 1.5 0 0 0 1.5 1.2h8.2a1.5 1.5 0 0 0 1.5-1.1L21 8H6.2"/></svg><span>Spesa</span></button><button class="tb" data-act="tabgo" data-t="settings" aria-label="Impostazioni"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg><span>Impostazioni</span></button></nav>
 <div id="toast" role="status"></div>
 <script>
 (function(){
 var UNITS=["g","kg","ml","l","cucchiai","cucchiaini","tazze","pizzico","pezzi","spicchi","q.b."];
 var LS="quaderno-ricette-v1";
-var TABS=["list","menu","form","shop","settings"],dishes=[],dedit=null,dq="",DK="quaderno-menu-v1",tab="list",recipes=[],selId=null,editing=null,sure=false,view="list",sq="",collapsed={},gsel="",groups=[],addingG=false,flt="tutte",scaleTo=0,shop={entries:[],checked:{}};
+var TABS=["list","menu","form","shop","settings"],dishes=[],dedit=null,dq="",recFrom="",pq="",DK="quaderno-menu-v1",tab="list",recipes=[],selId=null,editing=null,sure=false,view="list",sq="",collapsed={},gsel="",groups=[],addingG=false,flt="tutte",scaleTo=0,shop={entries:[],checked:{}};
 function $(s){return document.querySelector(s)}
 function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,6)}
@@ -434,7 +471,7 @@ window.addEventListener("resize",calibrate);
 window.addEventListener("orientationchange",function(){setTimeout(calibrate,300)});
 window.addEventListener("pageshow",calibrate);
 var SK="quaderno-impostazioni-v1";
-var settings={theme:"auto",size:"n",bar:"auto",bary:0,sort:"az",serv:0,awake:true};
+var settings={theme:"auto",size:"n",bar:"auto",bary:0,ides:1,als:1,lb:0,sort:"az",serv:0,awake:true};
 var wl=null;
 function loadSettings(){try{var o=JSON.parse(localStorage.getItem(SK)||"null");if(o&&typeof o==="object")Object.keys(settings).forEach(function(k){if(k in o)settings[k]=o[k]})}catch(e){}}
 function saveSettings(){lsSet(SK,settings)}
@@ -453,6 +490,24 @@ async function wakeUpdate(){
     if(want&&!wl){wl=await navigator.wakeLock.request("screen");wl.addEventListener("release",function(){wl=null})}
     else if(!want&&wl){var x=wl;wl=null;await x.release()}
   }catch(e){wl=null}
+}
+function lastBkText(){return settings.lb?"Ultimo backup su file: "+new Date(settings.lb).toLocaleDateString("it-IT",{day:"numeric",month:"long",year:"numeric"})+".":"Non hai ancora salvato nessun backup su file."}
+function markBackup(){settings.lb=Date.now();saveSettings();render(false)}
+function exportBackup(){
+  var txt=JSON.stringify(backupObj()),d=new Date(),p2=function(n){return (n<10?"0":"")+n};
+  var nm="quaderno-ricette-"+d.getFullYear()+"-"+p2(d.getMonth()+1)+"-"+p2(d.getDate())+".json";
+  function dl(){
+    try{
+      var u=URL.createObjectURL(new Blob([txt],{type:"application/json"})),a=document.createElement("a");
+      a.href=u;a.download=nm;document.body.appendChild(a);a.click();
+      setTimeout(function(){document.body.removeChild(a);URL.revokeObjectURL(u)},1500);
+      markBackup();
+    }catch(e){flash("Non riesco a creare il file.")}
+  }
+  var file=null;try{file=new File([txt],nm,{type:"application/json"})}catch(e){}
+  if(file&&navigator.canShare&&navigator.canShare({files:[file]})){
+    navigator.share({files:[file],title:"Backup quaderno ricette"}).then(markBackup).catch(function(e){if(e&&e.name==="AbortError")return;dl()});
+  }else dl();
 }
 function backupObj(){return{app:"quaderno-ricette",v:1,recipes:recipes,groups:groups,shop:shop,dishes:dishes}}
 function importBackup(txt){
@@ -495,13 +550,14 @@ function setHTML(){
   '<div class="sct">Ricette</div><div class="setc">'+
     '<div class="srow col"><div class="sl">Ordine della lista</div>'+seg("sort",[["az","A–Z"],["recent","Ultime modificate"]])+'</div>'+
     '<div class="srow col"><div class="sl">Persone predefinite</div><div class="sh">Quante persone compaiono già nelle nuove ricette.</div>'+seg("serv",[[0,"Nessuna"],[2,"2"],[4,"4"],[6,"6"]])+'</div>'+
+    '<div class="srow col"><div class="sl">Ingredienti stranieri</div><div class="sh">Una breve descrizione sotto gli ingredienti tipici di altre cucine, per capire subito cosa sono.</div>'+seg("ides",[[1,"Mostra"],[0,"Nascondi"]])+'</div>'+
   '</div>'+
-  '<div class="sct">In cucina</div><div class="setc">'+
+  allergenSet()+'<div class="sct">In cucina</div><div class="setc">'+
     '<div class="srow"><div><div class="sl">Schermo sempre acceso</div><div class="sh">'+(canWake?"Resta acceso mentre guardi una ricetta, utile mentre cucini.":"Questo browser non lo permette.")+'</div></div><button class="sw'+(on?" on":"")+'" role="switch" aria-checked="'+on+'" aria-label="Schermo sempre acceso" data-act="swap"></button></div>'+
   '</div>'+
   '<div class="sct">Dati</div><div class="setc">'+
-    '<div class="srow col"><div class="sl">'+recipes.length+(recipes.length===1?" ricetta":" ricette")+', '+groupNames().length+(groupNames().length===1?" gruppo":" gruppi")+', '+dishes.length+(dishes.length===1?" piatto":" piatti")+'</div><div class="sh">Sono salvati solo su questo dispositivo. Ogni tanto fai un backup: se il browser cancella i dati, puoi ripristinarli da qui.</div><div class="acts"><button class="b" data-act="bkcopy">Copia backup</button></div></div>'+
-    '<div class="srow col"><div class="sl">Ripristina da backup</div><div class="sh">Incolla qui il backup copiato. Le ricette si aggiungono a quelle che hai, senza cancellare niente.</div><textarea id="bk-text" placeholder="Incolla il backup" aria-label="Backup da importare"></textarea><div class="acts"><button class="b" data-act="bkimp">Importa</button></div></div>'+
+    '<div class="srow col"><div class="sl">'+recipes.length+(recipes.length===1?" ricetta":" ricette")+', '+groupNames().length+(groupNames().length===1?" gruppo":" gruppi")+', '+dishes.length+(dishes.length===1?" piatto":" piatti")+'</div><div class="sh">Sono salvati solo su questo dispositivo. Ogni tanto salva un backup su file (nell’app File o su iCloud Drive): se il browser cancella i dati, lo ripristini da qui. Il backup contiene ricette con foto, gruppi, piatti e lista della spesa.</div><div class="acts"><button class="b p" data-act="bkfile">Salva backup su file</button><button class="b" data-act="bkcopy">Copia come testo</button></div><div class="sh">'+lastBkText()+'</div></div>'+
+    '<div class="srow col"><div class="sl">Ripristina da backup</div><div class="sh">Scegli il file di backup oppure incolla il testo copiato. Quello che importi si aggiunge a quello che hai, senza cancellare niente.</div><div class="acts"><button class="b p" data-act="bkpick">Scegli file di backup</button></div><input type="file" id="bk-file" accept=".json,application/json,text/plain" hidden><textarea id="bk-text" placeholder="Incolla il backup" aria-label="Backup da importare"></textarea><div class="acts"><button class="b" data-act="bkimp">Importa</button></div></div>'+
     '<div class="srow col"><div class="sl">Cancella tutti i dati</div><div class="sh">Toglie ricette, gruppi e lista della spesa da questo dispositivo.</div><div class="acts">'+(sure?'<button class="b d sure" data-act="wipe">Conferma: cancella tutto</button><button class="b" data-act="wipeno">Annulla</button>':'<button class="b d" data-act="wipe0">Cancella tutto</button>')+'</div></div>'+
   '</div>'+
   '<p class="sh" style="text-align:center;margin:18px 0 0">Quaderno di ricette</p></div>';
@@ -511,7 +567,222 @@ function cur(){return recipes.find(function(r){return r.id===selId})}
 function num(s){s=String(s||"").trim().replace(",",".");var m=s.match(/^(\d+(?:\.\d+)?)\s*\/\s*(\d+(?:\.\d+)?)$/);if(m)return +m[1]/+m[2];return /^\d+(\.\d+)?$/.test(s)?+s:NaN}
 function fmt(x){return String(Math.round(x*100)/100).replace(".",",")}
 function scaleQ(q,k){if(!q||!k||k===1)return q;var v=num(q);return isNaN(v)?q:fmt(v*k)}
-function line(i,k){var q=esc(scaleQ(i.q,k)),n=esc(i.n),m=i.m?' <span class="mk">'+esc(i.m)+'</span>':"";if(i.u==="q.b.")return "<b>"+n+"</b> q.b."+(q?" ("+q+")":"")+m;return (q?"<b>"+q+"</b> ":"")+(i.u?esc(i.u)+" ":"")+n+m}
+function lineBase(i,k){var q=esc(scaleQ(i.q,k)),n=esc(i.n),m=i.m?' <span class="mk">'+esc(i.m)+'</span>':"";if(i.u==="q.b.")return "<b>"+n+"</b> q.b."+(q?" ("+q+")":"")+m;return (q?"<b>"+q+"</b> ":"")+(i.u?esc(i.u)+" ":"")+n+m}
+function nz(s){return String(s||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[’']/g," ").replace(/[^a-z0-9 ]+/g," ").replace(/\s+/g," ").trim()}
+var FOREIGN=[
+[["salsa di soia","shoyu","soy sauce","salsa shoyu"],"Salsa salata di soia fermentata, di origine asiatica. Insaporisce e dà umami."],
+[["tamari"],"Salsa di soia giapponese più densa e spesso senza glutine. Gusto intenso e rotondo."],
+[["miso"],"Pasta giapponese di soia fermentata, salata e ricca di umami. Per zuppe, salse e marinature."],
+[["dashi"],"Brodo giapponese di alga kombu e tonnetto secco. Base di zuppe e salse, sa di mare."],
+[["mirin"],"Vino di riso dolce giapponese da cucina. Dà dolcezza e lucido a salse e glasse."],
+[["sake"],"Bevanda giapponese di riso fermentato. In cucina ammorbidisce e profuma carne e pesce."],
+[["wasabi"],"Radice giapponese molto piccante, in pasta verde. Il bruciore sale al naso, non alla lingua."],
+[["nori"],"Alghe giapponesi in fogli secchi. Per sushi e onigiri, o sbriciolate sul riso."],
+[["kombu"],"Alga giapponese essiccata, ricca di umami. Serve a fare brodi e dashi."],
+[["wakame"],"Alga giapponese verde, morbida dopo l’ammollo. Per zuppe di miso e insalate."],
+[["katsuobushi","bonito"],"Scaglie di tonnetto essiccato e affumicato. Danno sapore di mare a brodi e piatti."],
+[["panko"],"Pangrattato giapponese a scaglie grosse. Dà una panatura leggera e molto croccante."],
+[["salsa tonkatsu","tonkatsu"],"Salsa giapponese densa, dolce e speziata, per cotolette e fritti."],
+[["edamame"],"Fagioli di soia verdi ancora nel baccello. Si lessano e si mangiano salati."],
+[["daikon"],"Grosso ravanello bianco giapponese, dolce e delicato. Crudo, in insalata o cotto in umido."],
+[["ponzu"],"Salsa giapponese agrumata a base di soia. Fresca e acida, per pesce e carne."],
+[["umeboshi"],"Prugne giapponesi sotto sale: molto salate e acide. Si mangiano a pezzetti con il riso."],
+[["furikake"],"Condimento giapponese per il riso: alghe, sesamo e pesce secco in scaglie."],
+[["maionese giapponese","kewpie"],"Maionese giapponese, più cremosa e dolce di quella classica."],
+[["riso per sushi","riso sushi"],"Riso giapponese a chicco corto e appiccicoso, condito con aceto per il sushi."],
+[["aceto di riso"],"Aceto di riso, delicato e un po’ dolce. Per sushi, insalate e salse asiatiche."],
+[["udon"],"Spaghettoni giapponesi di grano, spessi e morbidi. Per zuppe e saltati."],
+[["soba"],"Spaghetti giapponesi di grano saraceno, dal gusto rustico. Caldi in brodo o freddi con salsa."],
+[["ramen"],"Noodles giapponesi di grano, sottili ed elastici. Si servono in brodo."],
+[["tofu"],"Cagliata di soia, bianca e neutra. Assorbe i sapori; morbida o compatta."],
+[["tempeh"],"Soia fermentata in panetto, compatta e saporita. Si taglia e si cuoce."],
+[["seitan"],"Proteina di glutine di frumento, dalla consistenza simile alla carne. Per piatti vegetali."],
+[["matcha"],"Tè verde giapponese in polvere fine, dal sapore erbaceo e un po’ amaro."],
+[["yuzu"],"Agrume giapponese profumato, tra limone e mandarino. Per salse e dessert."],
+[["shiitake"],"Fungo asiatico dal sapore intenso e affumicato. Fresco o secco."],
+[["gochujang"],"Pasta coreana di peperoncino fermentata, piccante e dolce. Per marinature e salse."],
+[["gochugaru"],"Fiocchi di peperoncino coreano, piccantezza media e sapore fruttato."],
+[["kimchi"],"Cavolo cinese fermentato e piccante, tipico coreano: acido e speziato."],
+[["doenjang"],"Pasta coreana di soia fermentata, più forte del miso. Per zuppe e stufati."],
+[["tteok","tteokbokki"],"Bastoncini o dischi di riso coreani, masticabili. Si cuociono in salsa piccante."],
+[["hoisin"],"Salsa cinese densa, dolce e speziata, a base di soia. Per anatra, carne e saltati."],
+[["salsa di ostriche"],"Salsa cinese scura e dolce-salata di ostriche. Insaporisce saltati e verdure."],
+[["cinque spezie","5 spezie"],"Miscela cinese di anice stellato, cannella, finocchio, pepe di Sichuan e chiodi di garofano."],
+[["pepe di sichuan","pepe sichuan","sichuan"],"Bacca cinese dal profumo agrumato che dà un formicolio sulla lingua."],
+[["anice stellato"],"Spezia a forma di stella dal sapore di liquirizia. Per brodi e brasati."],
+[["pak choi","bok choy","pak choy"],"Cavolo cinese con foglie verdi e coste bianche, tenero e delicato. Saltato o in zuppa."],
+[["shaoxing"],"Vino di riso cinese ambrato da cucina. Profuma carne e salse."],
+[["doubanjiang"],"Pasta cinese di fave e peperoncino fermentata, piccante e salata."],
+[["glutammato"],"Esaltatore di sapore (umami) usato nella cucina asiatica. Se ne usa pochissimo."],
+[["wonton"],"Fagottini cinesi di pasta sottile ripieni, lessati o fritti."],
+[["vermicelli di riso","noodles di riso","noodle di riso","spaghetti di riso"],"Spaghetti sottili di riso, trasparenti dopo l’ammollo. Per insalate e zuppe."],
+[["germogli di bambu"],"Germogli di bambù: croccanti e delicati, di solito in scatola. Per saltati e zuppe."],
+[["cavolo cinese"],"Cavolo allungato dalle foglie tenere e dolci, comune in Asia. Crudo o cotto."],
+[["olio di sesamo"],"Olio di sesamo tostato, molto profumato. Si aggiunge a fine cottura nei piatti asiatici."],
+[["salsa di pesce","nam pla","fish sauce"],"Salsa asiatica di pesce fermentato, salatissima e piena di umami. Bastano poche gocce."],
+[["sriracha"],"Salsa piccante thailandese di peperoncino, aglio e aceto, dolce e acida."],
+[["latte di cocco"],"Crema densa e dolce ottenuta dalla noce di cocco. Per curry e dessert."],
+[["citronella","lemongrass"],"Erba asiatica dal profumo di limone. Si schiaccia, si cuoce e si toglie."],
+[["galanga"],"Radice thailandese simile allo zenzero, ma più resinosa e agrumata."],
+[["kaffir","foglie di lime"],"Foglie di lime thailandese molto profumate e agrumate. Per curry e zuppe."],
+[["pasta di curry","curry rosso","curry verde","curry giallo"],"Pasta thailandese di peperoncino, erbe e spezie: base dei curry. Rossa e verde sono piccanti."],
+[["tamarindo"],"Frutto asiatico dalla polpa acida e dolce. Per salse, chutney e curry."],
+[["sambal"],"Salsa indonesiana di peperoncino pestato, piccante e fresca."],
+[["carta di riso","rice paper"],"Fogli sottili e trasparenti di riso, da ammollare. Per gli involtini freschi vietnamiti."],
+[["peperoncino thai","thai chili","bird eye"],"Peperoncino piccolissimo ma molto piccante, tipico della cucina thailandese."],
+[["basilico thai"],"Basilico asiatico più speziato, con note di anice. Resiste alla cottura."],
+[["belacan","pasta di gamberi"],"Pasta fermentata di gamberi, molto forte. Base di salse e curry del sud-est asiatico."],
+[["garam masala"],"Miscela indiana di spezie calde (cumino, coriandolo, cardamomo, cannella). Si aggiunge a fine cottura."],
+[["tikka masala"],"Salsa indiana cremosa di pomodoro e spezie, dolce e speziata."],
+[["tandoori"],"Miscela indiana di spezie rosse con yogurt per marinare la carne. Dà colore e profumo."],
+[["foglie di curry"],"Foglie aromatiche indiane dal profumo agrumato e di nocciola, rosolate nell’olio."],
+[["curry"],"Miscela di spezie indiane (curcuma, coriandolo, cumino). Dà colore giallo e gusto speziato."],
+[["curcuma"],"Spezia gialla ricavata da una radice, calda e leggermente amara. Colora e profuma."],
+[["cumino"],"Semi dal sapore caldo e terroso, tipici di India, Medio Oriente e Messico."],
+[["coriandolo"],"I semi sono agrumati e dolci, le foglie fresche molto profumate. Tipico di India, Asia e Messico."],
+[["cardamomo"],"Semi aromatici in baccello verde, dolci e freschi. Per curry, dolci e tè chai."],
+[["ghee"],"Burro chiarificato indiano, senza acqua né lattosio. Regge le alte temperature."],
+[["paneer"],"Formaggio fresco indiano non stagionato, compatto e delicato. Non si scioglie in cottura."],
+[["basmati"],"Riso indiano a chicco lungo e profumato, soffice e sgranato dopo la cottura."],
+[["naan"],"Pane indiano soffice cotto nel forno tandoor. Per accompagnare i curry."],
+[["chapati"],"Pane indiano piatto di farina integrale, cotto su piastra."],
+[["dal","dhal"],"Legumi secchi indiani (lenticchie e simili) cotti in zuppa speziata."],
+[["chutney"],"Salsa indiana di frutta o verdura cotta con spezie: dolce, acida e piccante."],
+[["fieno greco"],"Semi un po’ amari dal profumo di sciroppo d’acero, tipici dei curry indiani."],
+[["tahina","tahini","tahin"],"Crema di semi di sesamo macinati, densa e leggermente amara. Base dell’hummus."],
+[["hummus"],"Crema mediorientale di ceci, tahina, limone e aglio."],
+[["za atar","zaatar","zatar"],"Miscela mediorientale di timo, sesamo e sommacco, aromatica e un po’ acida."],
+[["sommacco","sumac"],"Spezia rosso scuro dal sapore acidulo di limone, tipica del Medio Oriente."],
+[["harissa"],"Pasta nordafricana di peperoncino, aglio e cumino. Piccante e affumicata."],
+[["ras el hanout"],"Miscela nordafricana di decine di spezie, calda e profumata."],
+[["couscous","cous cous"],"Semola di grano duro in granelli, tipica del Maghreb. Si idrata con brodo o acqua calda."],
+[["bulgur"],"Grano spezzato e precotto, tipico di Turchia e Medio Oriente. Si ammolla o si lessa."],
+[["falafel"],"Crocchette fritte di ceci o fave con erbe e spezie, tipiche del Medio Oriente."],
+[["feta"],"Formaggio greco di pecora in salamoia, sapido e friabile."],
+[["halloumi"],"Formaggio cipriota di pecora e capra, compatto: si griglia senza sciogliersi."],
+[["tzatziki"],"Salsa greca di yogurt, cetriolo, aglio e olio."],
+[["yogurt greco"],"Yogurt colato, denso e cremoso, più ricco di proteine. Per salse e dessert."],
+[["pita"],"Pane piatto e tondo del Mediterraneo orientale, che si apre a tasca."],
+[["baharat"],"Miscela mediorientale di spezie dolci e calde (pepe, cannella, cumino, noce moscata)."],
+[["melassa di melograno"],"Sciroppo denso di melograno, acido e dolce, tipico del Medio Oriente."],
+[["labneh"],"Formaggio fresco di yogurt colato, cremoso e acidulo, dal Medio Oriente."],
+[["kefir"],"Latte fermentato dal gusto acidulo e leggermente frizzante, di origine caucasica."],
+[["jalapeno"],"Peperoncino messicano verde, piccante medio e polposo. Fresco, sott’aceto o affumicato."],
+[["chipotle"],"Jalapeño affumicato ed essiccato, piccante e fumé. Per salse e marinature."],
+[["habanero"],"Peperoncino molto piccante dal profumo fruttato, di origine caraibica e messicana."],
+[["ancho"],"Peperone poblano essiccato, dolce e fruttato, poco piccante. Per salse e mole."],
+[["mole"],"Salsa messicana complessa di peperoncini, cacao, frutta secca e spezie."],
+[["tortilla","tortillas"],"Sfoglia sottile di mais o frumento, tipica del Messico. Per tacos e burrito."],
+[["guacamole"],"Crema messicana di avocado, lime, cipolla e coriandolo."],
+[["pico de gallo"],"Salsa fresca messicana di pomodoro, cipolla, lime e coriandolo."],
+[["avocado"],"Frutto verde dalla polpa burrosa e delicata, di origine centroamericana."],
+[["lime"],"Agrume verde più acido e aromatico del limone, tipico di Asia e America Latina."],
+[["nachos"],"Triangoli di tortilla di mais fritta, croccanti."],
+[["masa harina"],"Farina di mais nixtamalizzato per fare tortilla e tamales."],
+[["fagioli neri"],"Fagioli scuri dal gusto morbido e terroso, tipici dell’America Latina."],
+[["spezie per tacos","mix per tacos","taco seasoning"],"Miscela messicana di cumino, paprika, aglio e peperoncino per carne e tacos."],
+[["tabasco"],"Salsa piccante americana di peperoncino, aceto e sale, liquida e acida."],
+[["dulce de leche"],"Crema sudamericana di latte caramellato, dolcissima."],
+[["quinoa"],"Pseudocereale andino senza glutine, in chicchi piccoli e un po’ croccanti."],
+[["platano","plantano"],"Banana da cucina, amidacea: si frigge o si lessa, non si mangia cruda."],
+[["yuca","manioca"],"Radice tropicale amidacea. Si lessa o si frigge; dalla farina si ricava la tapioca."],
+[["tapioca"],"Amido di manioca, in perle o farina. Rende dense e gelatinose le preparazioni."],
+[["cachaca"],"Distillato brasiliano di canna da zucchero, base della caipirinha."],
+[["chimichurri"],"Salsa argentina di prezzemolo, aglio, aceto e origano, per grigliate."],
+[["sciroppo di agave"],"Dolcificante messicano dalla pianta di agave, liquido e più dolce dello zucchero."],
+[["chia"],"Semi neri di origine centroamericana; in acqua formano un gel. Per budini e yogurt."],
+[["sciroppo d acero","sciroppo di acero"],"Sciroppo dolce ricavato dalla linfa dell’acero, tipico del Canada."],
+[["burro di arachidi","burro d arachidi"],"Crema di arachidi tostate, tipica americana. Dolce-salata e densa."],
+[["worcestershire","salsa worcester"],"Salsa inglese fermentata di acciughe, tamarindo e aceto, agrodolce e piccante."],
+[["cheddar"],"Formaggio inglese stagionato a pasta dura, dal sapore deciso e un po’ piccante."],
+[["bacon"],"Pancetta affumicata americana in fette sottili, da rosolare fino a renderla croccante."],
+[["senape di dijon","dijon"],"Senape francese forte e acidula, liscia e cremosa."],
+[["creme fraiche"],"Panna acida francese, densa e leggermente acidula, regge la cottura."],
+[["panna acida"],"Panna fermentata dal gusto acidulo, tipica dell’Est Europa. Per zuppe e salse."],
+[["brie","camembert"],"Formaggi francesi a crosta fiorita, cremosi e delicati."],
+[["gruyere"],"Formaggio svizzero a pasta dura, dolce e nocciolato. Ottimo gratinato."],
+[["emmental"],"Formaggio svizzero con i buchi, dolce e morbido. Si scioglie bene."],
+[["manchego"],"Formaggio spagnolo di pecora, compatto e saporito."],
+[["chorizo"],"Salume spagnolo di maiale e paprika, piccante o dolce. Da cuocere o affettare."],
+[["paprika affumicata","pimenton"],"Paprika spagnola affumicata: dolce o piccante, dal gusto di legna."],
+[["paprika"],"Peperone rosso essiccato e macinato, dolce o piccante, tipico dell’Ungheria."]
+];
+function foreignInfo(n){
+  var s=" "+nz(n)+" ";if(s.trim()==="")return "";
+  for(var i=0;i<FOREIGN.length;i++){var ks=FOREIGN[i][0];for(var j=0;j<ks.length;j++){var k=ks[j];if(k.length<=4?s.indexOf(" "+k+" ")>=0:s.indexOf(" "+k)>=0)return FOREIGN[i][1]}}
+  return "";
+}
+function ideOn(){return String(settings.ides)!=="0"}
+function line(i,k){var h=lineBase(i,k);if(alsOn()){var e=effAl(i);if(e.length)h+='<span class="alb">'+alBadges(e)+'</span>'}if(ideOn()){var d=foreignInfo(i.n);if(d)h+='<span class="ide">'+esc(d)+'</span>'}return h}
+var ALN=["","Cereali contenenti glutine","Crostacei","Uova","Pesce","Arachidi","Soia","Latte","Frutta a guscio","Sedano","Senape","Semi di sesamo","Anidride solforosa e solfiti","Lupini","Molluschi"];
+var ALS=["","Glutine","Crostacei","Uova","Pesce","Arachidi","Soia","Latte","Frutta a guscio","Sedano","Senape","Sesamo","Solfiti","Lupini","Molluschi"];
+var ALD=["","Frumento (anche farro e kamut), segale, orzo, avena e derivati.","Gamberi, scampi, aragosta, granchio e derivati.","Uova e prodotti a base di uova.","Pesce e prodotti a base di pesce.","Arachidi e prodotti a base di arachidi.","Soia e prodotti a base di soia.","Latte e derivati, compreso il lattosio.","Mandorle, nocciole, noci, anacardi, noci pecan, noci del Brasile, pistacchi, noci macadamia.","Sedano e prodotti a base di sedano.","Senape e prodotti a base di senape.","Semi di sesamo e prodotti a base di sesamo.","Conservanti presenti in vino, aceto e frutta secca (oltre 10 mg/kg o 10 mg/l).","Lupini e prodotti a base di lupini.","Cozze, vongole, ostriche, calamari, polpo, lumache e derivati."];
+var ALLG=[
+[["farina di riso","farina di mais","farina di ceci","farina di cocco","farina di grano saraceno","farina di castagne","farina di tapioca","farina di patate","farina di quinoa","farina di amaranto","farina di miglio","farina di teff","grano saraceno","granoturco","noce moscata","lievito di birra","burro di cacao","burro di karite","latte di cocco","latte di riso","panna di cocco","panna vegetale","yogurt di cocco","carta di riso","noce di cocco"],[]],
+[["farina di mandorle","latte di mandorla","burro di mandorle","pasta di mandorle","marzapane"],[8]],
+[["burro di arachidi","burro d arachidi","olio di arachidi","pasta di arachidi"],[5]],
+[["salsa di soia","shoyu","teriyaki","hoisin","gochujang"],[6,1]],
+[["farina di soia","latte di soia","yogurt di soia","panna di soia","lecitina di soia","tamari","doenjang","miso","soia","tofu","tempeh","edamame","okara","natto","pasta di miso"],[6]],
+[["pasta all uovo","pasta fresca","tagliolini all uovo","tagliatelle all uovo"],[1,3]],
+[["pasta frolla"],[1,3,7]],
+[["pasta sfoglia","pasta brisee"],[1,7]],
+[["besciamella"],[1,7]],
+[["pesto","nutella","crema di nocciole"],[7,8]],
+[["furikake"],[11,4]],
+[["pasta di semola","pasta di grano","pasta integrale","pasta di farro","pasta di kamut"],[1]],
+[["pasta di sesamo","tahina","tahini","tahin"],[11]],
+[["pasta di acciughe","pasta d acciughe"],[4]],
+[["pasta di gamberi","belacan"],[2]],
+[["pasta di"],[]],
+[["cioccolato al latte","siero di latte"],[7]],
+[["latte","burro","panna","yogurt","iogurt","formagg","mozzarell","parmigian","grana","pecorin","ricott","mascarpon","gorgonzol","provol","scamorz","fontina","taleggio","asiago","emmental","gruyere","cheddar","brie","camembert","feta","halloumi","paneer","stracchin","crescenz","burrata","caciocavall","bocconcin","robiol","creme fraiche","ghee","kefir","labneh","gelato","caseina","lattosio","latticini"],[7]],
+[["uova","uovo","tuorl","albume","albumi","maionese","meringa","zabaione"],[3]],
+[["pesce","tonno","salmon","merluzz","baccal","stoccafiss","acciug","alici","sardin","sgombr","branzin","orata","spigola","trota","sogliol","nasello","platess","halibut","dentice","rombo","cernia","aringa","bottarga","caviale","colatura","surimi","katsuobushi","bonito","dashi","nam pla","fish sauce","worcestershire","salsa worcester","anchovy"],[4]],
+[["gamber","mazzancoll","scampi","scampo","aragost","astice","granchi","granceola","canocchi","cicale di mare","krill"],[2]],
+[["cozz","vongol","ostric","calamar","polpo","polpi","seppi","totan","lumach","capesant","telline","cannolicchi","fasolari","moscardini","nero di seppia"],[14]],
+[["arachid"],[5]],
+[["nocciol","pistacch","anacard","noci","noce pecan","noce del brasile","noce comune","gherigli","macadamia","pecan","mandorl"],[8]],
+[["sedano"],[9]],
+[["senap","mostarda","dijon"],[10]],
+[["sesam","gomasio","hummus","za atar","zaatar"],[11]],
+[["vino","aceto","uvett","uva passa","albicocche secche","albicocca secca","marsala","prosecco","spumante","champagne","vermut","sherry"],[12]],
+[["lupin"],[13]],
+[["pasta","pastina","farin","spaghett","penne","rigaton","fusill","maccheroni","bucatini","linguine","fettuccin","pappardell","tagliatell","tagliolini","tortellin","tortelloni","ravioli","cannelloni","lasagn","orecchiett","paccheri","farfalle","conchigli","ditalini","vermicelli","gnocch","pane","panin","pancarre","pan carre","pan di spagna","pangrattat","pan grattato","panko","grissin","cracker","biscott","fette biscottate","pizza","piadina","focaccia","couscous","cous cous","bulgur","semola","semolin","frumento","grano","orzo","farro","avena","segale","kamut","spelta","seitan","birra","malto","udon","ramen","soba","noodle","wonton","crostini","amido di frumento"],[1]]
+];
+var ALX=ALLG.map(function(e){return{nums:e[1],rx:e[0].map(function(k){return new RegExp("(?:^| )"+k+(k.length<=4?"(?= |$)":"[a-z0-9]*"))})}});
+function autoAl(name){
+  var s=" "+nz(name)+" ",out={},ng=/(?:^| )(senza glutine|gluten free)(?= |$)/.test(s);
+  for(var i=0;i<ALX.length;i++){var e=ALX[i];for(var j=0;j<e.rx.length;j++){var rx=e.rx[j];if(rx.test(s)){e.nums.forEach(function(n){out[n]=1});s=s.replace(rx," ");break}}}
+  if(ng)delete out[1];
+  return Object.keys(out).map(Number).sort(function(a,b){return a-b});
+}
+function effAl(i){return Array.isArray(i.al)?i.al.slice().sort(function(a,b){return a-b}):autoAl(i.n)}
+function recipeAl(r){var o={};(r.ingredients||[]).forEach(function(i){effAl(i).forEach(function(n){o[n]=1})});return Object.keys(o).map(Number).sort(function(a,b){return a-b})}
+function alsOn(){return String(settings.als)!=="0"}
+function alBadges(a){return a.map(function(n){return '<span class="al" title="'+esc(ALN[n])+'">'+n+'</span>'}).join("")}
+function recipeAlSummary(r){if(!alsOn())return "";var al=recipeAl(r);if(!al.length)return "";return '<div class="alsum"><span class="alx">Allergeni</span>'+al.map(function(n){return '<span class="alc"><span class="al">'+n+'</span>'+esc(ALS[n])+'</span>'}).join("")+'</div>'}
+function alAttr(i){return Array.isArray(i.al)?(i.al.length?i.al.join(","):"-"):""}
+var aledit=-1;
+function alStrip(i,k){
+  if(!alsOn())return "";
+  var man=Array.isArray(i.al),eff=effAl(i);
+  var h='<div class="ial"><span class="alx">Allergeni</span><span class="alv">'+(eff.length?alBadges(eff):'<span class="alnone">nessuno</span>')+'</span><span class="alm">'+(man?"modificati":"automatici")+'</span><button type="button" class="b alt0" data-act="aled" data-i="'+k+'">'+(aledit===k?"Chiudi":"Modifica")+'</button>';
+  if(aledit===k){
+    h+='<div class="alp">';
+    for(var n=1;n<=14;n++)h+='<button type="button" class="chipb'+(eff.indexOf(n)>=0?" on":"")+'" data-act="alt" data-i="'+k+'" data-n="'+n+'" aria-pressed="'+(eff.indexOf(n)>=0)+'"><span class="al">'+n+'</span> '+esc(ALS[n])+'</button>';
+    if(man)h+='<button type="button" class="b" data-act="alauto" data-i="'+k+'">Torna automatico</button>';
+    h+='</div>';
+  }
+  return h+'</div>';
+}
+function allergenSet(){
+  var h='<div class="sct">Allergeni</div><div class="setc">'+
+    '<div class="srow col"><div class="sl">Mostra gli allergeni</div><div class="sh">Numeri accanto a ogni ingrediente e a ogni ricetta nella lista.</div>'+seg("als",[[1,"Mostra"],[0,"Nascondi"]])+'</div>'+
+    '<div class="srow col"><div class="sl">Legenda</div><div class="sh">I 14 allergeni dell’Allegato II del Regolamento UE 1169/2011, lo standard più usato nei ristoranti e sulle etichette.</div></div>';
+  for(var n=1;n<=14;n++)h+='<div class="leg"><span class="al">'+n+'</span><div><div class="sl">'+esc(ALN[n])+'</div><div class="sh">'+esc(ALD[n])+'</div></div></div>';
+  h+='<div class="srow col"><div class="sh"><b>Attenzione:</b> il riconoscimento è automatico dal nome dell’ingrediente e può sbagliare o non vedere allergeni nascosti, per esempio in salse e prodotti confezionati. Puoi correggerlo ingrediente per ingrediente quando scrivi la ricetta. Controlla sempre le etichette, soprattutto se hai un’allergia.</div></div></div>';
+  return h;
+}
 var PLUS='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>';
 var GEAR='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg>';
 var EDIT='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>';
@@ -587,7 +858,7 @@ function readPhoto(file,cb){
 function rowsHTML(){
   var ql=sq.trim().toLowerCase();
   var res=sorted().filter(function(r){if(!ql)return true;return ((r.title||"")+" "+(r.ingredients||[]).map(function(i){return (i.n||"")+" "+(i.m||"")}).join(" ")).toLowerCase().indexOf(ql)>=0});
-  function rw(r){var ing=(r.ingredients||[]).map(function(i){return i.n}).filter(Boolean).join(", ");return '<button class="row" data-act="tab" data-id="'+esc(r.id)+'">'+avatar(r)+'<span class="rtx"><span class="rline"><span class="rt">'+esc(r.title||"Senza nome")+'</span><span class="rs">'+(r.serv?"Per "+r.serv:"")+'</span></span><span class="rsub">'+(ing?esc(ing):"Nessun ingrediente")+'</span></span></button>'}
+  function rw(r){var ing=(r.ingredients||[]).map(function(i){return i.n}).filter(Boolean).join(", ");var al=alsOn()?recipeAl(r):[];return '<button class="row" data-act="tab" data-id="'+esc(r.id)+'">'+avatar(r)+'<span class="rtx"><span class="rline"><span class="rt">'+esc(r.title||"Senza nome")+'</span><span class="rs">'+(r.serv?"Per "+r.serv:"")+'</span></span><span class="rline"><span class="rsub">'+(ing?esc(ing):"Nessun ingrediente")+'</span>'+(al.length?'<span class="alb" aria-label="Allergeni">'+alBadges(al)+'</span>':'')+'</span></span></button>'}
   var sel=gsel,names=groupNames();
   if(sel&&!names.some(function(g){return g.toLowerCase()===sel.toLowerCase()}))sel="";
   if(sel)res=res.filter(function(r){return (r.group||"").trim().toLowerCase()===sel.toLowerCase()});
@@ -621,6 +892,7 @@ function recipeText(r){
   }
   if(r.steps&&r.steps.trim())t.push("","Procedimento:",r.steps.trim());
   if(r.notes&&r.notes.trim())t.push("","Note:",r.notes.trim());
+  if(alsOn()){var alr=recipeAl(r);if(alr.length)t.push("","Allergeni: "+alr.map(function(n){return n+" "+ALS[n]}).join(", "))}
   return t.join("\n");
 }
 function recipeHTML(){
@@ -633,17 +905,17 @@ function recipeHTML(){
   '<div class="bar">'+
   
   '<button class="b" data-act="shadd">Aggiungi alla spesa</button><button class="b" data-act="edit">Modifica</button><button class="b" data-act="share">Condividi</button></div>'+
-  (ing?'<h3>Ingredienti'+(r.serv?' per '+n+(n===1?' persona':' persone'):'')+'</h3>'+'<ul class="ingr">'+ing+'</ul>':"")+
+  (ing?'<h3>Ingredienti'+(r.serv?' per '+n+(n===1?' persona':' persone'):'')+'</h3>'+recipeAlSummary(r)+'<ul class="ingr">'+ing+'</ul>':"")+
   (r.steps?'<h3>Procedimento</h3><p class="txt">'+esc(r.steps)+'</p>':"")+
   (r.notes?'<h3>Note</h3><p class="txt">'+esc(r.notes)+'</p>':"")+
   '<div class="actions"><button class="b d'+(sure?" sure":"")+'" data-act="'+(sure?"delc":"del")+'">'+(sure?"Conferma: elimina ricetta":"Elimina ricetta")+'</button></div></div>';
 }
 function rowHTML(i,k){
-  return '<div class="ing"><input class="in" placeholder="Nome dell’ingrediente" aria-label="Nome dell’ingrediente" value="'+esc(i.n)+'">'+
+  return '<div class="ing" data-al="'+alAttr(i)+'"><input class="in" placeholder="Nome dell’ingrediente" aria-label="Nome dell’ingrediente" value="'+esc(i.n)+'">'+
   '<input class="im" placeholder="Marca (facoltativa)" aria-label="Marca" value="'+esc(i.m)+'">'+
   '<input class="iq" inputmode="decimal" placeholder="Quantità" aria-label="Quantità" value="'+esc(i.q)+'">'+
   '<select class="iu" aria-label="Unità di misura"><option value="">unità</option>'+UNITS.map(function(u){return '<option'+(u===i.u?" selected":"")+'>'+u+'</option>'}).join("")+'</select>'+
-  '<button class="b rm" data-act="rm" data-i="'+k+'" aria-label="Togli ingrediente">✕</button></div>';
+  '<button class="b rm" data-act="rm" data-i="'+k+'" aria-label="Togli ingrediente">✕</button>'+alStrip(i,k)+'</div>';
 }
 function formHTML(){
   var d=editing;if(!d)return "";
@@ -657,13 +929,36 @@ function formHTML(){
   '<label class="l" for="f-notes">Note</label><textarea id="f-notes" style="min-height:80px">'+esc(d.notes)+'</textarea>'+
   '<div class="actions"><button class="b p" data-act="save">Salva ricetta</button><button class="b" data-act="cancel">'+(d.isNew?"Svuota":"Annulla")+'</button></div></div>';
 }
+function dishRecs(d){return (d.rec||[]).map(function(id){return recipes.find(function(r){return r.id===id})}).filter(Boolean)}
+function dishAl(d){var o={};dishRecs(d).forEach(function(r){recipeAl(r).forEach(function(n){o[n]=1})});return Object.keys(o).map(Number).sort(function(a,b){return a-b})}
+function dishComp(d){
+  var rs=dishRecs(d),h='<div class="dcmp"><span class="sl">Ricette del piatto</span>';
+  if(!rs.length)h+='<p class="sh" style="margin:0 0 8px">Se vuoi, componi il piatto con le ricette che hai già. Per esempio il Ramen con il brodo dashi e il brodo di pollo.</p>';
+  rs.forEach(function(r){h+='<div class="dcr">'+avatar(r)+'<button type="button" class="dcl" data-act="dopenrec" data-id="'+esc(r.id)+'">'+esc(r.title||"Senza nome")+'</button><button type="button" class="b rm" data-act="dremrec" data-id="'+esc(r.id)+'" aria-label="Togli ricetta">✕</button></div>'});
+  h+='<button type="button" class="b" data-act="dpick">'+(rs.length?"Aggiungi o togli ricette":"Aggiungi ricette")+'</button>';
+  var al=alsOn()?dishAl(d):[];
+  if(al.length)h+='<div class="alsum" style="margin-top:12px"><span class="alx">Allergeni</span>'+al.map(function(n){return '<span class="alc"><span class="al">'+n+'</span>'+esc(ALS[n])+'</span>'}).join("")+'</div>';
+  return h+'</div>';
+}
+function pickRows(){
+  var q=(pq||"").trim().toLowerCase(),sel=(dedit&&dedit.rec)||[];
+  var l=recipes.slice().sort(function(a,b){return (a.title||"").localeCompare(b.title||"","it")});
+  if(q)l=l.filter(function(r){return ((r.title||"")+" "+(r.ingredients||[]).map(function(i){return i.n}).join(" ")).toLowerCase().indexOf(q)>=0});
+  if(!l.length)return '<div class="empty">'+(recipes.length?"Nessuna ricetta trovata.":"Non hai ancora ricette. Creane una dalla scheda «Nuova».")+'</div>';
+  return l.map(function(r){var on=sel.indexOf(r.id)>=0;return '<button class="row" data-act="ptog" data-id="'+esc(r.id)+'">'+avatar(r)+'<span class="rtx"><span class="rline"><span class="rt">'+esc(r.title||"Senza nome")+'</span><span class="pck'+(on?" on":"")+'" aria-hidden="true">'+(on?"✓":"")+'</span></span></span></button>'}).join("");
+}
+function pickCount(){return dedit&&dedit.rec?dedit.rec.filter(function(id){return recipes.some(function(r){return r.id===id})}).length:0}
+function pickHTML(){
+  var n=pickCount();
+  return '<div class="sheet"><div class="top"><div class="hdr"><h2>Aggiungi ricette</h2></div><input id="psearch" type="search" placeholder="Cerca una ricetta" aria-label="Cerca una ricetta" value="'+esc(pq)+'"><button class="b p wide" id="pdone" data-act="pdone">Fatto'+(n?" ("+n+")":"")+'</button></div><div id="prows">'+pickRows()+'</div></div>';
+}
 function saveDishes(){lsSet(DK,dishes)}
 function dishRows(){
   var q=(dq||"").trim().toLowerCase();
   var l=dishes.slice().sort(function(a,b){return (b.updated||0)-(a.updated||0)});
-  if(q)l=l.filter(function(d){return ((d.title||"")+" "+(d.desc||"")).toLowerCase().indexOf(q)>=0});
+  if(q)l=l.filter(function(d){return ((d.title||"")+" "+(d.desc||"")+" "+dishRecs(d).map(function(r){return r.title||""}).join(" ")).toLowerCase().indexOf(q)>=0});
   if(!l.length)return dishes.length?'<div class="empty">Nessun piatto trovato.</div>':'<div class="empty">Nessun piatto ancora. Tocca «+ Nuovo piatto» per segnare il primo.</div>';
-  return l.map(function(d){return '<button class="row" data-act="dopen" data-id="'+esc(d.id)+'">'+avatar(d)+'<span class="rtx"><span class="rline"><span class="rt">'+esc(d.title||"Senza nome")+'</span></span><span class="rsub">'+(d.desc&&d.desc.trim()?esc(d.desc.replace(/\s+/g," ")):"Nessuna descrizione")+'</span></span></button>'}).join("");
+  return l.map(function(d){var rs=dishRecs(d),nr=rs.length,al=alsOn()?dishAl(d):[],sub=d.desc&&d.desc.trim()?esc(d.desc.replace(/\s+/g," ")):(nr?esc(rs.map(function(r){return r.title||"Senza nome"}).join(", ")):"Nessuna descrizione");return '<button class="row" data-act="dopen" data-id="'+esc(d.id)+'">'+avatar(d)+'<span class="rtx"><span class="rline"><span class="rt">'+esc(d.title||"Senza nome")+'</span><span class="rs">'+(nr?nr+(nr===1?" ricetta":" ricette"):"")+'</span></span><span class="rline"><span class="rsub">'+sub+'</span>'+(al.length?'<span class="alb" aria-label="Allergeni">'+alBadges(al)+'</span>':'')+'</span></span></button>'}).join("");
 }
 function menuHTML(){
   return '<div class="sheet"><div class="top"><div class="hdr"><h2>Menù</h2></div><input id="dsearch" type="search" placeholder="Cerca un piatto" aria-label="Cerca un piatto" value="'+esc(dq)+'"><button class="b p wide" data-act="dnew">+ Nuovo piatto</button></div><div id="drows">'+dishRows()+'</div></div>';
@@ -674,12 +969,12 @@ function dishHTML(){
   return '<div class="sheet"><div class="fbar"><button class="back glass" data-act="dback">‹ Menù</button><button class="b p" data-act="dsave">Salva</button></div><h2 class="t">'+(d.isNew?"Nuovo piatto":"Modifica piatto")+'</h2>'+
   '<div class="phb"><div class="phv">'+(d.photo?'<img src="'+esc(d.photo)+'" alt="">':CAM)+'</div><div class="pha"><button class="b" data-act="dphcam">Scatta foto</button><button class="b" data-act="dphlib">Libreria</button>'+(d.photo?'<button class="b d" data-act="dphrm">Rimuovi</button>':'')+'</div><input type="file" id="dph-cam" accept="image/*" capture="environment" hidden><input type="file" id="dph-lib" accept="image/*" hidden></div>'+
   '<label class="l" for="d-title">Nome del piatto</label><input id="d-title" placeholder="Per esempio risotto ai funghi" value="'+esc(d.title)+'">'+
-  '<label class="l" for="d-desc">Descrizione</label><textarea id="d-desc" rows="4" placeholder="Due righe per ricordarti com’è">'+esc(d.desc)+'</textarea>'+
-  '<div class="actions">'+(d.isNew?'':(sure?'<button class="b d sure" data-act="ddel">Conferma: elimina piatto</button><button class="b" data-act="dno">Annulla</button>':'<button class="b d" data-act="ddel0">Elimina piatto</button>'))+'</div></div>';
+  '<label class="l" for="d-desc">Descrizione (facoltativa)</label><textarea id="d-desc" rows="4" placeholder="Due righe per ricordarti com’è">'+esc(d.desc)+'</textarea>'+
+  dishComp(d)+'<div class="actions">'+(d.isNew?'':(sure?'<button class="b d sure" data-act="ddel">Conferma: elimina piatto</button><button class="b" data-act="dno">Annulla</button>':'<button class="b d" data-act="ddel0">Elimina piatto</button>'))+'</div></div>';
 }
 function collect(){
   var d=editing;d.title=$("#f-title").value.trim();d.serv=parseInt($("#f-serv").value,10)||0;d.steps=$("#f-steps").value;d.notes=$("#f-notes").value;
-  d.ingredients=[].map.call(document.querySelectorAll(".ing"),function(r){return{m:r.querySelector(".im").value.trim(),q:r.querySelector(".iq").value.trim(),u:r.querySelector(".iu").value,n:r.querySelector(".in").value.trim()}});
+  d.ingredients=[].map.call(document.querySelectorAll(".ing"),function(r){var o={m:r.querySelector(".im").value.trim(),q:r.querySelector(".iq").value.trim(),u:r.querySelector(".iu").value,n:r.querySelector(".in").value.trim()};var aa=r.getAttribute("data-al");if(aa)o.al=aa==="-"?[]:aa.split(",").map(Number);return o});
 }
 function render(withForm){
   var bk0=$("#bk-text"),bv=bk0?bk0.value:"",ssc=$("#v-set").scrollTop,gc0=document.querySelector(".gch"),gx=gc0?gc0.scrollLeft:0;
@@ -699,6 +994,8 @@ function render(withForm){
   var gc1=document.querySelector(".gch");if(gc1)gc1.scrollLeft=gx;
   $("#v-recipe").classList.toggle("on",view==="recipe");
   $("#v-dish").classList.toggle("on",view==="dish");
+  if(view==="pick")$("#v-pick").innerHTML=pickHTML();
+  $("#v-pick").classList.toggle("on",view==="pick");
 }
 function setPage(i,smooth){var p=$("#pager");p.scrollTo({left:i*p.clientWidth,behavior:smooth?"smooth":"auto"})}
 function tabUI(p){
@@ -709,15 +1006,16 @@ function newDraft(){return{id:uid(),isNew:true,title:"",serv:settings.serv||0,st
 function loadDraft(){try{var d=JSON.parse(localStorage.getItem("quaderno-bozza-v1")||"null");if(d&&d.isNew&&Array.isArray(d.ingredients)&&d.ingredients.length)return d}catch(e){}return null}
 function dropDraft(){try{localStorage.removeItem("quaderno-bozza-v1")}catch(e){}}
 function go(v,top){
-  closeMenu();
+  closeMenu();aledit=-1;
+  if(v==="list"||v==="menu"||v==="shop"||v==="settings")recFrom="";
   if(view==="form"&&v!=="form"&&editing&&$("#f-title"))collect();
   var ti=TABS.indexOf(v);
   if(ti>=0)tab=v;
   if(v==="form"&&!editing)editing=loadDraft()||newDraft();
   view=v;sure=false;render(v==="form");
-  if(ti>=0)setPage(ti,true);else if(v==="recipe"){tab="list";setPage(0,false)}
+  if(ti>=0)setPage(ti,true);else if(v==="recipe"&&!recFrom){tab="list";setPage(0,false)}
   wakeUpdate();
-  if(top){var el=$(v==="form"?"#v-form":v==="recipe"?"#v-recipe":v==="settings"?"#v-set":v==="menu"?"#v-menu":v==="dish"?"#v-dish":v==="shop"?"#v-shop":"#v-list");if(el)el.scrollTop=0}
+  if(top){var el=$(v==="form"?"#v-form":v==="recipe"?"#v-recipe":v==="settings"?"#v-set":v==="menu"?"#v-menu":v==="dish"?"#v-dish":v==="pick"?"#v-pick":v==="shop"?"#v-shop":"#v-list");if(el)el.scrollTop=0}
 }
 document.addEventListener("click",function(e){
   var el=e.target.closest("[data-act]");if(!el)return;
@@ -743,6 +1041,8 @@ document.addEventListener("click",function(e){
   if(a==="settings")return go("settings",true);
   if(a==="set"){var k2=el.dataset.k,v2=el.dataset.v;settings[k2]=(k2==="serv")?(parseInt(v2,10)||0):v2;saveSettings();applySettings();render();return}
   if(a==="swap"){settings.awake=!settings.awake;saveSettings();wakeUpdate();render();return}
+  if(a==="bkfile"){exportBackup();return}
+  if(a==="bkpick"){var bf=$("#bk-file");if(bf)bf.click();return}
   if(a==="bkcopy"){copyText(JSON.stringify(backupObj()),"Backup copiato.");return}
   if(a==="bkimp"){var tx=($("#bk-text").value||"").trim();if(!tx){flash("Incolla prima il backup.");return}try{var n2=importBackup(tx);render(false);flash(n2?"Importati "+n2+(n2===1?" elemento.":" elementi."):"Niente di nuovo da importare.")}catch(x){flash("Il backup non è valido.")}return}
   if(a==="wipe0"){sure=true;render();return}
@@ -753,27 +1053,35 @@ document.addEventListener("click",function(e){
   if(a==="phrm"){collect();editing.photo="";render(true);saveDraft();return}
   if(a==="share"){var rs2=cur();if(!rs2)return;var tx2=recipeText(rs2);if(navigator.share){navigator.share({title:rs2.title||"Ricetta",text:tx2}).catch(function(e){if(e&&e.name==="AbortError")return;copyText(tx2,"Condivisione non disponibile: testo copiato.")})}else copyText(tx2,"Testo della ricetta copiato.");return}
   if(a==="bary"){var dd=parseInt(el.dataset.d,10)||0;settings.bary=dd===0?0:Math.max(-60,Math.min(160,(settings.bary||0)+dd));saveSettings();calibrate();render();return}
-  if(a==="dnew"){dedit={id:uid(),isNew:true,title:"",desc:"",photo:""};return go("dish",true)}
+  if(a==="dpick"){collectDish();pq="";go("pick",true);return}
+  if(a==="pdone"){go("dish");return}
+  if(a==="ptog"){if(!dedit)return;var pid=el.dataset.id;dedit.rec=dedit.rec||[];var pp=dedit.rec.indexOf(pid);if(pp>=0)dedit.rec.splice(pp,1);else dedit.rec.push(pid);var pr=$("#prows");if(pr)pr.innerHTML=pickRows();var pdn=$("#pdone"),pc=pickCount();if(pdn)pdn.textContent="Fatto"+(pc?" ("+pc+")":"");return}
+  if(a==="dremrec"){collectDish();var rp=(dedit.rec||[]).indexOf(el.dataset.id);if(rp>=0)dedit.rec.splice(rp,1);$("#v-dish").innerHTML=dishHTML();return}
+  if(a==="dopenrec"){collectDish();recFrom="dish";selId=el.dataset.id;scaleTo=0;go("recipe",true);return}
+  if(a==="dnew"){dedit={id:uid(),isNew:true,title:"",desc:"",photo:"",rec:[]};return go("dish",true)}
   if(a==="dopen"){var dd0=dishes.find(function(x){return x.id===el.dataset.id});if(!dd0)return;dedit=JSON.parse(JSON.stringify(dd0));return go("dish",true)}
-  if(a==="dback"){dedit=null;sure=false;return go("menu")}
+  if(a==="dback"){dedit=null;sure=false;recFrom="";return go("menu")}
   if(a==="dphcam"){$("#dph-cam").click();return}
   if(a==="dphlib"){$("#dph-lib").click();return}
   if(a==="dphrm"){collectDish();dedit.photo="";$("#v-dish").innerHTML=dishHTML();return}
-  if(a==="dsave"){collectDish();var nm=(dedit.title||"").trim();if(!nm){flash("Dai un nome al piatto.");return}var od={id:dedit.id,title:nm,desc:(dedit.desc||"").trim(),photo:dedit.photo||"",updated:Date.now()};var di=dishes.findIndex(function(x){return x.id===od.id});if(di<0)dishes.push(od);else dishes[di]=od;saveDishes();dedit=null;sure=false;go("menu");flash("Piatto salvato.");return}
+  if(a==="dsave"){collectDish();var nm=(dedit.title||"").trim();if(!nm){flash("Dai un nome al piatto.");return}var od={id:dedit.id,title:nm,desc:(dedit.desc||"").trim(),photo:dedit.photo||"",rec:(dedit.rec||[]).filter(function(id){return recipes.some(function(r){return r.id===id})}),updated:Date.now()};var di=dishes.findIndex(function(x){return x.id===od.id});if(di<0)dishes.push(od);else dishes[di]=od;saveDishes();dedit=null;sure=false;go("menu");flash("Piatto salvato.");return}
   if(a==="ddel0"){collectDish();sure=true;$("#v-dish").innerHTML=dishHTML();return}
   if(a==="dno"){sure=false;$("#v-dish").innerHTML=dishHTML();return}
   if(a==="ddel"){dishes=dishes.filter(function(x){return x.id!==dedit.id});saveDishes();dedit=null;sure=false;go("menu");flash("Piatto eliminato.");return}
+  if(a==="aled"){collect();var ak=+el.dataset.i;aledit=(aledit===ak?-1:ak);render(true);return}
+  if(a==="alt"){collect();var ak2=+el.dataset.i,an=+el.dataset.n,ai=editing.ingredients[ak2];if(!ai)return;var ac=effAl(ai),ap=ac.indexOf(an);if(ap>=0)ac.splice(ap,1);else ac.push(an);ac.sort(function(x,y){return x-y});ai.al=ac;render(true);return}
+  if(a==="alauto"){collect();var ai2=editing.ingredients[+el.dataset.i];if(ai2)delete ai2.al;render(true);return}
   if(a==="pmclose"){closeMenu();return}
   if(a==="pmset"){var rr=recipes.find(function(q){return q.id===el.dataset.id});closeMenu();if(rr){rr.group=el.dataset.g||"";persist(rr);render();flash(rr.group?"Aggiunta a «"+rr.group+"».":"Tolta dal gruppo.")}return}
-  if(a==="back")return go("list");
+  if(a==="back"){if(recFrom==="dish"){recFrom="";return go("dish")}return go("list")}
   if(a==="new")return go("form");
   if(a==="edit"&&r){editing=JSON.parse(JSON.stringify(r));if(!editing.ingredients.length)editing.ingredients.push({q:"",u:"",n:""});return go("form",true)}
   if(a==="toggle"&&r){r.status=r.status==="fatta"?"da fare":"fatta";persist(r);render();return}
   if(a==="del"){sure=true;render();return}
   if(a==="delc"&&r){removeR(r.id);selId=null;return go("list")}
   if(a==="cancel"){if(editing&&!editing.isNew){go("recipe");editing=loadDraft()||newDraft();$("#v-form").innerHTML=formHTML();return}dropDraft();editing=newDraft();render(true);return}
-  if(a==="add"){collect();editing.ingredients.push({q:"",u:"",n:""});render(true);var rows=document.querySelectorAll(".ing .in");rows[rows.length-1].focus();return}
-  if(a==="rm"){collect();editing.ingredients.splice(+el.dataset.i,1);if(!editing.ingredients.length)editing.ingredients.push({q:"",u:"",n:""});render(true);return}
+  if(a==="add"){aledit=-1;collect();editing.ingredients.push({q:"",u:"",n:""});render(true);var rows=document.querySelectorAll(".ing .in");rows[rows.length-1].focus();return}
+  if(a==="rm"){aledit=-1;collect();editing.ingredients.splice(+el.dataset.i,1);if(!editing.ingredients.length)editing.ingredients.push({q:"",u:"",n:""});render(true);return}
   if(a==="save"){
     collect();
     if(!editing.title){flash("Scrivi il nome della ricetta.");$("#f-title").focus();return}
@@ -867,7 +1175,52 @@ document.addEventListener("change",function(e){
   var f=t.files&&t.files[0];if(!f||!dedit)return;
   readPhoto(f,function(url){collectDish();dedit.photo=url;$("#v-dish").innerHTML=dishHTML();flash("Foto aggiunta.")});
 });
+document.addEventListener("input",function(e){if(e.target.id==="psearch"){pq=e.target.value;$("#prows").innerHTML=pickRows()}});
 document.addEventListener("input",function(e){if(e.target.id==="dsearch"){dq=e.target.value;$("#drows").innerHTML=dishRows()}});
+document.addEventListener("change",function(e){
+  var t=e.target;if(!t||t.id!=="bk-file")return;
+  var f=t.files&&t.files[0];if(!f)return;
+  var fr=new FileReader();
+  fr.onload=function(){try{var n=importBackup(String(fr.result||""));render(false);flash(n?"Importati "+n+(n===1?" elemento.":" elementi."):"Niente di nuovo da importare.")}catch(x){flash("Il file non è un backup valido.")}};
+  fr.onerror=function(){flash("Non riesco a leggere il file.")};
+  fr.readAsText(f);
+});
+var sw=null;
+function overlayEl(){return view==="recipe"?$("#v-recipe"):view==="dish"?$("#v-dish"):view==="pick"?$("#v-pick"):null}
+function backFromOverlay(){
+  if(view==="recipe"){if(recFrom==="dish"){recFrom="";go("dish")}else go("list")}
+  else if(view==="dish"){dedit=null;sure=false;recFrom="";go("menu")}
+  else if(view==="pick"){go("dish")}
+}
+document.addEventListener("touchstart",function(e){
+  var el=overlayEl();if(!el||e.touches.length!==1)return;
+  var t=e.touches[0];if(t.clientX>24)return;
+  sw={x:t.clientX,y:t.clientY,t0:Date.now(),el:el,dx:0,on:false};
+},{passive:true});
+document.addEventListener("touchmove",function(e){
+  if(!sw)return;
+  var t=e.touches[0],dx=t.clientX-sw.x,dy=t.clientY-sw.y;
+  if(!sw.on){
+    if(Math.abs(dy)>Math.abs(dx)&&Math.abs(dy)>8){sw=null;return}
+    if(dx>8){sw.on=true;sw.el.style.transition="none";sw.el.style.boxShadow="-10px 0 30px rgba(0,0,0,.2)"}
+    else return;
+  }
+  e.preventDefault();sw.dx=Math.max(0,dx);sw.el.style.transform="translateX("+sw.dx+"px)";
+},{passive:false});
+function swEnd(){
+  if(!sw)return;
+  var s=sw;sw=null;if(!s.on)return;
+  var w=window.innerWidth,v=s.dx/Math.max(1,Date.now()-s.t0),ok=s.dx>w*0.33||v>0.6;
+  s.el.style.transition="transform .22s ease";
+  s.el.style.transform="translateX("+(ok?w:0)+"px)";
+  setTimeout(function(){
+    s.el.style.transition="";s.el.style.transform="";s.el.style.boxShadow="";
+    if(ok){suppress=true;setTimeout(function(){suppress=false},350);backFromOverlay()}
+  },230);
+}
+document.addEventListener("touchend",swEnd);
+document.addEventListener("touchcancel",swEnd);
+document.addEventListener("input",function(e){var t=e.target;if(t&&t.classList&&t.classList.contains("in")){var rw0=t.closest(".ing");if(rw0&&!rw0.getAttribute("data-al")){var st=rw0.querySelector(".alv");if(st){var au=autoAl(t.value);st.innerHTML=au.length?alBadges(au):'<span class="alnone">nessuno</span>'}}}});
 document.addEventListener("input",function(e){if(e.target.id==="search"){sq=e.target.value;$("#rows").innerHTML=rowsHTML()}});
 recipes=loadLocal();
 try{var gj=JSON.parse(localStorage.getItem("quaderno-gruppi-v1")||"null");if(Array.isArray(gj))groups=gj}catch(e){}
