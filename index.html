@@ -222,6 +222,43 @@ input,select,textarea{border:1.5px solid var(--fb);background:var(--field);box-s
 #v-set.on{transform:none}
 .setc{background:var(--rc);border:1px solid var(--gl-b);border-radius:22px;padding:2px 16px;margin-bottom:6px;box-shadow:inset 0 1px 1px var(--gl-hi),0 8px 22px var(--gl-s)}
 .sct{font:600 13px/1 var(--sf);letter-spacing:.06em;text-transform:uppercase;color:var(--soft);margin:22px 6px 8px}
+/* ===== Scheda ricetta colorata e pillole degli ingredienti ===== */
+.rc0{--c1:#FF9A5A;--c2:#FF6B6B}.rc1{--c1:#FFD166;--c2:#F7A21B}.rc2{--c1:#7BD389;--c2:#3DAE6A}
+.rc3{--c1:#6EC6FF;--c2:#3A8DEB}.rc4{--c1:#B79CFF;--c2:#7C5CE0}.rc5{--c1:#FF8FB8;--c2:#E5508E}
+.rhero{position:relative;overflow:hidden;border-radius:26px;margin:2px 0 14px;min-height:128px;padding:18px 18px 16px;display:flex;align-items:flex-end;background:linear-gradient(135deg,var(--c1),var(--c2));box-shadow:0 12px 30px color-mix(in srgb,var(--c2) 38%,transparent)}
+.rhero.ph{min-height:230px}
+.rhero .rphi{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;-webkit-touch-callout:none;-webkit-user-drag:none}
+.rhero.ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 35%,rgba(0,0,0,.62))}
+.rhero .rem{position:absolute;right:12px;top:6px;font-size:84px;line-height:1;filter:drop-shadow(0 6px 10px rgba(0,0,0,.18));transform:rotate(-8deg)}
+.rhero h2.t{position:relative;z-index:1;margin:0;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.28);max-width:78%}
+.rhero.ph h2.t{max-width:100%}
+h3.hi::before,h3.hp::before,h3.hn::before{margin-right:8px}
+h3.hi::before{content:"🥕"}h3.hp::before{content:"👩‍🍳"}h3.hn::before{content:"📝"}
+.rc .txt{box-shadow:inset 4px 0 0 var(--c1)}
+ul.ingr.pills{display:flex;flex-wrap:wrap;gap:8px;padding:0;background:none;border:0;border-radius:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
+ul.ingr.pills li.ipill{display:inline-flex;align-items:center;gap:9px;max-width:100%;padding:6px 14px 6px 6px;border:1px solid var(--line);border-radius:26px;background:var(--field);background:color-mix(in srgb,var(--c1) 14%,var(--field));border-color:color-mix(in srgb,var(--c1) 40%,transparent);font-size:15.5px;line-height:1.25}
+ul.ingr.pills li.ipill:last-child{border-bottom:1px solid color-mix(in srgb,var(--c1) 40%,transparent)}
+.iem{flex:none;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-size:18px;line-height:1;background:linear-gradient(135deg,color-mix(in srgb,var(--c1,#F6CC30) 45%,#fff),color-mix(in srgb,var(--c2,#E7B602) 45%,#fff))}
+.itx{min-width:0}
+/* ===== Piatto del Menù: testata e pillole ===== */
+.rhero h2.t.e{opacity:.72}
+.dpills{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+.dp{display:inline-flex;align-items:center;gap:8px;max-width:100%;padding:5px 14px 5px 5px;border-radius:26px;border:1px solid var(--line);background:var(--field);background:color-mix(in srgb,var(--c1) 15%,var(--field));border-color:color-mix(in srgb,var(--c1) 42%,transparent);font-size:15.5px;line-height:1.25}
+.dp:has(.dpx){padding-right:4px}
+.dpo{display:inline-flex;align-items:center;gap:8px;min-width:0;background:none;border:0;padding:0;font:600 15px/1.2 var(--sf);color:var(--ink);cursor:pointer;text-align:left}
+.dpo .tl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:58vw}
+.dpx{flex:none;width:26px;height:26px;margin-left:2px;border-radius:50%;border:0;padding:0;background:rgba(0,0,0,.08);color:var(--soft);font-size:12px;cursor:pointer}
+.iem img{display:block;width:100%;height:100%;border-radius:50%;object-fit:cover}
+.dtx{min-width:0}
+/* spesa a pillole */
+.spills{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 12px}
+.spills .sp{width:auto;max-width:100%;margin:0;padding:6px 14px 6px 6px;gap:9px;align-items:center;border-radius:26px;border:1px solid rgba(231,182,2,.5);background:rgba(231,182,2,.13);box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
+.spills .spt{min-width:0}
+.spills .spn{font-size:16px}
+.spills .rs{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:46vw}
+.spills .sp.on{background:rgba(61,174,106,.1);border-color:rgba(61,174,106,.4)}
+.spills .sp.on .iem{font-size:0;background:#3DAE6A}
+.spills .sp.on .iem::after{content:"✓";font-size:17px;font-weight:700;color:#fff}
 .srow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}
 .srow:last-child{border-bottom:0}
 .srow.col{flex-direction:column;align-items:stretch;gap:0}
@@ -781,6 +818,7 @@ var LANG="it",DICT={},ORIG=new WeakMap(),ORIGA=new WeakMap(),I18N_ON=false;
 (function(){var X={"Nuovo timer":["New timer","Nuevo temporizador","Nouveau minuteur","新计时器"],"Timer 1":["Timer 1","Temporizador 1","Minuteur 1","计时器 1"],"Timer 2":["Timer 2","Temporizador 2","Minuteur 2","计时器 2"],"Etichetta (per esempio pasta)":["Label (e.g. pasta)","Etiqueta (p. ej. pasta)","Libellé (par ex. pâtes)","标签（例如：意面）"]};["en","es","fr","zh"].forEach(function(l,j){Object.keys(X).forEach(function(k){DICT[l][k]=X[k][j]})})})();
 (function(){var X={"Numerato":["Numbered","Numerado","Numéroté","编号"],"Libero":["Free","Libre","Libre","自由"],"Formato del procedimento":["Steps format","Formato del procedimiento","Format des étapes","步骤格式"]};["en","es","fr","zh"].forEach(function(l,j){Object.keys(X).forEach(function(k){DICT[l][k]=X[k][j]})})})();
 (function(){var X={"Eliminare questa ricetta? Non si può annullare.":["Delete this recipe? This can\u2019t be undone.","¿Eliminar esta receta? No se puede deshacer.","Supprimer cette recette ? Cette action est irréversible.","要删除这份食谱吗？此操作无法撤销。"],"Ricetta eliminata.":["Recipe deleted.","Receta eliminada.","Recette supprimée.","食谱已删除。"]};["en","es","fr","zh"].forEach(function(l,j){Object.keys(X).forEach(function(k){DICT[l][k]=X[k][j]})})})();
+(function(){var X={"Ingredienti del piatto":["Dish ingredients","Ingredientes del plato","Ingrédients du plat","菜品食材"]};["en","es","fr","zh"].forEach(function(l,j){Object.keys(X).forEach(function(k){DICT[l][k]=X[k][j]})})})();
 function mkP(re,en,es,fr,zh){return[re,{en:en,es:es,fr:fr,zh:zh}]}
 function pl(n,a,b){return +n===1?a:b}
 var PATS=[
@@ -836,7 +874,7 @@ function trShare(l){
   if(m)return trStr("Allergeni:")+" "+m[1].split(", ").map(function(x){var mm=/^(\d+) (.*)$/.exec(x);return mm?mm[1]+" "+trStr(mm[2]):x}).join(", ");
   return l;
 }
-var NT_SEL='[data-nt],textarea,script,style,.rt,.rsub:not(.ui),.ht:not(.empty),.dcl,ul.ingr li,.soc,.pm[data-act="pmset"]:not([data-g=""]),.gchip[data-g]:not([data-g=""]),.src,.spn,.sp .rs';
+var NT_SEL='[data-nt],textarea,script,style,.rt,.rsub:not(.ui),.ht:not(.empty),.dcl,ul.ingr li,.soc,.pm[data-act="pmset"]:not([data-g=""]),.gchip[data-g]:not([data-g=""]),.src,.spn,.sp .rs,.dp .tl,.dtx';
 var ATTRS=["placeholder","aria-label","title","alt"];
 function trText(n){
   var el=n.parentNode;if(!el||el.nodeType!==1)return;
@@ -1452,7 +1490,7 @@ function shopRows(){
   return arr.sort(function(a,b){return (a.n||"").localeCompare(b.n||"","it")});
 }
 function shopHTML(){
-  var rows=shopRows();
+  var rows=shopRows(),multi=shop.entries.length>1;
   var chips=shop.entries.map(function(e){return '<span class="src">'+esc(e.title)+(e.people?' ('+e.people+')':"")+'<button data-act="shrm" data-id="'+esc(e.rid)+'" aria-label="Togli '+esc(e.title)+' dalla spesa">✕</button></span>'}).join("");
   var list=rows.map(function(r){
     var on=!!shop.checked[r.key];
@@ -1460,11 +1498,11 @@ function shopHTML(){
     var u=r.u&&r.u!=="q.b."?esc(uT(r.u))+' ':'';
     var tail=r.u==="q.b."?' '+uT("q.b."):'';
     var extra=r.txt.length?' ('+esc(r.txt.join(", "))+')':'';
-    return '<button class="sp'+(on?' on':'')+'" data-act="chk" data-k="'+esc(r.key)+'" aria-pressed="'+on+'"><span class="bx"></span><span class="spt"><span class="spn">'+q+u+esc(r.n)+tail+extra+(r.m?' <span class="mk">'+esc(r.m)+'</span>':'')+'</span><span class="rs">'+esc(r.src)+'</span></span></button>';
+    return '<button class="sp'+(on?' on':'')+'" data-act="chk" data-k="'+esc(r.key)+'" aria-pressed="'+on+'"><span class="iem" aria-hidden="true">'+ingEmoji(r.n)+'</span><span class="spt"><span class="spn">'+q+u+esc(r.n)+tail+extra+(r.m?' <span class="mk">'+esc(r.m)+'</span>':'')+'</span>'+(multi?'<span class="rs">'+esc(r.src)+'</span>':'')+'</span></button>';
   }).join("");
   return '<div class="sheet"><div class="head"><h2>Spesa</h2></div>'+
   (chips?'<div class="srcs">'+chips+'</div>':'')+
-  (list||'<div class="empty">La lista è vuota. Apri una ricetta e tocca «Aggiungi alla spesa».</div>')+
+  (list?'<div class="spills">'+list+'</div>':'<div class="empty">La lista è vuota. Apri una ricetta e tocca «Aggiungi alla spesa».</div>')+
   (list?'<div class="actions"><button class="b" data-act="shdone">Togli i già presi</button><button class="b" data-act="shcopy">Copia lista</button><button class="b d'+(sure?' sure':'')+'" data-act="'+(sure?'shclr':'shclr0')+'">'+(sure?'Conferma: svuota':'Svuota la lista')+'</button></div>':'')+'</div>';
 }
 function copyText(t,msg){msg=msg||"Lista copiata.";
@@ -1486,6 +1524,59 @@ function avatar(r){
   for(var i=0;i<t.length;i++)h=(h*31+t.charCodeAt(i))>>>0;
   return '<span class="av av'+(h%6)+'">'+esc(ch)+'</span>';
 }
+/* ===== Immagini degli ingredienti (emoji) ===== */
+var ING_EM=[
+["🍜",["ramen","noodle","udon"]],["🍣",["sushi","sashimi","nigiri"]],
+["🍆",["melanzan","parmigiana"]],["🌶️",["peperoncin"]],["🫑",["peperon"]],["🍟",["patatine"]],
+["🍅",["pomodor","pelati","passata","polpa di"]],["🧅",["cipoll","scalogn","porro"]],["🧄",["agli"]],
+["🥕",["carot"]],["🥔",["patat"]],["🥒",["zucchin","cetriol"]],["🎃",["zucca"]],["🥦",["broccol","cavolfior"]],
+["🥬",["spinac","insalat","lattug","bietol","cavol","verza","rucola","sedano","indivia","radicchi","cicoria","songino"]],
+["🍄",["fungh","champignon","porcin"]],["🌽",["mais","granoturco"]],["🫛",["pisell","fave","fagiolin"]],
+["🫘",["fagiol","ceci","lenticch","legumi","borlotti","cannellini"]],
+["🌿",["basilic","prezzemol","rosmarin","salvia","timo","origano","menta","erba","erbe","maggiorana","alloro","finocchi","aneto"]],
+["🍋",["limon"]],["🍊",["aranc","mandarin","clementin","pompelmo"]],["🍎",["mela","mele"]],["🍐",["pera","pere"]],["🍌",["banan"]],
+["🍓",["fragol","lampon"]],["🫐",["mirtill","ribes"]],["🍇",["uva","uvett"]],["🍒",["ciliegi","amarena","amarene"]],
+["🍑",["pesca","pesche"]],["🍍",["ananas"]],["🥥",["cocco"]],["🥑",["avocado"]],["🥝",["kiwi"]],["🥭",["mango"]],
+["🍉",["anguria","cocomero"]],["🍈",["melone"]],["🫚",["zenzero"]],
+["🫒",["olive","oliva","olio"]],["🧂",["sale","salgemma","spezi","cannell","curcuma","cumino","paprica","chiodi di garofano","cardamom","coriandol","curry","masala"]],
+["⚫",["pepe"]],["🌼",["zafferano","vaniglia"]],
+["🌰",["noce moscata","noci","noce","nocciol","castagn","pistacchi","mandorl","pinoli","anacard"]],["🥜",["arachid"]],
+["🌾",["farina","semola","amido","fecola"]],["🥐",["pasta sfoglia","pasta frolla","pasta brisee","sfoglia","cornett"]],
+["🍞",["pane","pangrattato","pancarr","lievito","baguette","crostin"]],
+["🍝",["spaghett","tagliatell","pasta","penne","rigaton","maccheron","fusill","linguine","bucatini","lasagn","tortellin","ravioli","gnocchi","orecchiett","paccheri","farfalle","vermicelli","tagliolin","pappardell","cappellett"]],
+["🍚",["riso","risotto","basmati"]],["🥚",["uov","tuorl","albume","albumi","frittat","omelette"]],
+["🥛",["latte","panna","yogurt","kefir","besciamella"]],["🧈",["burro","margarina","strutto"]],
+["🧀",["formaggi","parmigian","pecorin","grana","mozzarell","ricott","mascarpon","gorgonzol","scamorz","provol","fontina","emmental","asiago","taleggio","stracchin","burrata","feta","philadelphia","caciocavall"]],
+["🍔",["hamburger","panino","panini","toast","burger"]],
+["🥓",["guanciale","pancetta","prosciutt","salsicc","speck","bacon","salame","mortadella","bresaola","lardo","nduja"]],
+["🥩",["manzo","macinato","bistecc","vitell","carne","maiale","costin","filetto","fettina","agnello","spezzatino","polpett"]],
+["🍗",["pollo","tacchino","petto di","cosce","alette","anatra","coniglio"]],
+["🐟",["pesce","salmone","tonno","merluzz","branzin","orata","acciug","alici","sgombro","baccala","stoccafisso","trota","sogliol","spada","platessa"]],
+["🦐",["gamber","scamp","mazzancoll","aragost","granchi","astic"]],["🦑",["calamar","seppi","polpo","totan"]],["🦪",["cozz","vongol","ostric","molluschi"]],
+["🍷",["vino","prosecco","marsala","vermouth","spumante"]],["🍺",["birra"]],["🥃",["rum","brandy","cognac","whisky","grappa","liquore","amaretto","limoncello"]],
+["🫙",["aceto","capperi","sottaceti","cetriolini","senape","giardiniera","conserva","marmellata","confettura"]],
+["🍯",["miele","sciroppo","malto"]],["🍬",["zuccher","caramell","glucosio"]],["🍫",["ciocco","cacao","nutella"]],
+["☕",["caffe","espresso","moka"]],["🍵",["te verde","te nero","tisana","camomilla","matcha","infuso"]],
+["💧",["acqua","ghiaccio"]],["🍲",["brodo","dado","fondo di","zuppa","minestr"]],
+["🍪",["savoiardi","biscott","pavesini","wafer","cracker","amaretti","frollini","grissini","taralli"]],
+["🍰",["tiramisu","torta","pan di spagna","crema pasticcera","budino","dolce","crostata","panna cotta","cheesecake","brownie","muffin"]],
+["🥫",["salsa","ketchup","maionese","pesto"]],["🍕",["pizza","impasto"]],["🌱",["germogli","alghe","nori","wakame","kombu","tofu","soia","tempeh","seitan"]]
+].map(function(e){return [e[0],new RegExp("(^| )(?:"+e[1].map(function(k){return k.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")}).join("|")+")")]});
+var ING_CACHE={};
+function ingEmoji(name,def){
+  var s=nz(name);if(!s)return def||"🥣";
+  var c=ING_CACHE[s];if(c)return c==="-"?(def||"🥣"):c;
+  for(var i=0;i<ING_EM.length;i++)if(ING_EM[i][1].test(s)){ING_CACHE[s]=ING_EM[i][0];return ING_EM[i][0]}
+  ING_CACHE[s]="-";return def||"🥣";
+}
+function recipeEmoji(r){
+  var s=nz(r.title||""),best=null,bi=1e9;
+  ING_EM.forEach(function(e){var m=e[1].exec(s);if(m&&m.index<bi){bi=m.index;best=e[0]}});
+  if(best)return best;
+  var a=r.ingredients||[];for(var i=0;i<a.length;i++){var x=ingEmoji(a[i].n,"");if(x)return x}
+  return "🍽️";
+}
+function tintIdx(r){var t=(r.title||"?").trim(),h=0;for(var i=0;i<t.length;i++)h=(h*31+t.charCodeAt(i))>>>0;return h%6}
 function readPhoto(file,cb){
   var fr=new FileReader();
   fr.onload=function(){
@@ -1547,14 +1638,14 @@ function recipeHTML(){
   var f=r.status==="fatta";
   var k=r.serv?(scaleTo||r.serv)/r.serv:1;
   var n=r.serv?(scaleTo||r.serv):0;
-  var ing=(r.ingredients||[]).map(function(i){return "<li>"+line(i,k)+"</li>"}).join("");
-  return '<div class="sheet"><div class="rtop"><button class="back glass" data-act="back">‹ Ricette</button><button class="back glass tmb" data-act="tmopen" aria-label="Timer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13.5" r="7.5"/><path d="M12 9.5v4l2.5 1.5M9.5 3h5"/></svg><span>Timer</span></button></div><h2 class="t" data-nt>'+esc(r.title)+'</h2>'+(r.photo?'<img class="rph" src="'+esc(r.photo)+'" alt="">':'')+
+  var ing=(r.ingredients||[]).map(function(i){return '<li class="ipill"><span class="iem" aria-hidden="true">'+ingEmoji(i.n)+'</span><span class="itx">'+line(i,k)+'</span></li>'}).join("");
+  return '<div class="sheet rc rc'+tintIdx(r)+'"><div class="rtop"><button class="back glass" data-act="back">‹ Ricette</button><button class="back glass tmb" data-act="tmopen" aria-label="Timer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13.5" r="7.5"/><path d="M12 9.5v4l2.5 1.5M9.5 3h5"/></svg><span>Timer</span></button></div><div class="rhero'+(r.photo?' ph':'')+'">'+(r.photo?'<img class="rphi" src="'+esc(r.photo)+'" alt="">':'<span class="rem" aria-hidden="true">'+recipeEmoji(r)+'</span>')+'<h2 class="t" data-nt>'+esc(r.title)+'</h2></div>'+
   '<div class="bar">'+
   
   '<button class="b" data-act="shadd">Aggiungi alla spesa</button><button class="b shr" data-act="share"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3M8 7l4-4 4 4"/><path d="M5 12v6.5A2.5 2.5 0 0 0 7.5 21h9a2.5 2.5 0 0 0 2.5-2.5V12"/></svg><span>Condividi</span></button></div>'+
-  (ing?'<h3>Ingredienti'+(r.serv?' per '+n+(n===1?' persona':' persone'):'')+'</h3>'+recipeAlSummary(r)+'<ul class="ingr">'+ing+'</ul>':"")+
-  (r.steps?'<h3>Procedimento</h3><p class="txt">'+esc(r.steps)+'</p>':"")+
-  (r.notes?'<h3>Note</h3><p class="txt">'+esc(r.notes)+'</p>':"")+
+  (ing?'<h3 class="hi">Ingredienti'+(r.serv?' per '+n+(n===1?' persona':' persone'):'')+'</h3>'+recipeAlSummary(r)+'<ul class="ingr pills">'+ing+'</ul>':"")+
+  (r.steps?'<h3 class="hp">Procedimento</h3><p class="txt">'+esc(r.steps)+'</p>':"")+
+  (r.notes?'<h3 class="hn">Note</h3><p class="txt">'+esc(r.notes)+'</p>':"")+
   '</div>';
 }
 function ingTitle(i){
@@ -1600,10 +1691,43 @@ function formHTML(){
 }
 function dishRecs(d){return (d.rec||[]).map(function(id){return recipes.find(function(r){return r.id===id})}).filter(Boolean)}
 function dishAl(d){var o={};dishRecs(d).forEach(function(r){recipeAl(r).forEach(function(n){o[n]=1})});return Object.keys(o).map(Number).sort(function(a,b){return a-b})}
+function dishEmoji(d){
+  var s=nz(d.title||""),best=null,bi=1e9;
+  ING_EM.forEach(function(e){var m=e[1].exec(s);if(m&&m.index<bi){bi=m.index;best=e[0]}});
+  if(best)return best;
+  var rs=dishRecs(d);return rs.length?recipeEmoji(rs[0]):"🍽️";
+}
+function dishHero(d){
+  var t=(d.title||"").trim();
+  return '<div class="rhero'+(d.photo?' ph':'')+'">'+(d.photo?'<img class="rphi" src="'+esc(d.photo)+'" alt="">':'<span class="rem" id="dem" aria-hidden="true">'+dishEmoji(d)+'</span>')+'<h2 class="t'+(t?'':' e')+'" id="dht"'+(t?' data-nt':'')+'>'+esc(t||(d.isNew?"Nuovo piatto":"Senza nome"))+'</h2></div>';
+}
+function dishLive(){
+  var i=$("#d-title");if(!i||!dedit)return;
+  var t=i.value.trim(),sh=$("#v-dish .sheet"),h=$("#dht"),e=$("#dem");
+  if(sh)sh.className="sheet rc rc"+tintIdx({title:t});
+  if(h){h.textContent=t||(dedit.isNew?"Nuovo piatto":"Senza nome");h.classList.toggle("e",!t);if(t)h.setAttribute("data-nt","");else h.removeAttribute("data-nt")}
+  if(e)e.textContent=dishEmoji({title:t,rec:dedit.rec});
+}
+function dishIngRows(d){
+  var map={},arr=[];
+  dishRecs(d).forEach(function(r){(r.ingredients||[]).forEach(function(i){
+    if(!i.n)return;var l={n:i.n,u:i.u,m:i.m,q:i.q},k=lkey(l),o=map[k];
+    if(!o){o=map[k]={n:l.n,u:l.u,m:l.m,sum:0,txt:[]};arr.push(o)}
+    var v=num(l.q);if(l.q&&!isNaN(v))o.sum+=v;else if(l.q&&l.u!=="q.b."&&o.txt.indexOf(l.q)<0)o.txt.push(l.q);
+  })});
+  return arr.sort(function(a,b){return (a.n||"").localeCompare(b.n||"","it")});
+}
+function dishIngr(d){
+  var rows=dishIngRows(d);if(!rows.length)return "";
+  return '<h3 class="hi">Ingredienti del piatto</h3><div class="dpills">'+rows.map(function(r){
+    var q=r.sum>0?'<b>'+fmt(r.sum)+'</b> ':'',u=r.u&&r.u!=="q.b."?esc(uT(r.u))+' ':'',tail=r.u==="q.b."?' '+uT("q.b."):'',extra=r.txt.length?' ('+esc(r.txt.join(", "))+')':'';
+    return '<span class="dp"><span class="iem" aria-hidden="true">'+ingEmoji(r.n)+'</span><span class="dtx">'+q+u+esc(r.n)+tail+extra+(r.m?' <span class="mk">'+esc(r.m)+'</span>':'')+'</span></span>';
+  }).join("")+'</div>';
+}
 function dishComp(d){
   var rs=dishRecs(d),h='<div class="dcmp"><span class="sl">Ricette del piatto</span>';
   if(!rs.length)h+='<p class="sh" style="margin:0 0 8px">Se vuoi, componi il piatto con le ricette che hai già. Per esempio il Ramen con il brodo dashi e il brodo di pollo.</p>';
-  rs.forEach(function(r){h+='<div class="dcr">'+avatar(r)+'<button type="button" class="dcl" data-act="dopenrec" data-id="'+esc(r.id)+'">'+esc(r.title||"Senza nome")+'</button><button type="button" class="b rm" data-act="dremrec" data-id="'+esc(r.id)+'" aria-label="Togli ricetta">✕</button></div>'});
+  if(rs.length)h+='<div class="dpills">'+rs.map(function(r){return '<span class="dp rc'+tintIdx(r)+'"><button type="button" class="dpo" data-act="dopenrec" data-id="'+esc(r.id)+'"><span class="iem" aria-hidden="true">'+(r.photo?'<img src="'+esc(r.photo)+'" alt="">':recipeEmoji(r))+'</span><span class="tl">'+esc(r.title||"Senza nome")+'</span></button><button type="button" class="dpx" data-act="dremrec" data-id="'+esc(r.id)+'" aria-label="Togli ricetta">✕</button></span>'}).join("")+'</div>';
   h+='<button type="button" class="b" data-act="dpick">'+(rs.length?"Aggiungi o togli ricette":"Aggiungi ricette")+'</button>';
   var al=alsOn()?dishAl(d):[];
   if(al.length)h+='<div class="alsum" style="margin-top:12px"><span class="alx">Allergeni</span>'+al.map(function(n){return '<span class="alc"><span class="al">'+n+'</span>'+esc(ALS[n])+'</span>'}).join("")+'</div>';
@@ -1635,11 +1759,11 @@ function menuHTML(){
 function collectDish(){if(!dedit)return;var t=$("#d-title"),x=$("#d-desc");if(t)dedit.title=t.value;if(x)dedit.desc=x.value}
 function dishHTML(){
   var d=dedit;if(!d)return "";
-  return '<div class="sheet"><div class="fbar"><button class="back glass" data-act="dback">‹ Menù</button><button class="b p" data-act="dsave">Salva</button></div><h2 class="t">'+(d.isNew?"Nuovo piatto":"Modifica piatto")+'</h2>'+
+  return '<div class="sheet rc rc'+tintIdx(d)+'"><div class="fbar"><button class="back glass" data-act="dback">‹ Menù</button><button class="b p" data-act="dsave">Salva</button></div>'+dishHero(d)+
   '<div class="phb"><div class="phv">'+(d.photo?'<img src="'+esc(d.photo)+'" alt="">':CAM)+'</div><div class="pha"><button class="b" data-act="dphcam">Scatta foto</button><button class="b" data-act="dphlib">Libreria</button>'+(d.photo?'<button class="b d" data-act="dphrm">Rimuovi</button>':'')+'</div><input type="file" id="dph-cam" accept="image/*" capture="environment" hidden><input type="file" id="dph-lib" accept="image/*" hidden></div>'+
   '<label class="l" for="d-title">Nome del piatto</label><input id="d-title" placeholder="Per esempio risotto ai funghi" value="'+esc(d.title)+'">'+
   '<label class="l" for="d-desc">Descrizione (facoltativa)</label><textarea id="d-desc" rows="4" placeholder="Due righe per ricordarti com’è">'+esc(d.desc)+'</textarea>'+
-  dishComp(d)+'<div class="actions">'+(d.isNew?'':(sure?'<button class="b d sure" data-act="ddel">Conferma: elimina piatto</button><button class="b" data-act="dno">Annulla</button>':'<button class="b d" data-act="ddel0">Elimina piatto</button>'))+'</div></div>';
+  dishComp(d)+dishIngr(d)+'<div class="actions">'+(d.isNew?'':(sure?'<button class="b d sure" data-act="ddel">Conferma: elimina piatto</button><button class="b" data-act="dno">Annulla</button>':'<button class="b d" data-act="ddel0">Elimina piatto</button>'))+'</div></div>';
 }
 function collect(){
   var d=editing;d.title=$("#f-title").value.trim();d.serv=parseInt($("#f-serv").value,10)||0;d.steps=cleanSteps($("#f-steps").value);d.notes=$("#f-notes").value;
@@ -1680,6 +1804,7 @@ function tabUI(p){
   var i=Math.round(p);[].forEach.call(document.querySelectorAll(".tb"),function(b,k){b.classList.toggle("on",k===i)});
 }
 var SM=null,editFrom="";
+document.addEventListener("input",function(e){if(e.target&&e.target.id==="d-title")dishLive()});
 function stepsAuto(t){t=(t||"").trim();if(!t)return true;return t.split("\n").filter(function(l){return l.trim()}).every(function(l){return /^\s*\d+[.)]\s/.test(l)})}
 function stepsNum(d){return SM===null?stepsAuto(d.steps):SM}
 function cleanSteps(t){var L=String(t||"").split("\n");while(L.length&&/^\s*(\d+[.)]\s*)?$/.test(L[L.length-1]))L.pop();return L.join("\n")}
