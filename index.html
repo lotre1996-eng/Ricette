@@ -250,6 +250,16 @@ ul.ingr.pills li.ipill:last-child{border-bottom:1px solid color-mix(in srgb,var(
 .dpx{flex:none;width:26px;height:26px;margin-left:2px;border-radius:50%;border:0;padding:0;background:rgba(0,0,0,.08);color:var(--soft);font-size:12px;cursor:pointer}
 .iem img{display:block;width:100%;height:100%;border-radius:50%;object-fit:cover}
 .dtx{min-width:0}
+.rhero{min-height:96px}
+.rhero h2.t{max-width:100%}
+h3.hdc::before{content:"🍽️";margin-right:8px}
+.txt.dd{margin:0 0 14px}
+.noimg{padding-left:14px!important}
+.dp.ro{padding-right:14px}
+.iem.no{background:transparent;border:2px solid rgba(231,182,2,.7)}
+.sp.on .iem.no{border-color:#3DAE6A;background:#3DAE6A}
+.phbtn{display:inline-flex;align-items:center;gap:7px}
+.phbtn svg{width:16px;height:16px}
 /* spesa a pillole */
 .spills{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 12px}
 .spills .sp{width:auto;max-width:100%;margin:0;padding:6px 14px 6px 6px;gap:9px;align-items:center;border-radius:26px;border:1px solid rgba(231,182,2,.5);background:rgba(231,182,2,.13);box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
@@ -819,6 +829,7 @@ var LANG="it",DICT={},ORIG=new WeakMap(),ORIGA=new WeakMap(),I18N_ON=false;
 (function(){var X={"Numerato":["Numbered","Numerado","Numéroté","编号"],"Libero":["Free","Libre","Libre","自由"],"Formato del procedimento":["Steps format","Formato del procedimiento","Format des étapes","步骤格式"]};["en","es","fr","zh"].forEach(function(l,j){Object.keys(X).forEach(function(k){DICT[l][k]=X[k][j]})})})();
 (function(){var X={"Eliminare questa ricetta? Non si può annullare.":["Delete this recipe? This can\u2019t be undone.","¿Eliminar esta receta? No se puede deshacer.","Supprimer cette recette ? Cette action est irréversible.","要删除这份食谱吗？此操作无法撤销。"],"Ricetta eliminata.":["Recipe deleted.","Receta eliminada.","Recette supprimée.","食谱已删除。"]};["en","es","fr","zh"].forEach(function(l,j){Object.keys(X).forEach(function(k){DICT[l][k]=X[k][j]})})})();
 (function(){var X={"Ingredienti del piatto":["Dish ingredients","Ingredientes del plato","Ingrédients du plat","菜品食材"]};["en","es","fr","zh"].forEach(function(l,j){Object.keys(X).forEach(function(k){DICT[l][k]=X[k][j]})})})();
+(function(){var X={"Rimuovi foto":["Remove photo","Quitar foto","Supprimer la photo","移除照片"],"Eliminare questo piatto? Non si può annullare.":["Delete this dish? This can\u2019t be undone.","¿Eliminar este plato? No se puede deshacer.","Supprimer ce plat ? Cette action est irréversible.","要删除这道菜品吗？此操作无法撤销。"],"Nessuna ricetta in questo piatto. Tieni premuto il piatto nell’elenco e scegli Modifica per aggiungerne.":["No recipes in this dish. Press and hold the dish in the list and choose Edit to add some.","No hay recetas en este plato. Mantén pulsado el plato en la lista y elige Editar para añadir.","Aucune recette dans ce plat. Maintenez le plat dans la liste et choisissez Modifier pour en ajouter.","这道菜品还没有食谱。在列表中长按菜品并选择“编辑”即可添加。"]};["en","es","fr","zh"].forEach(function(l,j){Object.keys(X).forEach(function(k){DICT[l][k]=X[k][j]})})})();
 function mkP(re,en,es,fr,zh){return[re,{en:en,es:es,fr:fr,zh:zh}]}
 function pl(n,a,b){return +n===1?a:b}
 var PATS=[
@@ -1498,7 +1509,7 @@ function shopHTML(){
     var u=r.u&&r.u!=="q.b."?esc(uT(r.u))+' ':'';
     var tail=r.u==="q.b."?' '+uT("q.b."):'';
     var extra=r.txt.length?' ('+esc(r.txt.join(", "))+')':'';
-    return '<button class="sp'+(on?' on':'')+'" data-act="chk" data-k="'+esc(r.key)+'" aria-pressed="'+on+'"><span class="iem" aria-hidden="true">'+ingEmoji(r.n)+'</span><span class="spt"><span class="spn">'+q+u+esc(r.n)+tail+extra+(r.m?' <span class="mk">'+esc(r.m)+'</span>':'')+'</span>'+(multi?'<span class="rs">'+esc(r.src)+'</span>':'')+'</span></button>';
+    return '<button class="sp'+(on?' on':'')+'" data-act="chk" data-k="'+esc(r.key)+'" aria-pressed="'+on+'">'+iemHTML(r.n,true)+'<span class="spt"><span class="spn">'+q+u+esc(r.n)+tail+extra+(r.m?' <span class="mk">'+esc(r.m)+'</span>':'')+'</span>'+(multi?'<span class="rs">'+esc(r.src)+'</span>':'')+'</span></button>';
   }).join("");
   return '<div class="sheet"><div class="head"><h2>Spesa</h2></div>'+
   (chips?'<div class="srcs">'+chips+'</div>':'')+
@@ -1526,56 +1537,45 @@ function avatar(r){
 }
 /* ===== Immagini degli ingredienti (emoji) ===== */
 var ING_EM=[
-["🍜",["ramen","noodle","udon"]],["🍣",["sushi","sashimi","nigiri"]],
-["🍆",["melanzan","parmigiana"]],["🌶️",["peperoncin"]],["🫑",["peperon"]],["🍟",["patatine"]],
-["🍅",["pomodor","pelati","passata","polpa di"]],["🧅",["cipoll","scalogn","porro"]],["🧄",["agli"]],
+["",["noce moscata","pasta di mandorle"]],
+["🍆",["melanzan"]],["🌶️",["peperoncin"]],["🫑",["peperon"]],["🍟",["patatine"]],
+["🍅",["pomodor","pelati","passata","polpa di"]],["🧅",["cipoll","scalogn"]],["🧄",["agli"]],
 ["🥕",["carot"]],["🥔",["patat"]],["🥒",["zucchin","cetriol"]],["🎃",["zucca"]],["🥦",["broccol","cavolfior"]],
-["🥬",["spinac","insalat","lattug","bietol","cavol","verza","rucola","sedano","indivia","radicchi","cicoria","songino"]],
+["🥬",["spinac","insalat","lattug","bietol","cavol","verza","rucola","indivia","radicchi","cicoria","songino"]],
 ["🍄",["fungh","champignon","porcin"]],["🌽",["mais","granoturco"]],["🫛",["pisell","fave","fagiolin"]],
 ["🫘",["fagiol","ceci","lenticch","legumi","borlotti","cannellini"]],
-["🌿",["basilic","prezzemol","rosmarin","salvia","timo","origano","menta","erba","erbe","maggiorana","alloro","finocchi","aneto"]],
+["🌿",["basilic","prezzemol","rosmarin","salvia","timo","origano","menta","maggiorana","alloro","erbe"]],
 ["🍋",["limon"]],["🍊",["aranc","mandarin","clementin","pompelmo"]],["🍎",["mela","mele"]],["🍐",["pera","pere"]],["🍌",["banan"]],
 ["🍓",["fragol","lampon"]],["🫐",["mirtill","ribes"]],["🍇",["uva","uvett"]],["🍒",["ciliegi","amarena","amarene"]],
 ["🍑",["pesca","pesche"]],["🍍",["ananas"]],["🥥",["cocco"]],["🥑",["avocado"]],["🥝",["kiwi"]],["🥭",["mango"]],
 ["🍉",["anguria","cocomero"]],["🍈",["melone"]],["🫚",["zenzero"]],
-["🫒",["olive","oliva","olio"]],["🧂",["sale","salgemma","spezi","cannell","curcuma","cumino","paprica","chiodi di garofano","cardamom","coriandol","curry","masala"]],
-["⚫",["pepe"]],["🌼",["zafferano","vaniglia"]],
-["🌰",["noce moscata","noci","noce","nocciol","castagn","pistacchi","mandorl","pinoli","anacard"]],["🥜",["arachid"]],
+["🫒",["olive","oliva","olio"]],["🧂",["sale","salgemma"]],
+["🌰",["noci","noce","nocciol","castagn","pistacchi","mandorl","pinoli","anacard"]],["🥜",["arachid"]],
 ["🌾",["farina","semola","amido","fecola"]],["🥐",["pasta sfoglia","pasta frolla","pasta brisee","sfoglia","cornett"]],
-["🍞",["pane","pangrattato","pancarr","lievito","baguette","crostin"]],
+["🍞",["pane","pangrattato","pancarr","baguette","crostin"]],
 ["🍝",["spaghett","tagliatell","pasta","penne","rigaton","maccheron","fusill","linguine","bucatini","lasagn","tortellin","ravioli","gnocchi","orecchiett","paccheri","farfalle","vermicelli","tagliolin","pappardell","cappellett"]],
-["🍚",["riso","risotto","basmati"]],["🥚",["uov","tuorl","albume","albumi","frittat","omelette"]],
-["🥛",["latte","panna","yogurt","kefir","besciamella"]],["🧈",["burro","margarina","strutto"]],
+["🍚",["riso","basmati"]],["🥚",["uov","tuorl","albume","albumi"]],
+["🥛",["latte","panna","yogurt","kefir"]],["🧈",["burro","margarina","strutto"]],
 ["🧀",["formaggi","parmigian","pecorin","grana","mozzarell","ricott","mascarpon","gorgonzol","scamorz","provol","fontina","emmental","asiago","taleggio","stracchin","burrata","feta","philadelphia","caciocavall"]],
-["🍔",["hamburger","panino","panini","toast","burger"]],
-["🥓",["guanciale","pancetta","prosciutt","salsicc","speck","bacon","salame","mortadella","bresaola","lardo","nduja"]],
+["🥓",["guanciale","pancetta","prosciutt","salsicc","speck","bacon","salame","mortadella","bresaola","lardo"]],
 ["🥩",["manzo","macinato","bistecc","vitell","carne","maiale","costin","filetto","fettina","agnello","spezzatino","polpett"]],
 ["🍗",["pollo","tacchino","petto di","cosce","alette","anatra","coniglio"]],
 ["🐟",["pesce","salmone","tonno","merluzz","branzin","orata","acciug","alici","sgombro","baccala","stoccafisso","trota","sogliol","spada","platessa"]],
-["🦐",["gamber","scamp","mazzancoll","aragost","granchi","astic"]],["🦑",["calamar","seppi","polpo","totan"]],["🦪",["cozz","vongol","ostric","molluschi"]],
-["🍷",["vino","prosecco","marsala","vermouth","spumante"]],["🍺",["birra"]],["🥃",["rum","brandy","cognac","whisky","grappa","liquore","amaretto","limoncello"]],
-["🫙",["aceto","capperi","sottaceti","cetriolini","senape","giardiniera","conserva","marmellata","confettura"]],
-["🍯",["miele","sciroppo","malto"]],["🍬",["zuccher","caramell","glucosio"]],["🍫",["ciocco","cacao","nutella"]],
-["☕",["caffe","espresso","moka"]],["🍵",["te verde","te nero","tisana","camomilla","matcha","infuso"]],
-["💧",["acqua","ghiaccio"]],["🍲",["brodo","dado","fondo di","zuppa","minestr"]],
-["🍪",["savoiardi","biscott","pavesini","wafer","cracker","amaretti","frollini","grissini","taralli"]],
-["🍰",["tiramisu","torta","pan di spagna","crema pasticcera","budino","dolce","crostata","panna cotta","cheesecake","brownie","muffin"]],
-["🥫",["salsa","ketchup","maionese","pesto"]],["🍕",["pizza","impasto"]],["🌱",["germogli","alghe","nori","wakame","kombu","tofu","soia","tempeh","seitan"]]
+["🦐",["gamber","scamp","mazzancoll","aragost","granchi","astic"]],["🦑",["calamar","seppi","polpo","totan"]],["🦪",["cozz","vongol","ostric"]],
+["🍷",["vino","prosecco","marsala","spumante"]],["🍺",["birra"]],
+["🍯",["miele"]],["🍫",["ciocco","cacao","nutella"]],
+["☕",["caffe","espresso"]],["🍵",["te verde","te nero","tisana","camomilla","matcha"]],
+["💧",["acqua","ghiaccio"]],["🍲",["brodo","zuppa","minestr"]],
+["🍪",["savoiardi","biscott","pavesini","wafer","cracker","amaretti","frollini","grissini","taralli"]]
 ].map(function(e){return [e[0],new RegExp("(^| )(?:"+e[1].map(function(k){return k.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")}).join("|")+")")]});
 var ING_CACHE={};
-function ingEmoji(name,def){
-  var s=nz(name);if(!s)return def||"🥣";
-  var c=ING_CACHE[s];if(c)return c==="-"?(def||"🥣"):c;
+function ingEmoji(name){
+  var s=nz(name);if(!s)return "";
+  var c=ING_CACHE[s];if(c!==undefined)return c;
   for(var i=0;i<ING_EM.length;i++)if(ING_EM[i][1].test(s)){ING_CACHE[s]=ING_EM[i][0];return ING_EM[i][0]}
-  ING_CACHE[s]="-";return def||"🥣";
+  ING_CACHE[s]="";return "";
 }
-function recipeEmoji(r){
-  var s=nz(r.title||""),best=null,bi=1e9;
-  ING_EM.forEach(function(e){var m=e[1].exec(s);if(m&&m.index<bi){bi=m.index;best=e[0]}});
-  if(best)return best;
-  var a=r.ingredients||[];for(var i=0;i<a.length;i++){var x=ingEmoji(a[i].n,"");if(x)return x}
-  return "🍽️";
-}
+function iemHTML(name,keep){var e=ingEmoji(name);return e?'<span class="iem" aria-hidden="true">'+e+'</span>':(keep?'<span class="iem no" aria-hidden="true"></span>':'')}
 function tintIdx(r){var t=(r.title||"?").trim(),h=0;for(var i=0;i<t.length;i++)h=(h*31+t.charCodeAt(i))>>>0;return h%6}
 function readPhoto(file,cb){
   var fr=new FileReader();
@@ -1638,8 +1638,8 @@ function recipeHTML(){
   var f=r.status==="fatta";
   var k=r.serv?(scaleTo||r.serv)/r.serv:1;
   var n=r.serv?(scaleTo||r.serv):0;
-  var ing=(r.ingredients||[]).map(function(i){return '<li class="ipill"><span class="iem" aria-hidden="true">'+ingEmoji(i.n)+'</span><span class="itx">'+line(i,k)+'</span></li>'}).join("");
-  return '<div class="sheet rc rc'+tintIdx(r)+'"><div class="rtop"><button class="back glass" data-act="back">‹ Ricette</button><button class="back glass tmb" data-act="tmopen" aria-label="Timer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13.5" r="7.5"/><path d="M12 9.5v4l2.5 1.5M9.5 3h5"/></svg><span>Timer</span></button></div><div class="rhero'+(r.photo?' ph':'')+'">'+(r.photo?'<img class="rphi" src="'+esc(r.photo)+'" alt="">':'<span class="rem" aria-hidden="true">'+recipeEmoji(r)+'</span>')+'<h2 class="t" data-nt>'+esc(r.title)+'</h2></div>'+
+  var ing=(r.ingredients||[]).map(function(i){var em=iemHTML(i.n);return '<li class="ipill'+(em?'':' noimg')+'">'+em+'<span class="itx">'+line(i,k)+'</span></li>'}).join("");
+  return '<div class="sheet rc rc'+tintIdx(r)+'"><div class="rtop"><button class="back glass" data-act="back">‹ Ricette</button><button class="back glass tmb" data-act="tmopen" aria-label="Timer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13.5" r="7.5"/><path d="M12 9.5v4l2.5 1.5M9.5 3h5"/></svg><span>Timer</span></button></div><div class="rhero'+(r.photo?' ph':'')+'">'+(r.photo?'<img class="rphi" src="'+esc(r.photo)+'" alt="">':'')+'<h2 class="t" data-nt>'+esc(r.title)+'</h2></div>'+
   '<div class="bar">'+
   
   '<button class="b" data-act="shadd">Aggiungi alla spesa</button><button class="b shr" data-act="share"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3M8 7l4-4 4 4"/><path d="M5 12v6.5A2.5 2.5 0 0 0 7.5 21h9a2.5 2.5 0 0 0 2.5-2.5V12"/></svg><span>Condividi</span></button></div>'+
@@ -1680,7 +1680,7 @@ function rowHTML(i,k){
 function formHTML(){
   var d=editing;if(!d)return "";
   return '<div class="sheet">'+'<div class="fbar"><button class="back glass" data-act="cancel">‹ Annulla</button><button class="b p" data-act="save">Salva</button></div><h2 class="t">'+(d.isNew?'Nuova ricetta':'Modifica ricetta')+'</h2>'+
-  '<div class="phb"><div class="phv">'+(d.photo?'<img src="'+esc(d.photo)+'" alt="">':CAM)+'</div><div class="pha"><button class="b" data-act="phcam">Scatta foto</button><button class="b" data-act="phlib">Libreria</button>'+(d.photo?'<button class="b d" data-act="phrm">Rimuovi</button>':'')+'</div><input type="file" id="ph-cam" accept="image/*" capture="environment" hidden><input type="file" id="ph-lib" accept="image/*" hidden></div>'+
+  '<div class="phb"><div class="phv">'+(d.photo?'<img src="'+esc(d.photo)+'" alt="">':CAM)+'</div><div class="pha"><button class="b phbtn" data-act="phmenu">'+PMI.edit+'<span>Modifica</span></button></div><input type="file" id="ph-cam" accept="image/*" capture="environment" hidden><input type="file" id="ph-lib" accept="image/*" hidden></div>'+
   '<label class="l" for="f-title">Nome della ricetta</label><input id="f-title" value="'+esc(d.title)+'">'+
   '<label class="l" for="f-serv">Per quante persone</label><input id="f-serv" inputmode="numeric" placeholder="Per esempio 4" value="'+esc(d.serv||"")+'">'+
   '<h3>Ingredienti</h3>'+d.ingredients.map(rowHTML).join("")+
@@ -1691,22 +1691,15 @@ function formHTML(){
 }
 function dishRecs(d){return (d.rec||[]).map(function(id){return recipes.find(function(r){return r.id===id})}).filter(Boolean)}
 function dishAl(d){var o={};dishRecs(d).forEach(function(r){recipeAl(r).forEach(function(n){o[n]=1})});return Object.keys(o).map(Number).sort(function(a,b){return a-b})}
-function dishEmoji(d){
-  var s=nz(d.title||""),best=null,bi=1e9;
-  ING_EM.forEach(function(e){var m=e[1].exec(s);if(m&&m.index<bi){bi=m.index;best=e[0]}});
-  if(best)return best;
-  var rs=dishRecs(d);return rs.length?recipeEmoji(rs[0]):"🍽️";
-}
-function dishHero(d){
-  var t=(d.title||"").trim();
-  return '<div class="rhero'+(d.photo?' ph':'')+'">'+(d.photo?'<img class="rphi" src="'+esc(d.photo)+'" alt="">':'<span class="rem" id="dem" aria-hidden="true">'+dishEmoji(d)+'</span>')+'<h2 class="t'+(t?'':' e')+'" id="dht"'+(t?' data-nt':'')+'>'+esc(t||(d.isNew?"Nuovo piatto":"Senza nome"))+'</h2></div>';
+function dishHero(d,photo){
+  var t=(d.title||"").trim(),ph=photo&&d.photo;
+  return '<div class="rhero'+(ph?' ph':'')+'">'+(ph?'<img class="rphi" src="'+esc(d.photo)+'" alt="">':'')+'<h2 class="t'+(t?'':' e')+'" id="dht"'+(t?' data-nt':'')+'>'+esc(t||(d.isNew?"Nuovo piatto":"Senza nome"))+'</h2></div>';
 }
 function dishLive(){
   var i=$("#d-title");if(!i||!dedit)return;
-  var t=i.value.trim(),sh=$("#v-dish .sheet"),h=$("#dht"),e=$("#dem");
+  var t=i.value.trim(),sh=$("#v-dish .sheet"),h=$("#dht");
   if(sh)sh.className="sheet rc rc"+tintIdx({title:t});
   if(h){h.textContent=t||(dedit.isNew?"Nuovo piatto":"Senza nome");h.classList.toggle("e",!t);if(t)h.setAttribute("data-nt","");else h.removeAttribute("data-nt")}
-  if(e)e.textContent=dishEmoji({title:t,rec:dedit.rec});
 }
 function dishIngRows(d){
   var map={},arr=[];
@@ -1721,13 +1714,61 @@ function dishIngr(d){
   var rows=dishIngRows(d);if(!rows.length)return "";
   return '<h3 class="hi">Ingredienti del piatto</h3><div class="dpills">'+rows.map(function(r){
     var q=r.sum>0?'<b>'+fmt(r.sum)+'</b> ':'',u=r.u&&r.u!=="q.b."?esc(uT(r.u))+' ':'',tail=r.u==="q.b."?' '+uT("q.b."):'',extra=r.txt.length?' ('+esc(r.txt.join(", "))+')':'';
-    return '<span class="dp"><span class="iem" aria-hidden="true">'+ingEmoji(r.n)+'</span><span class="dtx">'+q+u+esc(r.n)+tail+extra+(r.m?' <span class="mk">'+esc(r.m)+'</span>':'')+'</span></span>';
+    var em=iemHTML(r.n);return '<span class="dp'+(em?'':' noimg')+'">'+em+'<span class="dtx">'+q+u+esc(r.n)+tail+extra+(r.m?' <span class="mk">'+esc(r.m)+'</span>':'')+'</span></span>';
   }).join("")+'</div>';
+}
+function dishRecPills(rs,edit){
+  return '<div class="dpills">'+rs.map(function(r){
+    var img=r.photo?'<span class="iem" aria-hidden="true"><img src="'+esc(r.photo)+'" alt=""></span>':'';
+    return '<span class="dp rc'+tintIdx(r)+(img?'':' noimg')+(edit?'':' ro')+'"><button type="button" class="dpo" data-act="dopenrec" data-id="'+esc(r.id)+'">'+img+'<span class="tl">'+esc(r.title||"Senza nome")+'</span></button>'+(edit?'<button type="button" class="dpx" data-act="dremrec" data-id="'+esc(r.id)+'" aria-label="Togli ricetta">✕</button>':'')+'</span>';
+  }).join("")+'</div>';
+}
+function dishViewHTML(d){
+  var rs=dishRecs(d),al=alsOn()?dishAl(d):[];
+  return '<div class="sheet rc rc'+tintIdx(d)+'"><div class="rtop"><button class="back glass" data-act="dback">‹ Menù</button></div>'+dishHero(d,true)+
+    (d.desc&&d.desc.trim()?'<p class="txt dd">'+esc(d.desc)+'</p>':'')+
+    (rs.length?'<h3 class="hdc">Ricette del piatto</h3>'+dishRecPills(rs,false)+(al.length?'<div class="alsum"><span class="alx">Allergeni</span>'+al.map(function(n){return '<span class="alc"><span class="al">'+n+'</span>'+esc(ALS[n])+'</span>'}).join("")+'</div>':''):'<p class="sh">Nessuna ricetta in questo piatto. Tieni premuto il piatto nell’elenco e scegli Modifica per aggiungerne.</p>')+
+    dishIngr(d)+'</div>';
+}
+var dview=false;
+function dmBody(d,confirm){
+  var id=esc(d.id);
+  if(confirm)return '<div class="pmh" data-nt>'+esc(d.title||"Senza nome")+'</div><div class="pmn">Eliminare questo piatto? Non si può annullare.</div><button class="pm pmx" data-act="dmdel" data-id="'+id+'">'+pmi("trash","r")+'<span class="pml">Elimina piatto</span></button><button class="pm" data-act="pmclose">'+pmi("x","g")+'<span class="pml">Annulla</span></button>';
+  return '<button class="pm" data-act="dmedit" data-id="'+id+'">'+pmi("edit","y")+'<span class="pml">Modifica</span></button><div class="pmd"></div><button class="pm pmx" data-act="dmdelask" data-id="'+id+'">'+pmi("trash","r")+'<span class="pml">Elimina piatto</span></button>';
+}
+function placeMenu(m,x,y){
+  var vw=window.innerWidth,vh=window.innerHeight,w=m.offsetWidth,hh=m.offsetHeight;
+  var left=x>vw/2?x-w-14:x+14;left=Math.max(12,Math.min(vw-w-12,left));
+  var top=Math.max(12,Math.min(vh-hh-110,y-20));m.style.left=left+"px";m.style.top=top+"px";
+}
+function openDishMenu(row,x,y){
+  var d=dishes.find(function(q){return q.id===row.dataset.id});if(!d)return;
+  closeMenu();
+  var mask=document.createElement("div");mask.id="pmask";mask.setAttribute("data-act","pmclose");
+  var m=document.createElement("div");m.id="pmenu";m.setAttribute("role","menu");m.innerHTML=dmBody(d,false);
+  document.body.appendChild(mask);document.body.appendChild(m);
+  row.classList.add("pressed");clearSel();setTimeout(clearSel,120);setTimeout(clearSel,450);
+  placeMenu(m,x,y);
+  haptic("medium");
+  suppress=true;setTimeout(function(){suppress=false},450);
+}
+function openPhotoMenu(kind,btn){
+  closeMenu();
+  var p=kind==="d"?"d":"",has=kind==="d"?(dedit&&dedit.photo):(editing&&editing.photo);
+  var h='<button class="pm" data-act="'+p+'phcam">'+pmi("cam","y")+'<span class="pml">Scatta foto</span></button><button class="pm" data-act="'+p+'phlib">'+pmi("lib","t")+'<span class="pml">Libreria</span></button>'+(has?'<div class="pmd"></div><button class="pm pmx" data-act="'+p+'phrm">'+pmi("trash","r")+'<span class="pml">Rimuovi foto</span></button>':'');
+  var mask=document.createElement("div");mask.id="pmask";mask.setAttribute("data-act","pmclose");
+  var m=document.createElement("div");m.id="pmenu";m.setAttribute("role","menu");m.innerHTML=h;
+  document.body.appendChild(mask);document.body.appendChild(m);
+  haptic("light");
+  var r=btn.getBoundingClientRect(),vw=window.innerWidth,vh=window.innerHeight,w=m.offsetWidth,hh=m.offsetHeight;
+  var left=Math.max(12,Math.min(vw-w-12,r.left+r.width/2-w/2)),top=r.bottom+8;
+  if(top+hh>vh-20)top=Math.max(12,r.top-hh-8);
+  m.style.left=left+"px";m.style.top=top+"px";
 }
 function dishComp(d){
   var rs=dishRecs(d),h='<div class="dcmp"><span class="sl">Ricette del piatto</span>';
   if(!rs.length)h+='<p class="sh" style="margin:0 0 8px">Se vuoi, componi il piatto con le ricette che hai già. Per esempio il Ramen con il brodo dashi e il brodo di pollo.</p>';
-  if(rs.length)h+='<div class="dpills">'+rs.map(function(r){return '<span class="dp rc'+tintIdx(r)+'"><button type="button" class="dpo" data-act="dopenrec" data-id="'+esc(r.id)+'"><span class="iem" aria-hidden="true">'+(r.photo?'<img src="'+esc(r.photo)+'" alt="">':recipeEmoji(r))+'</span><span class="tl">'+esc(r.title||"Senza nome")+'</span></button><button type="button" class="dpx" data-act="dremrec" data-id="'+esc(r.id)+'" aria-label="Togli ricetta">✕</button></span>'}).join("")+'</div>';
+  if(rs.length)h+=dishRecPills(rs,true);
   h+='<button type="button" class="b" data-act="dpick">'+(rs.length?"Aggiungi o togli ricette":"Aggiungi ricette")+'</button>';
   var al=alsOn()?dishAl(d):[];
   if(al.length)h+='<div class="alsum" style="margin-top:12px"><span class="alx">Allergeni</span>'+al.map(function(n){return '<span class="alc"><span class="al">'+n+'</span>'+esc(ALS[n])+'</span>'}).join("")+'</div>';
@@ -1759,8 +1800,9 @@ function menuHTML(){
 function collectDish(){if(!dedit)return;var t=$("#d-title"),x=$("#d-desc");if(t)dedit.title=t.value;if(x)dedit.desc=x.value}
 function dishHTML(){
   var d=dedit;if(!d)return "";
-  return '<div class="sheet rc rc'+tintIdx(d)+'"><div class="fbar"><button class="back glass" data-act="dback">‹ Menù</button><button class="b p" data-act="dsave">Salva</button></div>'+dishHero(d)+
-  '<div class="phb"><div class="phv">'+(d.photo?'<img src="'+esc(d.photo)+'" alt="">':CAM)+'</div><div class="pha"><button class="b" data-act="dphcam">Scatta foto</button><button class="b" data-act="dphlib">Libreria</button>'+(d.photo?'<button class="b d" data-act="dphrm">Rimuovi</button>':'')+'</div><input type="file" id="dph-cam" accept="image/*" capture="environment" hidden><input type="file" id="dph-lib" accept="image/*" hidden></div>'+
+  if(dview)return dishViewHTML(d);
+  return '<div class="sheet rc rc'+tintIdx(d)+'"><div class="fbar"><button class="back glass" data-act="dback">‹ Menù</button><button class="b p" data-act="dsave">Salva</button></div>'+dishHero(d,false)+
+  '<div class="phb"><div class="phv">'+(d.photo?'<img src="'+esc(d.photo)+'" alt="">':CAM)+'</div><div class="pha"><button class="b phbtn" data-act="dphmenu">'+PMI.edit+'<span>Modifica</span></button></div><input type="file" id="dph-cam" accept="image/*" capture="environment" hidden><input type="file" id="dph-lib" accept="image/*" hidden></div>'+
   '<label class="l" for="d-title">Nome del piatto</label><input id="d-title" placeholder="Per esempio risotto ai funghi" value="'+esc(d.title)+'">'+
   '<label class="l" for="d-desc">Descrizione (facoltativa)</label><textarea id="d-desc" rows="4" placeholder="Due righe per ricordarti com’è">'+esc(d.desc)+'</textarea>'+
   dishComp(d)+dishIngr(d)+'<div class="actions">'+(d.isNew?'':(sure?'<button class="b d sure" data-act="ddel">Conferma: elimina piatto</button><button class="b" data-act="dno">Annulla</button>':'<button class="b d" data-act="ddel0">Elimina piatto</button>'))+'</div></div>';
@@ -1949,9 +1991,9 @@ document.addEventListener("click",function(e){
   if(a==="wipe0"){sure=true;render();return}
   if(a==="wipeno"){sure=false;render();return}
   if(a==="wipe"){recipes=[];groups=[];dishes=[];saveDishes();shop={entries:[],checked:{}};saveLocal();persistGroups();persistShop();dropDraft();setOpen.wipe=false;sure=false;editing=newDraft();render(true);flash("Dati cancellati.");return}
-  if(a==="phcam"){$("#ph-cam").click();return}
-  if(a==="phlib"){$("#ph-lib").click();return}
-  if(a==="phrm"){collect();editing.photo="";render(true);saveDraft();return}
+  if(a==="phcam"){closeMenu();$("#ph-cam").click();return}
+  if(a==="phlib"){closeMenu();$("#ph-lib").click();return}
+  if(a==="phrm"){closeMenu();collect();editing.photo="";render(true);saveDraft();return}
   if(a==="share"){var rs2=cur();if(!rs2)return;var tx2=recipeText(rs2);if(navigator.share){navigator.share({title:rs2.title||"Ricetta",text:tx2}).catch(function(e){if(e&&e.name==="AbortError")return;copyText(tx2,"Condivisione non disponibile: testo copiato.")})}else copyText(tx2,"Testo della ricetta copiato.");return}
   if(a==="bary"){var dd=parseInt(el.dataset.d,10)||0;settings.bary=dd===0?0:Math.max(-60,Math.min(160,(settings.bary||0)+dd));saveSettings();calibrate();render();return}
   if(a==="dpick"){collectDish();pq="";go("pick",true);return}
@@ -1959,12 +2001,17 @@ document.addEventListener("click",function(e){
   if(a==="ptog"){if(!dedit)return;var pid=el.dataset.id;dedit.rec=dedit.rec||[];var pp=dedit.rec.indexOf(pid);if(pp>=0)dedit.rec.splice(pp,1);else dedit.rec.push(pid);var pr=$("#prows");if(pr)pr.innerHTML=pickRows();var pdn=$("#pdone"),pc=pickCount();if(pdn)pdn.textContent="Fatto"+(pc?" ("+pc+")":"");return}
   if(a==="dremrec"){collectDish();var rp=(dedit.rec||[]).indexOf(el.dataset.id);if(rp>=0)dedit.rec.splice(rp,1);$("#v-dish").innerHTML=dishHTML();return}
   if(a==="dopenrec"){collectDish();recFrom="dish";selId=el.dataset.id;scaleTo=0;go("recipe",true);return}
-  if(a==="dnew"){dedit={id:uid(),isNew:true,title:"",desc:"",photo:"",rec:[]};return go("dish",true)}
-  if(a==="dopen"){var dd0=dishes.find(function(x){return x.id===el.dataset.id});if(!dd0)return;dedit=JSON.parse(JSON.stringify(dd0));return go("dish",true)}
+  if(a==="dnew"){dview=false;dedit={id:uid(),isNew:true,title:"",desc:"",photo:"",rec:[]};return go("dish",true)}
+  if(a==="dopen"){var dd0=dishes.find(function(x){return x.id===el.dataset.id});if(!dd0)return;dview=true;dedit=JSON.parse(JSON.stringify(dd0));return go("dish",true)}
+  if(a==="dmedit"){var dm=dishes.find(function(q){return q.id===el.dataset.id});closeMenu();if(!dm)return;dview=false;dedit=JSON.parse(JSON.stringify(dm));return go("dish",true)}
+  if(a==="dmdelask"){var dq2=dishes.find(function(q){return q.id===el.dataset.id}),pm2=document.getElementById("pmenu");if(dq2&&pm2)pm2.innerHTML=dmBody(dq2,true);return}
+  if(a==="dmdel"){var dx=el.dataset.id;closeMenu();dishes=dishes.filter(function(q){return q.id!==dx});saveDishes();render();flash("Piatto eliminato.");return}
+  if(a==="phmenu"){openPhotoMenu("r",el);return}
+  if(a==="dphmenu"){collectDish();openPhotoMenu("d",el);return}
   if(a==="dback"){dedit=null;sure=false;recFrom="";return go("menu")}
-  if(a==="dphcam"){$("#dph-cam").click();return}
-  if(a==="dphlib"){$("#dph-lib").click();return}
-  if(a==="dphrm"){collectDish();dedit.photo="";$("#v-dish").innerHTML=dishHTML();return}
+  if(a==="dphcam"){closeMenu();$("#dph-cam").click();return}
+  if(a==="dphlib"){closeMenu();$("#dph-lib").click();return}
+  if(a==="dphrm"){closeMenu();collectDish();dedit.photo="";$("#v-dish").innerHTML=dishHTML();return}
   if(a==="dsave"){collectDish();var nm=(dedit.title||"").trim();if(!nm){flash("Dai un nome al piatto.");return}var od={id:dedit.id,title:nm,desc:(dedit.desc||"").trim(),photo:dedit.photo||"",rec:(dedit.rec||[]).filter(function(id){return recipes.some(function(r){return r.id===id})}),updated:Date.now()};var di=dishes.findIndex(function(x){return x.id===od.id});if(di<0)dishes.push(od);else dishes[di]=od;saveDishes();dedit=null;sure=false;go("menu");flash("Piatto salvato.");return}
   if(a==="ddel0"){collectDish();sure=true;$("#v-dish").innerHTML=dishHTML();return}
   if(a==="dno"){sure=false;$("#v-dish").innerHTML=dishHTML();return}
@@ -2018,6 +2065,16 @@ document.addEventListener("click",function(e){
     var wasNew=!!(editing&&editing.isNew);persist(out);selId=out.id;scaleTo=0;dropDraft();if(wasNew)gsel="";var bk2=wasNew||editFrom==="list"?"list":"recipe";editing=null;SM=null;editFrom="";go(bk2,true);if(wasNew)setPage(0,false);flash("Ricetta salvata.");
   }
 });
+/* Feedback tattile: vibrazione su Android; su iPhone (iOS 17.4 o successivo) un interruttore nascosto che fa "tic" */
+function haptic(kind){
+  try{if(navigator.vibrate)navigator.vibrate(kind==="light"?8:14)}catch(e){}
+  try{
+    var l=document.createElement("label"),i=document.createElement("input");
+    l.setAttribute("aria-hidden","true");l.style.cssText="position:fixed;left:-99px;top:-99px;width:1px;height:1px;opacity:0;pointer-events:none";
+    i.type="checkbox";i.setAttribute("switch","");i.tabIndex=-1;l.appendChild(i);
+    document.body.appendChild(l);l.click();document.body.removeChild(l);
+  }catch(e){}
+}
 var suppress=false,pmT=null,pmS=null;
 function closeMenu(){
   var m=document.getElementById("pmenu"),k=document.getElementById("pmask");
@@ -2031,7 +2088,9 @@ var PMI={
  folder:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 7.5A1.5 1.5 0 0 1 5 6h4l2 2.5h8a1.5 1.5 0 0 1 1.5 1.5v8a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 18z"/></svg>',
  unfolder:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 7.5A1.5 1.5 0 0 1 5 6h4l2 2.5h8a1.5 1.5 0 0 1 1.5 1.5v8a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 18z"/><path d="M9 14h6"/></svg>',
  trash:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7h14M10 7V5h4v2M7 7l1 12h8l1-12M10.5 11v5M13.5 11v5"/></svg>',
- x:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>'
+ x:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+ cam:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.4"/></svg>',
+ lib:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="14" rx="2.5"/><circle cx="9" cy="10.5" r="1.6"/><path d="M4 17l5-4.5 3.5 3 3-2.5 4.5 4"/></svg>'
 };
 function pmi(k,c){return '<span class="pmi '+c+'" aria-hidden="true">'+PMI[k]+'</span>'}
 function pmBody(r,confirm){
@@ -2058,15 +2117,17 @@ function openMenu(row,x,y){
   left=Math.max(12,Math.min(vw-w-12,left));
   var top=Math.max(12,Math.min(vh-hh-110,y-20));
   m.style.left=left+"px";m.style.top=top+"px";
-  try{if(navigator.vibrate)navigator.vibrate(12)}catch(e){}
+  haptic("medium");
   suppress=true;setTimeout(function(){suppress=false},450);
 }
 document.addEventListener("pointerdown",function(e){
-  var row=e.target.closest&&e.target.closest("#rows .row");
-  if(!row||view!=="list")return;
+  var row=e.target.closest&&e.target.closest("#rows .row,#drows .row");
+  if(!row)return;
+  var isD=!!row.closest("#drows");
+  if(isD?view!=="menu":view!=="list")return;
   if(e.pointerType==="mouse"&&e.button!==0)return;
   pmS={x:e.clientX,y:e.clientY};clearTimeout(pmT);
-  pmT=setTimeout(function(){pmT=null;openMenu(row,pmS.x,pmS.y)},450);
+  pmT=setTimeout(function(){pmT=null;if(isD)openDishMenu(row,pmS.x,pmS.y);else openMenu(row,pmS.x,pmS.y)},450);
 });
 document.addEventListener("pointermove",function(e){
   if(pmT&&pmS&&(Math.abs(e.clientX-pmS.x)>10||Math.abs(e.clientY-pmS.y)>10)){clearTimeout(pmT);pmT=null}
@@ -2084,7 +2145,7 @@ function showGroupMenu(g,rect,confirm){
   var vw=window.innerWidth,w=m.offsetWidth;
   m.style.left=Math.max(12,Math.min(vw-w-12,rect.left))+"px";
   m.style.top=(rect.bottom+8)+"px";
-  if(!confirm){try{if(navigator.vibrate)navigator.vibrate(12)}catch(e){}suppress=true;setTimeout(function(){suppress=false},450)}
+  if(!confirm){haptic("medium");suppress=true;setTimeout(function(){suppress=false},450)}
 }
 document.addEventListener("pointerdown",function(e){
   var chip=e.target.closest&&e.target.closest(".gchip[data-g]");
@@ -2120,7 +2181,7 @@ tbar.addEventListener("pointermove",function(e){
   if(!scrub.moved&&Math.abs(e.clientX-scrub.x)<8)return;
   scrub.moved=true;
   var rc=tbar.getBoundingClientRect(),w=(rc.width-8)/TABS.length,i=Math.max(0,Math.min(TABS.length-1,Math.floor((e.clientX-rc.left-4)/w)));
-  if(i!==TABS.indexOf(tab)&&TABS.indexOf(view)>=0){try{if(navigator.vibrate)navigator.vibrate(8)}catch(x){}go(TABS[i])}
+  if(i!==TABS.indexOf(tab)&&TABS.indexOf(view)>=0){haptic("light");go(TABS[i])}
 });
 function scrubEnd(){if(scrub&&scrub.moved){suppress=true;setTimeout(function(){suppress=false},400)}scrub=null}
 tbar.addEventListener("pointerup",scrubEnd);
