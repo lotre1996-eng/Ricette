@@ -232,6 +232,12 @@ h2.tfx{display:flex;align-items:center;gap:10px;margin:0;font:600 34px/1.05 "Fra
 .hog{display:inline-block;flex:none;width:2.1em;height:2.1em;margin:-.4em 0 -.4em;-webkit-text-stroke:0}
 .hog svg{display:block;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 3px 3px rgba(70,35,0,.28));transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
 .hog:active svg{transform:scale(1.14) rotate(-7deg)}
+/* ===== Comparsa elastica delle tendine ===== */
+@keyframes pmpop{from{opacity:0;transform:scale(.78)}to{opacity:1;transform:scale(1)}}
+@keyframes pmfade{from{opacity:0}to{opacity:1}}
+#pmenu{animation:pmpop .36s cubic-bezier(.34,1.56,.64,1) backwards}
+#pmask{animation:pmfade .2s ease-out backwards}
+@media (prefers-reduced-motion:reduce){#pmenu,#pmask{animation:none}}
 /* ===== Profondità: fascia in alto e titoli sfumati ===== */
 :root{--tg1:#14110A;--tg2:#7A4A00;--tgs:#3A2808;--bg1:rgba(231,182,2,.30);--bsh:rgba(40,25,0,.34);--tsh:rgba(231,182,2,.38)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--tg1:#FFFFFF;--tg2:#F2BF1A;--tgs:#FBEBB0;--bg1:rgba(231,182,2,.20);--bsh:rgba(0,0,0,.6);--tsh:rgba(231,182,2,.16)}}
@@ -798,7 +804,7 @@ window.addEventListener("resize",calibrate);
 window.addEventListener("orientationchange",function(){setTimeout(calibrate,300)});
 window.addEventListener("pageshow",calibrate);
 var SK="quaderno-impostazioni-v1";
-var settings={theme:"auto",size:"n",bar:"auto",bary:0,ides:1,als:1,lb:0,lang:"it",sort:"az",serv:0,awake:true,hap:1};
+var settings={theme:"auto",size:"n",bar:"auto",bary:0,ides:1,als:1,lb:0,lang:"it",sort:"az",serv:0,awake:true};
 var wl=null;
 function loadSettings(){try{var o=JSON.parse(localStorage.getItem(SK)||"null");if(o&&typeof o==="object")Object.keys(settings).forEach(function(k){if(k in o)settings[k]=o[k]})}catch(e){}}
 function saveSettings(){lsSet(SK,settings)}
@@ -1262,7 +1268,6 @@ function spHTML(k){
     '<div class="srow col"><div class="sl">Tema</div>'+seg("theme",[["auto","Automatico"],["light","Chiaro"],["dark","Scuro"]])+'</div>'+
     '<div class="srow col"><div class="sl">Dimensione del testo</div>'+seg("size",[["n","Normale"],["l","Grande"]])+'</div>'+
     '<div class="srow col"><div class="sl">Posizione della barra</div><div class="sh">Se la barra è troppo in alto o troppo in basso, spostala qui. Ogni tocco sposta di pochi millimetri.</div><div class="acts"><button class="b" data-act="bary" data-d="8">Più in basso</button><button class="b" data-act="bary" data-d="-8">Più in alto</button><button class="b" data-act="bary" data-d="0">Ripristina</button></div><div class="sh" style="margin-top:10px">'+esc(diag())+'</div></div>'+
-    '<div class="srow col"><div class="sl">Feedback tattile</div><div class="sh">Un piccolo «tic» quando tieni premuto su qualcosa. Su iPhone richiede iOS 17.4 o successivo.</div>'+seg("hap",[[1,"Attivo"],[0,"Non attivo"]])+'<div class="acts"><button class="b" data-act="haptest">Prova</button></div></div>'+
     '</div></div>';
   if(k==="lang")return spBack("Lingua")+'<div class="lgrp">'+LANGS.map(function(l){var cu=(settings.lang||"it")===l[0];return '<button type="button" class="lrow lopt" data-act="set" data-k="lang" data-v="'+l[0]+'"><span class="lbody"><span class="llb">'+l[1]+'</span>'+(cu?'<span class="lck">✓</span>':'')+'</span></button>'}).join("")+'</div></div>';
   if(k==="rec")return spBack("Ricette")+'<div class="setc">'+
@@ -1771,17 +1776,17 @@ function openDishMenu(row,x,y){
   document.body.appendChild(mask);document.body.appendChild(m);
   row.classList.add("pressed");clearSel();setTimeout(clearSel,120);setTimeout(clearSel,450);
   placeMenu(m,x,y);
-  hapLong();
+  
   suppress=true;setTimeout(function(){suppress=false},450);
 }
 function openPhotoMenu(kind,btn){
-  closeMenu();
+  closeMenu();pmS=null;
   var p=kind==="d"?"d":"",has=kind==="d"?(dedit&&dedit.photo):(editing&&editing.photo);
   var h='<button class="pm" data-act="'+p+'phcam">'+pmi("cam","y")+'<span class="pml">Scatta foto</span></button><button class="pm" data-act="'+p+'phlib">'+pmi("lib","t")+'<span class="pml">Libreria</span></button>'+(has?'<div class="pmd"></div><button class="pm pmx" data-act="'+p+'phrm">'+pmi("trash","r")+'<span class="pml">Rimuovi foto</span></button>':'');
   var mask=document.createElement("div");mask.id="pmask";mask.setAttribute("data-act","pmclose");
   var m=document.createElement("div");m.id="pmenu";m.setAttribute("role","menu");m.innerHTML=h;
   document.body.appendChild(mask);document.body.appendChild(m);
-  haptic("light");
+  
   var r=btn.getBoundingClientRect(),vw=window.innerWidth,vh=window.innerHeight,w=m.offsetWidth,hh=m.offsetHeight;
   var left=Math.max(12,Math.min(vw-w-12,r.left+r.width/2-w/2)),top=r.bottom+8;
   if(top+hh>vh-20)top=Math.max(12,r.top-hh-8);
@@ -2006,8 +2011,7 @@ document.addEventListener("click",function(e){
   if(a==="gtog"){var gk=el.dataset.g;collapsed[gk]=!collapsed[gk];$("#rows").innerHTML=rowsHTML();return}
   if(a==="flt"){flt=el.dataset.f;render();return}
   if(a==="settings")return go("settings",true);
-  if(a==="set"){var k2=el.dataset.k,v2=el.dataset.v;settings[k2]=(k2==="serv")?(parseInt(v2,10)||0):(k2==="hap"?(parseInt(v2,10)?1:0):v2);saveSettings();applySettings();render();var lg0=$("#v-login");if(lg0&&lg0.className!=="hide")showLogin();return}
-  if(a==="haptest"){haptic("medium");flash(IOSDEV?"Se senti un tic, funziona. Altrimenti serve iOS 17.4 o successivo.":"Prova inviata.");return}
+  if(a==="set"){var k2=el.dataset.k,v2=el.dataset.v;settings[k2]=(k2==="serv")?(parseInt(v2,10)||0):v2;saveSettings();applySettings();render();var lg0=$("#v-login");if(lg0&&lg0.className!=="hide")showLogin();return}
   if(a==="swap"){settings.awake=!settings.awake;saveSettings();wakeUpdate();render();return}
   if(a==="bkfile"){exportBackup();return}
   if(a==="bkpick"){var bf=$("#bk-file");if(bf)bf.click();return}
@@ -2090,27 +2094,21 @@ document.addEventListener("click",function(e){
     var wasNew=!!(editing&&editing.isNew);persist(out);selId=out.id;scaleTo=0;dropDraft();if(wasNew)gsel="";var bk2=wasNew||editFrom==="list"?"list":"recipe";editing=null;SM=null;editFrom="";go(bk2,true);if(wasNew)setPage(0,false);flash("Ricetta salvata.");
   }
 });
-/* Feedback tattile: vibrazione su Android; su iPhone (iOS 17.4 o successivo) un interruttore nativo nascosto che fa "tic".
-   Su iPhone il tic parte solo mentre il dito tocca lo schermo: per questo, dopo una pressione prolungata, scatta al rilascio. */
-var HAPEL=null,HAP_PEND=false,IOSDEV=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
-function hapEl(){
-  if(HAPEL&&HAPEL.isConnected)return HAPEL;
-  var l=document.createElement("label"),i=document.createElement("input");
-  l.setAttribute("aria-hidden","true");l.style.cssText="position:fixed;left:0;top:0;width:44px;height:44px;opacity:.01;pointer-events:none;overflow:hidden;z-index:-1";
-  i.type="checkbox";i.setAttribute("switch","");i.tabIndex=-1;i.addEventListener("focus",function(){i.blur()});
-  l.appendChild(i);document.body.appendChild(l);HAPEL=l;return l;
+/* Effetto visivo della pressione prolungata: la riga si schiaccia piano e rimbalza quando compare la tendina */
+var holdEl=null;
+function holdIn(el){
+  if(!el.animate||(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches))return;
+  holdOut(false,true);holdEl=el;
+  el.__h=el.animate([{transform:"scale(1)"},{transform:"scale(.962)"}],{duration:430,easing:"cubic-bezier(.3,0,.6,1)",fill:"forwards"});
 }
-function haptic(kind){
-  if(settings.hap===0)return;
-  try{if(navigator.vibrate)navigator.vibrate(kind==="light"?8:14)}catch(e){}
-  try{
-    hapEl().click();
-    var t=document.getElementById("tabbar"),a=document.activeElement;
-    if(t&&(!a||!/^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName)))t.classList.remove("kb");
-  }catch(e){}
+function holdOut(pop,silent){
+  var el=holdEl;if(!el)return;holdEl=null;
+  var h=el.__h,k0=1;el.__h=null;
+  try{var m=getComputedStyle(el).transform;if(m&&m!=="none")k0=parseFloat(m.split("(")[1])||1}catch(e){}
+  if(h)h.cancel();
+  if(silent)return;
+  el.animate(pop?[{transform:"scale("+k0+")"},{transform:"scale(1.035)",offset:.5},{transform:"scale(1)"}]:[{transform:"scale("+k0+")"},{transform:"scale(1)"}],{duration:pop?400:180,easing:"ease-out"});
 }
-function hapLong(){if(IOSDEV)HAP_PEND=true;else haptic("medium")}
-["touchend","pointerup","pointercancel"].forEach(function(t){document.addEventListener(t,function(){if(HAP_PEND){HAP_PEND=false;haptic("medium")}},{passive:true,capture:true})});
 var suppress=false,pmT=null,pmS=null;
 function closeMenu(){
   var m=document.getElementById("pmenu"),k=document.getElementById("pmask");
@@ -2153,7 +2151,7 @@ function openMenu(row,x,y){
   left=Math.max(12,Math.min(vw-w-12,left));
   var top=Math.max(12,Math.min(vh-hh-110,y-20));
   m.style.left=left+"px";m.style.top=top+"px";
-  hapLong();
+  
   suppress=true;setTimeout(function(){suppress=false},450);
 }
 document.addEventListener("pointerdown",function(e){
@@ -2163,11 +2161,15 @@ document.addEventListener("pointerdown",function(e){
   if(isD?view!=="menu":view!=="list")return;
   if(e.pointerType==="mouse"&&e.button!==0)return;
   pmS={x:e.clientX,y:e.clientY};clearTimeout(pmT);
-  pmT=setTimeout(function(){pmT=null;if(isD)openDishMenu(row,pmS.x,pmS.y);else openMenu(row,pmS.x,pmS.y)},450);
+  pmT=setTimeout(function(){pmT=null;holdOut(true);if(isD)openDishMenu(row,pmS.x,pmS.y);else openMenu(row,pmS.x,pmS.y)},450);
+  holdIn(row);
 });
 document.addEventListener("pointermove",function(e){
-  if(pmT&&pmS&&(Math.abs(e.clientX-pmS.x)>10||Math.abs(e.clientY-pmS.y)>10)){clearTimeout(pmT);pmT=null}
+  if(pmT&&pmS&&(Math.abs(e.clientX-pmS.x)>10||Math.abs(e.clientY-pmS.y)>10)){clearTimeout(pmT);pmT=null;holdOut(false)}
 });
+new MutationObserver(function(ms){ms.forEach(function(m){[].forEach.call(m.addedNodes,function(n){
+  if(n.id==="pmenu"){var r=n.getBoundingClientRect(),p=pmS||{x:r.left+r.width/2,y:r.top};
+    n.style.transformOrigin=Math.max(0,Math.min(r.width,p.x-r.left))+"px "+Math.max(0,Math.min(r.height,p.y-r.top))+"px"}})})}).observe(document.body,{childList:true});
 var pmRect=null;
 function showGroupMenu(g,rect,confirm){
   closeMenu();pmRect=rect;
@@ -2181,7 +2183,7 @@ function showGroupMenu(g,rect,confirm){
   var vw=window.innerWidth,w=m.offsetWidth;
   m.style.left=Math.max(12,Math.min(vw-w-12,rect.left))+"px";
   m.style.top=(rect.bottom+8)+"px";
-  if(!confirm){hapLong();suppress=true;setTimeout(function(){suppress=false},450)}
+  if(!confirm){suppress=true;setTimeout(function(){suppress=false},450)}
 }
 document.addEventListener("pointerdown",function(e){
   var chip=e.target.closest&&e.target.closest(".gchip[data-g]");
@@ -2190,7 +2192,7 @@ document.addEventListener("pointerdown",function(e){
   pmS={x:e.clientX,y:e.clientY};clearTimeout(pmT);
   pmT=setTimeout(function(){pmT=null;var r=chip.getBoundingClientRect();showGroupMenu(chip.dataset.g,{left:r.left,bottom:r.bottom},false)},450);
 });
-function pmEnd(){clearTimeout(pmT);pmT=null}
+function pmEnd(){if(pmT)holdOut(false);clearTimeout(pmT);pmT=null}
 document.addEventListener("pointerup",pmEnd);
 document.addEventListener("pointercancel",pmEnd);
 document.addEventListener("contextmenu",function(e){if(e.target.closest&&e.target.closest("#rows .row,.gchip"))e.preventDefault()});
@@ -2217,7 +2219,7 @@ tbar.addEventListener("pointermove",function(e){
   if(!scrub.moved&&Math.abs(e.clientX-scrub.x)<8)return;
   scrub.moved=true;
   var rc=tbar.getBoundingClientRect(),w=(rc.width-8)/TABS.length,i=Math.max(0,Math.min(TABS.length-1,Math.floor((e.clientX-rc.left-4)/w)));
-  if(i!==TABS.indexOf(tab)&&TABS.indexOf(view)>=0){haptic("light");go(TABS[i])}
+  if(i!==TABS.indexOf(tab)&&TABS.indexOf(view)>=0){go(TABS[i])}
 });
 function scrubEnd(){if(scrub&&scrub.moved){suppress=true;setTimeout(function(){suppress=false},400)}scrub=null}
 tbar.addEventListener("pointerup",scrubEnd);
