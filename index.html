@@ -253,12 +253,16 @@ h2.tfx{display:flex;align-items:center;gap:10px;margin:0;font:600 34px/1.05 "Fra
 .wsh h4{margin:0;font:700 16px/1 var(--sf)}
 .wdot{width:11px;height:11px;border-radius:50%;background:linear-gradient(135deg,var(--c1),var(--c2));box-shadow:0 2px 6px color-mix(in srgb,var(--c2) 45%,transparent)}
 .wpills{display:flex;flex-wrap:wrap;gap:8px}
-.wp{display:inline-flex;align-items:center;gap:4px;max-width:100%;padding:3px 4px 3px 13px;border-radius:22px;border:1px solid var(--line);background:var(--card);font:600 15px/1.25 var(--sf)}
+.wp{display:inline-flex;align-items:center;gap:4px;max-width:100%;padding:3px 13px;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;border-radius:22px;border:1px solid var(--line);background:var(--card);font:600 15px/1.25 var(--sf)}
 .wp .tl{overflow-wrap:anywhere;padding:5px 0}
-.wp.dsh{padding-left:4px;background:var(--field);background:color-mix(in srgb,var(--c1) 18%,var(--card));border-color:color-mix(in srgb,var(--c1) 45%,transparent)}
+.wp.dsh{padding:3px 4px;background:var(--field);background:color-mix(in srgb,var(--c1) 18%,var(--card));border-color:color-mix(in srgb,var(--c1) 45%,transparent)}
 .wpo{background:none;border:0;padding:3px 6px 3px 10px;font:600 15px/1.25 var(--sf);color:var(--ink);cursor:pointer;text-align:left;min-width:0}
 .wpo .tl{display:block;padding:2px 0}
-.wpx{flex:none;width:24px;height:24px;border-radius:50%;border:0;padding:0;background:rgba(0,0,0,.08);color:var(--soft);font-size:11px;cursor:pointer}
+.wq{flex:none;margin-left:7px;padding:3px 9px;border-radius:99px;background:rgba(231,182,2,.26);color:var(--ink);font:700 12.5px/1.2 var(--sf)}
+.wpo{display:inline-flex;align-items:center}
+.whint{margin:-2px 2px 10px;color:var(--soft);font-size:13px}
+#w-dl .dp.on{box-shadow:0 0 0 2px var(--accent)}
+#wcard .l{margin-top:10px}
 .wadd{display:inline-flex;align-items:center;gap:6px;padding:8px 13px;border-radius:22px;border:1.5px dashed rgba(231,182,2,.75);background:transparent;color:var(--accent);font:600 14px/1 var(--sf);cursor:pointer;-webkit-tap-highlight-color:transparent}
 .wfoot{margin-top:6px}
 #wsh{position:fixed;inset:0;z-index:50;transition:opacity .2s}
@@ -925,6 +929,7 @@ var LANG="it",DICT={},ORIG=new WeakMap(),ORIGA=new WeakMap(),I18N_ON=false;
 "Svuota la settimana":["Clear the week","Vaciar la semana","Vider la semaine","清空本周"],"Conferma: svuota la settimana":["Confirm: clear the week","Confirmar: vaciar la semana","Confirmer : vider la semaine","确认：清空本周"],"Settimana svuotata.":["Week cleared.","Semana vaciada.","Semaine vidée.","本周已清空。"],
 "Togli":["Remove","Quitar","Retirer","移除"],"Sezioni del menù":["Menu sections","Secciones del menú","Sections du menu","菜单分区"],"Giorni":["Days","Días","Jours","日期"],"Aggiungi un pasto":["Add a meal","Añadir una comida","Ajouter un repas","添加一餐"]
 };["en","es","fr","zh"].forEach(function(l,j){Object.keys(X).forEach(function(k){if(!DICT[l][k])DICT[l][k]=X[k][j]})})})();
+(function(){var X={"Grammatura (facoltativa)":["Amount (optional)","Cantidad (opcional)","Quantité (facultative)","分量（可选）"],"Per esempio 80 g":["For example 80 g","Por ejemplo 80 g","Par exemple 80 g","例如 80 克"],"Modifica pasto":["Edit meal","Editar comida","Modifier le repas","编辑这一餐"],"Elimina pasto":["Delete meal","Eliminar comida","Supprimer le repas","删除这一餐"],"Eliminare questo pasto? Non si può annullare.":["Delete this meal? This can\u2019t be undone.","¿Eliminar esta comida? No se puede deshacer.","Supprimer ce repas ? Cette action est irréversible.","要删除这一餐吗？此操作无法撤销。"],"Tieni premuto un pasto per modificarlo o eliminarlo.":["Press and hold a meal to edit or delete it.","Mantén pulsada una comida para editarla o eliminarla.","Maintenez un repas pour le modifier ou le supprimer.","长按某一餐即可编辑或删除。"],"Pasto eliminato.":["Meal deleted.","Comida eliminada.","Repas supprimé.","已删除这一餐。"],"Oppure cambia con un tuo piatto":["Or switch to one of your dishes","O cámbialo por uno de tus platos","Ou remplacez par un de vos plats","或换成你的菜品"]};["en","es","fr","zh"].forEach(function(l,j){Object.keys(X).forEach(function(k){if(!DICT[l][k])DICT[l][k]=X[k][j]})})})();
 function mkP(re,en,es,fr,zh){return[re,{en:en,es:es,fr:fr,zh:zh}]}
 function pl(n,a,b){return +n===1?a:b}
 var PATS=[
@@ -980,7 +985,7 @@ function trShare(l){
   if(m)return trStr("Allergeni:")+" "+m[1].split(", ").map(function(x){var mm=/^(\d+) (.*)$/.exec(x);return mm?mm[1]+" "+trStr(mm[2]):x}).join(", ");
   return l;
 }
-var NT_SEL='[data-nt],textarea,script,style,.rt,.rsub:not(.ui),.ht:not(.empty),.dcl,ul.ingr li,.soc,.pm[data-act="pmset"]:not([data-g=""]),.gchip[data-g]:not([data-g=""]),.src,.spn,.sp .rs,.dp .tl,.dtx,.wp .tl';
+var NT_SEL='[data-nt],textarea,script,style,.rt,.rsub:not(.ui),.ht:not(.empty),.dcl,ul.ingr li,.soc,.pm[data-act="pmset"]:not([data-g=""]),.gchip[data-g]:not([data-g=""]),.src,.spn,.sp .rs,.dp .tl,.dtx,.wp .tl,.wq';
 var ATTRS=["placeholder","aria-label","title","alt"];
 function trText(n){
   var el=n.parentNode;if(!el||el.nodeType!==1)return;
@@ -1838,6 +1843,21 @@ function placeMenu(m,x,y){
   var left=x>vw/2?x-w-14:x+14;left=Math.max(12,Math.min(vw-w-12,left));
   var top=Math.max(12,Math.min(vh-hh-110,y-20));m.style.left=left+"px";m.style.top=top+"px";
 }
+function wmBody(it,slot,confirm){
+  var at=' data-i="'+esc(it.id)+'" data-s="'+slot+'"';
+  if(confirm)return '<div class="pmh" data-nt>'+esc(it.t||"")+'</div><div class="pmn">Eliminare questo pasto? Non si può annullare.</div><button class="pm pmx" data-act="wmdel"'+at+'>'+pmi("trash","r")+'<span class="pml">Elimina pasto</span></button><button class="pm" data-act="pmclose">'+pmi("x","g")+'<span class="pml">Annulla</span></button>';
+  return '<button class="pm" data-act="wmedit"'+at+'>'+pmi("edit","y")+'<span class="pml">Modifica</span></button><div class="pmd"></div><button class="pm pmx" data-act="wmdelask"'+at+'>'+pmi("trash","r")+'<span class="pml">Elimina pasto</span></button>';
+}
+function openPlanMenu(row,x,y){
+  var it=planFind(row.dataset.s,row.dataset.i);if(!it)return;
+  closeMenu();
+  var mask=document.createElement("div");mask.id="pmask";mask.setAttribute("data-act","pmclose");
+  var m=document.createElement("div");m.id="pmenu";m.setAttribute("role","menu");m.innerHTML=wmBody(it,row.dataset.s,false);
+  document.body.appendChild(mask);document.body.appendChild(m);
+  row.classList.add("pressed");clearSel();setTimeout(clearSel,120);setTimeout(clearSel,450);
+  placeMenu(m,x,y);
+  suppress=true;setTimeout(function(){suppress=false},450);
+}
 function openDishMenu(row,x,y){
   var d=dishes.find(function(q){return q.id===row.dataset.id});if(!d)return;
   closeMenu();
@@ -1898,10 +1918,11 @@ function menuHTML(){
   if(wk)return '<div class="sheet"><div class="top">'+hd+seg+'</div>'+weekHTML()+'</div>';
   return '<div class="sheet"><div class="top">'+hd+seg+'<input id="dsearch" type="search" placeholder="Cerca un piatto" aria-label="Cerca un piatto" value="'+esc(dq)+'"></div><div id="drows">'+dishRows()+'</div></div>';
 }
+function planFind(slot,id){var l=(plan.d[PDAYS[wday]]||{})[slot]||[];for(var i=0;i<l.length;i++)if(l[i].id===id)return l[i];return null}
 function planItemHTML(it,slot){
-  var d=it.did?dishes.find(function(x){return x.id===it.did}):null,x='<button type="button" class="wpx" data-act="wrm" data-i="'+esc(it.id)+'" data-s="'+slot+'" aria-label="Togli">✕</button>';
-  if(d)return '<span class="wp dsh rc'+tintIdx(d)+'"><button type="button" class="wpo" data-act="dopen" data-id="'+esc(d.id)+'"><span class="tl">'+esc(d.title||"Senza nome")+'</span></button>'+x+'</span>';
-  return '<span class="wp"><span class="tl">'+esc(it.t||"")+'</span>'+x+'</span>';
+  var d=it.did?dishes.find(function(x){return x.id===it.did}):null,q=it.q?'<span class="wq">'+esc(it.q)+'</span>':'',at=' data-i="'+esc(it.id)+'" data-s="'+slot+'"';
+  if(d)return '<span class="wp dsh rc'+tintIdx(d)+'"'+at+'><button type="button" class="wpo" data-act="dopen" data-id="'+esc(d.id)+'"><span class="tl">'+esc(d.title||"Senza nome")+'</span>'+q+'</button></span>';
+  return '<span class="wp"'+at+'><span class="tl">'+esc(it.t||"")+'</span>'+q+'</span>';
 }
 function weekHTML(){
   var k=PDAYS[wday],today=(new Date().getDay()+6)%7;
@@ -1911,32 +1932,49 @@ function weekHTML(){
     return '<section class="wslot ps'+si+'"><div class="wsh"><span class="wdot"></span><h4>'+sl[1]+'</h4></div><div class="wpills">'+items.map(function(it){return planItemHTML(it,sl[0])}).join("")+'<button type="button" class="wadd" data-act="wadd" data-s="'+sl[0]+'"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Aggiungi</span></button></div></section>';
   }).join("");
   var any=PDAYS.some(function(_,i){return planCount(i)>0});
-  return '<div class="wk">'+strip+'<div class="wtitle"><h3>'+PDN[wday]+'</h3>'+(wday===today?'<span class="wtoday">Oggi</span>':'')+'</div>'+slots+
+  return '<div class="wk">'+strip+'<div class="wtitle"><h3>'+PDN[wday]+'</h3>'+(wday===today?'<span class="wtoday">Oggi</span>':'')+'</div>'+(planCount(wday)?'<p class="whint">Tieni premuto un pasto per modificarlo o eliminarlo.</p>':'')+slots+
     (any?'<div class="acts wfoot"><button type="button" class="b d'+(wsure?" sure":"")+'" data-act="'+(wsure?"wclrok":"wclr")+'">'+(wsure?"Conferma: svuota la settimana":"Svuota la settimana")+'</button></div>':'')+'</div>';
 }
-function wOpen(slot){
-  wsel={slot:slot,days:{}};wsel.days[wday]=true;wRender();$("#wsh").classList.remove("off");
+function wOpen(slot,edit){
+  wsel={slot:slot,days:{},edit:edit||null,pick:"",text:"",q:""};
+  if(edit){wsel.pick=edit.did||"";wsel.text=edit.did?"":(edit.t||"");wsel.q=edit.q||""}else wsel.days[wday]=true;
+  wRender();$("#wsh").classList.remove("off");
 }
 function wClose(){$("#wsh").classList.add("off");wsel=null}
 function wDishList(q){
   q=(q||"").trim().toLowerCase();
   var l=dishes.slice().sort(function(a,b){return (b.updated||0)-(a.updated||0)});
   if(q)l=l.filter(function(d){return (d.title||"").toLowerCase().indexOf(q)>=0});
-  return l.length?l.map(function(d){return '<button type="button" class="dp rc'+tintIdx(d)+'" data-act="wdish" data-id="'+esc(d.id)+'"><span class="tl">'+esc(d.title||"Senza nome")+'</span></button>'}).join(""):'<span class="sh">Nessun piatto trovato.</span>';
+  return l.length?l.map(function(d){return '<button type="button" class="dp rc'+tintIdx(d)+(wsel&&wsel.edit&&wsel.pick===d.id?" on":"")+'" data-act="wdish" data-id="'+esc(d.id)+'"><span class="tl">'+esc(d.title||"Senza nome")+'</span></button>'}).join(""):'<span class="sh">Nessun piatto trovato.</span>';
 }
 function wRender(){
   if(!wsel)return;
-  var sl=PSLOTS.filter(function(x){return x[0]===wsel.slot})[0];
-  var h='<div class="tmh"><h3>'+sl[1]+'</h3><button class="tmx" data-act="wclose" aria-label="Chiudi">✕</button></div><p class="wsubt">'+PDN[wday]+'</p>'+
-  '<label class="l" for="w-t">Scrivi un pasto</label><div class="wrow"><input id="w-t" type="text" maxlength="80" enterkeyhint="done" autocomplete="off" placeholder="Per esempio yogurt e frutta" aria-label="Scrivi un pasto"><button type="button" class="b p" data-act="wtext">Aggiungi</button></div>';
-  if(dishes.length)h+='<p class="tml">Oppure scegli un tuo piatto</p>'+(dishes.length>6?'<input id="w-q" type="search" class="tmlab" placeholder="Cerca un piatto" aria-label="Cerca un piatto">':'')+'<div class="wdl dpills" id="w-dl">'+wDishList("")+'</div>';
-  h+='<p class="tml">Aggiungi anche a</p><div class="wxd">'+PDAYS.map(function(_,i){var on=!!wsel.days[i];return '<button type="button" class="wxc'+(on?" on":"")+(i===wday?" lock":"")+'" data-act="wxd" data-i="'+i+'" aria-pressed="'+on+'" aria-label="'+PDN[i]+'">'+PDS[i]+'</button>'}).join("")+'</div>';
+  var ed=!!wsel.edit,sl=PSLOTS.filter(function(x){return x[0]===wsel.slot})[0];
+  var h='<div class="tmh"><h3>'+(ed?"Modifica pasto":sl[1])+'</h3><button class="tmx" data-act="wclose" aria-label="Chiudi">✕</button></div><p class="wsubt">'+(ed?sl[1]+", ":"")+PDN[wday]+'</p>'+
+  '<label class="l" for="w-t">Scrivi un pasto</label><input id="w-t" type="text" maxlength="80" enterkeyhint="next" autocomplete="off" placeholder="Per esempio yogurt e frutta" aria-label="Scrivi un pasto" value="'+esc(wsel.text)+'">'+
+  '<label class="l" for="w-qt">Grammatura (facoltativa)</label><div class="wrow"><input id="w-qt" type="text" maxlength="20" enterkeyhint="done" autocomplete="off" placeholder="Per esempio 80 g" aria-label="Grammatura (facoltativa)" value="'+esc(wsel.q)+'"><button type="button" class="b p" data-act="wsubmit">'+(ed?"Salva":"Aggiungi")+'</button></div>';
+  if(dishes.length)h+='<p class="tml">'+(ed?"Oppure cambia con un tuo piatto":"Oppure scegli un tuo piatto")+'</p>'+(dishes.length>6?'<input id="w-q" type="search" class="tmlab" placeholder="Cerca un piatto" aria-label="Cerca un piatto">':'')+'<div class="wdl dpills" id="w-dl">'+wDishList("")+'</div>';
+  if(!ed)h+='<p class="tml">Aggiungi anche a</p><div class="wxd">'+PDAYS.map(function(_,i){var on=!!wsel.days[i];return '<button type="button" class="wxc'+(on?" on":"")+(i===wday?" lock":"")+'" data-act="wxd" data-i="'+i+'" aria-pressed="'+on+'" aria-label="'+PDN[i]+'">'+PDS[i]+'</button>'}).join("")+'</div>';
   $("#wcard").innerHTML=h;
+}
+function wSubmit(){
+  if(!wsel)return;
+  var t=(($("#w-t")||{}).value||"").trim(),q=(($("#w-qt")||{}).value||"").trim().slice(0,20);
+  if(wsel.edit){
+    var it=planFind(wsel.slot,wsel.edit.id);if(!it){wClose();return}
+    if(t){it.t=t;delete it.did}
+    else if(wsel.pick){var d=dishes.find(function(x){return x.id===wsel.pick});if(!d)return;it.did=d.id;it.t=d.title||""}
+    else return;
+    if(q)it.q=q;else delete it.q;
+    savePlan();wClose();render(false);return;
+  }
+  if(!t)return;
+  wAdd({t:t,q:q});
 }
 function wAdd(item){
   if(!wsel)return;
   var slot=wsel.slot;
-  PDAYS.forEach(function(k,i){if(wsel.days[i]){var o={id:uid()};if(item.did){o.did=item.did;o.t=item.t}else o.t=item.t;plan.d[k][slot].push(o)}});
+  PDAYS.forEach(function(k,i){if(wsel.days[i]){var o={id:uid(),t:item.t};if(item.did)o.did=item.did;if(item.q)o.q=item.q;plan.d[k][slot].push(o)}});
   savePlan();wClose();render(false);
 }
 function collectDish(){if(!dedit)return;var t=$("#d-title"),x=$("#d-desc");if(t)dedit.title=t.value;if(x)dedit.desc=x.value}
@@ -1989,7 +2027,7 @@ function tabUI(p){
 }
 var HOG={"menu": "<svg viewBox=\"-3 1 70 63\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\"><defs><linearGradient id=\"hsmenu\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#9A6A3F\"/><stop offset=\"1\" stop-color=\"#6D4527\"/></linearGradient></defs><path d=\"M5.0 51.6 L9.4 45.0 L1.2 42.3 L8.0 37.5 L1.5 32.3 L9.8 30.0 L5.8 23.1 L14.6 23.5 L13.7 15.9 L21.7 19.0 L23.9 11.6 L30.1 17.1 L35.3 10.8 L38.8 17.9 L46.2 13.7 L46.6 21.3 L55.2 19.7 L52.5 27.0 L61.1 28.2 L55.6 34.2 L63.2 38.0 L55.6 41.8 L61.1 47.8 Z\" fill=\"#5E3A20\" stroke=\"#5E3A20\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M7.2 43.8 L11.0 39.4 L7.5 34.8 L13.1 32.1 L12.1 26.7 L18.5 26.2 L20.2 20.9 L26.2 22.7 L30.2 18.5 L34.9 22.2 L40.6 19.7 L43.1 24.7 L49.5 24.5 L49.4 29.9 L55.4 31.9 L52.7 36.9 L57.2 40.8 Z\" fill=\"url(#hsmenu)\" stroke=\"url(#hsmenu)\" stroke-width=\"1.6\" stroke-linejoin=\"round\"/><ellipse cx=\"32\" cy=\"41\" rx=\"19.5\" ry=\"17.5\" fill=\"url(#hsmenu)\"/><circle cx=\"15.5\" cy=\"31\" r=\"5.2\" fill=\"#F3D9B4\"/><circle cx=\"15.5\" cy=\"31.4\" r=\"2.6\" fill=\"#F4A9A0\"/><circle cx=\"48.5\" cy=\"31\" r=\"5.2\" fill=\"#F3D9B4\"/><circle cx=\"48.5\" cy=\"31.4\" r=\"2.6\" fill=\"#F4A9A0\"/><path d=\"M32 27.5c9.5 0 16 6.2 16 14.2 0 7.2-6.8 12.3-16 12.3S16 48.9 16 41.7c0-8 6.5-14.2 16-14.2z\" fill=\"#F8E6CB\"/><ellipse cx=\"32\" cy=\"46.5\" rx=\"9\" ry=\"6.6\" fill=\"#FFF3E0\"/><circle cx=\"25\" cy=\"39\" r=\"2.5\" fill=\"#2B1B12\"/><circle cx=\"39\" cy=\"39\" r=\"2.5\" fill=\"#2B1B12\"/><circle cx=\"25.9\" cy=\"38.1\" r=\".9\" fill=\"#fff\"/><circle cx=\"39.9\" cy=\"38.1\" r=\".9\" fill=\"#fff\"/><ellipse cx=\"32\" cy=\"44.4\" rx=\"3.2\" ry=\"2.4\" fill=\"#2B1B12\"/><ellipse cx=\"31.2\" cy=\"43.6\" rx=\".9\" ry=\".6\" fill=\"#fff\" opacity=\".8\"/><path d=\"M29.5 48.2q2.5 2.2 5 0\" fill=\"none\" stroke=\"#2B1B12\" stroke-width=\"1.3\" stroke-linecap=\"round\"/><circle cx=\"20.5\" cy=\"45.5\" r=\"3\" fill=\"#F6A5A5\" opacity=\".65\"/><circle cx=\"43.5\" cy=\"45.5\" r=\"3\" fill=\"#F6A5A5\" opacity=\".65\"/><ellipse cx=\"23.5\" cy=\"57.8\" rx=\"5.2\" ry=\"2.8\" fill=\"#F3D9B4\"/><ellipse cx=\"40.5\" cy=\"57.8\" rx=\"5.2\" ry=\"2.8\" fill=\"#F3D9B4\"/><g transform=\"rotate(-6 32 14)\"><path d=\"M21 22.5h22l-1.5-7h-19z\" fill=\"#fff\" stroke=\"#DDE1E7\" stroke-width=\"1\"/><circle cx=\"23.5\" cy=\"12.5\" r=\"5.5\" fill=\"#fff\" stroke=\"#DDE1E7\" stroke-width=\"1\"/><circle cx=\"32\" cy=\"9.5\" r=\"6.5\" fill=\"#fff\" stroke=\"#DDE1E7\" stroke-width=\"1\"/><circle cx=\"40.5\" cy=\"12.5\" r=\"5.5\" fill=\"#fff\" stroke=\"#DDE1E7\" stroke-width=\"1\"/><rect x=\"21\" y=\"18.5\" width=\"22\" height=\"4.6\" rx=\"1.8\" fill=\"#fff\" stroke=\"#DDE1E7\" stroke-width=\"1\"/></g></svg>", "spesa": "<svg viewBox=\"-3 1 70 63\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\"><defs><linearGradient id=\"hsspesa\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#9A6A3F\"/><stop offset=\"1\" stop-color=\"#6D4527\"/></linearGradient></defs><path d=\"M5.0 51.6 L9.4 45.0 L1.2 42.3 L8.0 37.5 L1.5 32.3 L9.8 30.0 L5.8 23.1 L14.6 23.5 L13.7 15.9 L21.7 19.0 L23.9 11.6 L30.1 17.1 L35.3 10.8 L38.8 17.9 L46.2 13.7 L46.6 21.3 L55.2 19.7 L52.5 27.0 L61.1 28.2 L55.6 34.2 L63.2 38.0 L55.6 41.8 L61.1 47.8 Z\" fill=\"#5E3A20\" stroke=\"#5E3A20\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M7.2 43.8 L11.0 39.4 L7.5 34.8 L13.1 32.1 L12.1 26.7 L18.5 26.2 L20.2 20.9 L26.2 22.7 L30.2 18.5 L34.9 22.2 L40.6 19.7 L43.1 24.7 L49.5 24.5 L49.4 29.9 L55.4 31.9 L52.7 36.9 L57.2 40.8 Z\" fill=\"url(#hsspesa)\" stroke=\"url(#hsspesa)\" stroke-width=\"1.6\" stroke-linejoin=\"round\"/><ellipse cx=\"32\" cy=\"41\" rx=\"19.5\" ry=\"17.5\" fill=\"url(#hsspesa)\"/><circle cx=\"15.5\" cy=\"31\" r=\"5.2\" fill=\"#F3D9B4\"/><circle cx=\"15.5\" cy=\"31.4\" r=\"2.6\" fill=\"#F4A9A0\"/><circle cx=\"48.5\" cy=\"31\" r=\"5.2\" fill=\"#F3D9B4\"/><circle cx=\"48.5\" cy=\"31.4\" r=\"2.6\" fill=\"#F4A9A0\"/><path d=\"M32 27.5c9.5 0 16 6.2 16 14.2 0 7.2-6.8 12.3-16 12.3S16 48.9 16 41.7c0-8 6.5-14.2 16-14.2z\" fill=\"#F8E6CB\"/><ellipse cx=\"32\" cy=\"46.5\" rx=\"9\" ry=\"6.6\" fill=\"#FFF3E0\"/><circle cx=\"25\" cy=\"39\" r=\"2.5\" fill=\"#2B1B12\"/><circle cx=\"39\" cy=\"39\" r=\"2.5\" fill=\"#2B1B12\"/><circle cx=\"25.9\" cy=\"38.1\" r=\".9\" fill=\"#fff\"/><circle cx=\"39.9\" cy=\"38.1\" r=\".9\" fill=\"#fff\"/><ellipse cx=\"32\" cy=\"44.4\" rx=\"3.2\" ry=\"2.4\" fill=\"#2B1B12\"/><ellipse cx=\"31.2\" cy=\"43.6\" rx=\".9\" ry=\".6\" fill=\"#fff\" opacity=\".8\"/><path d=\"M29.5 48.2q2.5 2.2 5 0\" fill=\"none\" stroke=\"#2B1B12\" stroke-width=\"1.3\" stroke-linecap=\"round\"/><circle cx=\"20.5\" cy=\"45.5\" r=\"3\" fill=\"#F6A5A5\" opacity=\".65\"/><circle cx=\"43.5\" cy=\"45.5\" r=\"3\" fill=\"#F6A5A5\" opacity=\".65\"/><ellipse cx=\"23.5\" cy=\"57.8\" rx=\"5.2\" ry=\"2.8\" fill=\"#F3D9B4\"/><ellipse cx=\"40.5\" cy=\"57.8\" rx=\"5.2\" ry=\"2.8\" fill=\"#F3D9B4\"/><g><path d=\"M44 47h15l-2 11H46z\" fill=\"#E7B602\" stroke=\"#B88C00\" stroke-width=\"1.1\" stroke-linejoin=\"round\"/><path d=\"M46.5 47c0-5 8-5 8 0\" fill=\"none\" stroke=\"#B88C00\" stroke-width=\"1.6\" stroke-linecap=\"round\"/><path d=\"M49 47l-1-6\" stroke=\"#2F9E5B\" stroke-width=\"2\" stroke-linecap=\"round\"/><path d=\"M51.5 47l2-5\" stroke=\"#2F9E5B\" stroke-width=\"2\" stroke-linecap=\"round\"/><path d=\"M49 47l2-8\" stroke=\"#F28C28\" stroke-width=\"3\" stroke-linecap=\"round\"/></g></svg>", "set": "<svg viewBox=\"-3 1 70 63\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\"><defs><linearGradient id=\"hsset\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#9A6A3F\"/><stop offset=\"1\" stop-color=\"#6D4527\"/></linearGradient></defs><path d=\"M5.0 51.6 L9.4 45.0 L1.2 42.3 L8.0 37.5 L1.5 32.3 L9.8 30.0 L5.8 23.1 L14.6 23.5 L13.7 15.9 L21.7 19.0 L23.9 11.6 L30.1 17.1 L35.3 10.8 L38.8 17.9 L46.2 13.7 L46.6 21.3 L55.2 19.7 L52.5 27.0 L61.1 28.2 L55.6 34.2 L63.2 38.0 L55.6 41.8 L61.1 47.8 Z\" fill=\"#5E3A20\" stroke=\"#5E3A20\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M7.2 43.8 L11.0 39.4 L7.5 34.8 L13.1 32.1 L12.1 26.7 L18.5 26.2 L20.2 20.9 L26.2 22.7 L30.2 18.5 L34.9 22.2 L40.6 19.7 L43.1 24.7 L49.5 24.5 L49.4 29.9 L55.4 31.9 L52.7 36.9 L57.2 40.8 Z\" fill=\"url(#hsset)\" stroke=\"url(#hsset)\" stroke-width=\"1.6\" stroke-linejoin=\"round\"/><ellipse cx=\"32\" cy=\"41\" rx=\"19.5\" ry=\"17.5\" fill=\"url(#hsset)\"/><circle cx=\"15.5\" cy=\"31\" r=\"5.2\" fill=\"#F3D9B4\"/><circle cx=\"15.5\" cy=\"31.4\" r=\"2.6\" fill=\"#F4A9A0\"/><circle cx=\"48.5\" cy=\"31\" r=\"5.2\" fill=\"#F3D9B4\"/><circle cx=\"48.5\" cy=\"31.4\" r=\"2.6\" fill=\"#F4A9A0\"/><path d=\"M32 27.5c9.5 0 16 6.2 16 14.2 0 7.2-6.8 12.3-16 12.3S16 48.9 16 41.7c0-8 6.5-14.2 16-14.2z\" fill=\"#F8E6CB\"/><ellipse cx=\"32\" cy=\"46.5\" rx=\"9\" ry=\"6.6\" fill=\"#FFF3E0\"/><circle cx=\"25\" cy=\"39\" r=\"2.5\" fill=\"#2B1B12\"/><circle cx=\"39\" cy=\"39\" r=\"2.5\" fill=\"#2B1B12\"/><circle cx=\"25.9\" cy=\"38.1\" r=\".9\" fill=\"#fff\"/><circle cx=\"39.9\" cy=\"38.1\" r=\".9\" fill=\"#fff\"/><ellipse cx=\"32\" cy=\"44.4\" rx=\"3.2\" ry=\"2.4\" fill=\"#2B1B12\"/><ellipse cx=\"31.2\" cy=\"43.6\" rx=\".9\" ry=\".6\" fill=\"#fff\" opacity=\".8\"/><path d=\"M29.5 48.2q2.5 2.2 5 0\" fill=\"none\" stroke=\"#2B1B12\" stroke-width=\"1.3\" stroke-linecap=\"round\"/><circle cx=\"20.5\" cy=\"45.5\" r=\"3\" fill=\"#F6A5A5\" opacity=\".65\"/><circle cx=\"43.5\" cy=\"45.5\" r=\"3\" fill=\"#F6A5A5\" opacity=\".65\"/><ellipse cx=\"23.5\" cy=\"57.8\" rx=\"5.2\" ry=\"2.8\" fill=\"#F3D9B4\"/><ellipse cx=\"40.5\" cy=\"57.8\" rx=\"5.2\" ry=\"2.8\" fill=\"#F3D9B4\"/><g transform=\"translate(49 14) rotate(12)\"><g fill=\"#E7B602\" stroke=\"#B88C00\" stroke-width=\"1\" stroke-linejoin=\"round\"><rect x=\"-1.7\" y=\"-9.2\" width=\"3.4\" height=\"4\" rx=\"1\" transform=\"rotate(0)\"/><rect x=\"-1.7\" y=\"-9.2\" width=\"3.4\" height=\"4\" rx=\"1\" transform=\"rotate(45)\"/><rect x=\"-1.7\" y=\"-9.2\" width=\"3.4\" height=\"4\" rx=\"1\" transform=\"rotate(90)\"/><rect x=\"-1.7\" y=\"-9.2\" width=\"3.4\" height=\"4\" rx=\"1\" transform=\"rotate(135)\"/><rect x=\"-1.7\" y=\"-9.2\" width=\"3.4\" height=\"4\" rx=\"1\" transform=\"rotate(180)\"/><rect x=\"-1.7\" y=\"-9.2\" width=\"3.4\" height=\"4\" rx=\"1\" transform=\"rotate(225)\"/><rect x=\"-1.7\" y=\"-9.2\" width=\"3.4\" height=\"4\" rx=\"1\" transform=\"rotate(270)\"/><rect x=\"-1.7\" y=\"-9.2\" width=\"3.4\" height=\"4\" rx=\"1\" transform=\"rotate(315)\"/><circle r=\"6.6\"/></g><circle r=\"2.6\" fill=\"#FBF7EC\" stroke=\"#B88C00\" stroke-width=\"1\"/></g></svg>"};
 function hog(k){return '<span class="hog" aria-hidden="true">'+HOG[k]+'</span>'}
-document.addEventListener("keydown",function(e){if(e.key==="Enter"&&e.target&&e.target.id==="w-t"&&!e.isComposing){e.preventDefault();var v=(e.target.value||"").trim();if(v)wAdd({t:v})}});
+document.addEventListener("keydown",function(e){if(e.key!=="Enter"||e.isComposing||!e.target)return;if(e.target.id==="w-qt"){e.preventDefault();wSubmit()}else if(e.target.id==="w-t"){e.preventDefault();var q=$("#w-qt");if(q)q.focus()}});
 document.addEventListener("input",function(e){if(e.target&&e.target.id==="w-q"){var l=$("#w-dl");if(l)l.innerHTML=wDishList(e.target.value)}});
 var SM=null,editFrom="";
 document.addEventListener("input",function(e){if(e.target&&e.target.id==="d-title")dishLive()});
@@ -2134,9 +2172,14 @@ document.addEventListener("click",function(e){
   if(a==="wadd"){wOpen(el.dataset.s);return}
   if(a==="wclose"){wClose();return}
   if(a==="wxd"){var wi=parseInt(el.dataset.i,10)||0;if(wi!==wday&&wsel){var on=!wsel.days[wi];if(on)wsel.days[wi]=true;else delete wsel.days[wi];el.classList.toggle("on",on);el.setAttribute("aria-pressed",on?"true":"false")}return}
-  if(a==="wtext"){var wt=($("#w-t")||{}).value;wt=(wt||"").trim();if(!wt)return;wAdd({t:wt});return}
-  if(a==="wdish"){var wd=dishes.find(function(x){return x.id===el.dataset.id});if(wd)wAdd({did:wd.id,t:wd.title||""});return}
-  if(a==="wrm"){var wk=PDAYS[wday],ws=el.dataset.s;plan.d[wk][ws]=plan.d[wk][ws].filter(function(x){return x.id!==el.dataset.i});savePlan();render(false);return}
+  if(a==="wsubmit"){wSubmit();return}
+  if(a==="wdish"){
+    var wd=dishes.find(function(x){return x.id===el.dataset.id});if(!wd||!wsel)return;
+    if(wsel.edit){wsel.pick=wd.id;var wt0=$("#w-t");if(wt0)wt0.value="";[].forEach.call(document.querySelectorAll("#w-dl .dp"),function(b){b.classList.toggle("on",b.dataset.id===wd.id)});return}
+    wAdd({did:wd.id,t:wd.title||"",q:(($("#w-qt")||{}).value||"").trim().slice(0,20)});return}
+  if(a==="wmedit"){var we=planFind(el.dataset.s,el.dataset.i);closeMenu();if(we)wOpen(el.dataset.s,JSON.parse(JSON.stringify(we)));return}
+  if(a==="wmdelask"){var wq2=planFind(el.dataset.s,el.dataset.i),pm3=document.getElementById("pmenu");if(wq2&&pm3)pm3.innerHTML=wmBody(wq2,el.dataset.s,true);return}
+  if(a==="wmdel"){var wk=PDAYS[wday],ws=el.dataset.s,wid=el.dataset.i;closeMenu();plan.d[wk][ws]=plan.d[wk][ws].filter(function(x){return x.id!==wid});savePlan();render(false);flash("Pasto eliminato.");return}
   if(a==="wclr"){wsure=true;render(false);return}
   if(a==="wclrok"){plan=planNorm(null);wsure=false;savePlan();render(false);flash("Settimana svuotata.");return}
   if(a==="swap"){settings.awake=!settings.awake;saveSettings();wakeUpdate();render();return}
@@ -2282,13 +2325,13 @@ function openMenu(row,x,y){
   suppress=true;setTimeout(function(){suppress=false},450);
 }
 document.addEventListener("pointerdown",function(e){
-  var row=e.target.closest&&e.target.closest("#rows .row,#drows .row");
+  var row=e.target.closest&&e.target.closest("#rows .row,#drows .row,#v-menu .wp");
   if(!row)return;
-  var isD=!!row.closest("#drows");
-  if(isD?view!=="menu":view!=="list")return;
+  var isD=!!row.closest("#drows"),isW=row.classList.contains("wp");
+  if(isW?(view!=="menu"||mtab!=="week"):(isD?view!=="menu":view!=="list"))return;
   if(e.pointerType==="mouse"&&e.button!==0)return;
   pmS={x:e.clientX,y:e.clientY};clearTimeout(pmT);
-  pmT=setTimeout(function(){pmT=null;holdOut(true);if(isD)openDishMenu(row,pmS.x,pmS.y);else openMenu(row,pmS.x,pmS.y)},450);
+  pmT=setTimeout(function(){pmT=null;holdOut(true);if(isW)openPlanMenu(row,pmS.x,pmS.y);else if(isD)openDishMenu(row,pmS.x,pmS.y);else openMenu(row,pmS.x,pmS.y)},450);
   holdIn(row);
 });
 document.addEventListener("pointermove",function(e){
