@@ -232,6 +232,48 @@ h2.tfx{display:flex;align-items:center;gap:10px;margin:0;font:600 34px/1.05 "Fra
 .hog{display:inline-block;flex:none;width:2.1em;height:2.1em;margin:-.4em 0 -.4em;-webkit-text-stroke:0}
 .hog svg{display:block;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 3px 3px rgba(70,35,0,.28));transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
 .hog:active svg{transform:scale(1.14) rotate(-7deg)}
+/* ===== Menù: sezioni Piatti / Settimana ===== */
+.mseg{display:flex;background:var(--sbg);border-radius:14px;padding:3px;margin:6px 0 10px}
+.mseg button{flex:1;border:0;background:transparent;color:var(--soft);padding:9px 0;border-radius:11px;font:600 14.5px/1 var(--sf);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.mseg button.on{background:var(--card);color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.16)}
+.wk{padding:0 16px 120px}
+.wstrip{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin:14px 0 6px}
+.wd{position:relative;border:1px solid var(--line);background:var(--field);color:var(--ink);padding:10px 0 9px;border-radius:15px;font:600 13px/1 var(--sf);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.wd.td .wdn::after{content:"";display:block;width:5px;height:5px;border-radius:50%;background:var(--accent);margin:5px auto -2px}
+.wd.on{background:linear-gradient(180deg,#F6CC30 0%,#E7B602 100%);border-color:rgba(255,255,255,.55);color:#14110A;box-shadow:0 6px 14px rgba(231,182,2,.32)}
+.wd.on.td .wdn::after{background:#14110A}
+.wdc{position:absolute;top:-6px;right:-3px;min-width:17px;height:17px;padding:0 4px;border-radius:9px;background:#14110A;color:#fff;font:700 10.5px/17px var(--sf);text-align:center}
+.wd.on .wdc{background:#fff;color:#14110A}
+.wtitle{display:flex;align-items:center;gap:10px;margin:16px 0 8px}
+.wtitle h3{margin:0;font:600 28px/1.1 "Fraunces Ever",ui-serif,"New York",Georgia,serif;-webkit-text-stroke:.026em currentColor}
+.wtoday{font:700 12px/1 var(--sf);padding:5px 10px;border-radius:99px;background:rgba(231,182,2,.22);color:var(--accent)}
+.wslot{margin:0 0 10px;padding:12px 14px 13px;border-radius:22px;border:1px solid color-mix(in srgb,var(--c1) 38%,transparent);background:var(--field);background:color-mix(in srgb,var(--c1) 10%,var(--field))}
+.ps0{--c1:#FFD166;--c2:#F7A21B}.ps1{--c1:#7BD389;--c2:#3DAE6A}.ps2{--c1:#FF9A5A;--c2:#FF6B6B}.ps3{--c1:#FF8FB8;--c2:#E5508E}.ps4{--c1:#6EC6FF;--c2:#3A8DEB}
+.wsh{display:flex;align-items:center;gap:9px;margin:0 0 9px}
+.wsh h4{margin:0;font:700 16px/1 var(--sf)}
+.wdot{width:11px;height:11px;border-radius:50%;background:linear-gradient(135deg,var(--c1),var(--c2));box-shadow:0 2px 6px color-mix(in srgb,var(--c2) 45%,transparent)}
+.wpills{display:flex;flex-wrap:wrap;gap:8px}
+.wp{display:inline-flex;align-items:center;gap:4px;max-width:100%;padding:3px 4px 3px 13px;border-radius:22px;border:1px solid var(--line);background:var(--card);font:600 15px/1.25 var(--sf)}
+.wp .tl{overflow-wrap:anywhere;padding:5px 0}
+.wp.dsh{padding-left:4px;background:var(--field);background:color-mix(in srgb,var(--c1) 18%,var(--card));border-color:color-mix(in srgb,var(--c1) 45%,transparent)}
+.wpo{background:none;border:0;padding:3px 6px 3px 10px;font:600 15px/1.25 var(--sf);color:var(--ink);cursor:pointer;text-align:left;min-width:0}
+.wpo .tl{display:block;padding:2px 0}
+.wpx{flex:none;width:24px;height:24px;border-radius:50%;border:0;padding:0;background:rgba(0,0,0,.08);color:var(--soft);font-size:11px;cursor:pointer}
+.wadd{display:inline-flex;align-items:center;gap:6px;padding:8px 13px;border-radius:22px;border:1.5px dashed rgba(231,182,2,.75);background:transparent;color:var(--accent);font:600 14px/1 var(--sf);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.wfoot{margin-top:6px}
+#wsh{position:fixed;inset:0;z-index:50;transition:opacity .2s}
+#wsh.off{opacity:0;pointer-events:none}
+#wsh .tmcard{transition:transform .4s cubic-bezier(.22,1.1,.36,1)}
+#wsh.off .tmcard{transform:translateY(100%)}
+.wsubt{margin:-2px 0 6px;color:var(--soft);font-size:14px}
+.wrow{display:flex;gap:8px;align-items:center;margin-top:4px}
+.wrow input{flex:1;min-width:0;margin:0;font-size:16px}
+.wrow .b{flex:0 0 auto;padding:12px 18px}
+.wdl{margin:2px 0 4px}
+.wxd{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin:2px 0 4px}
+.wxc{border:1px solid var(--line);background:var(--field);color:var(--ink);padding:10px 0;border-radius:13px;font:600 12.5px/1 var(--sf);cursor:pointer}
+.wxc.on{background:rgba(231,182,2,.22);border-color:rgba(231,182,2,.7);color:var(--ink)}
+.wxc.lock{opacity:.75}
 /* ===== Comparsa elastica delle tendine ===== */
 @keyframes pmpop{from{opacity:0;transform:scale(.78)}to{opacity:1;transform:scale(1)}}
 @keyframes pmfade{from{opacity:0}to{opacity:1}}
@@ -777,6 +819,7 @@ button,.tb,[data-act]{touch-action:manipulation}
 <nav id="tabbar" class="off" aria-label="Sezioni"><span id="tabind"></span><button class="tb on" data-act="tabgo" data-t="list" aria-label="Ricette"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M4 21.5V5.5"/><path d="M9 8h7"/></svg><span>Ricette</span></button><button class="tb" data-act="tabgo" data-t="menu" aria-label="Menù"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10"/><path d="M17 3c-2 1.5-3 4-3 7 0 2 1 3 3 3v8"/></svg><span>Menù</span></button><button class="tb" data-act="tabgo" data-t="shop" aria-label="Spesa"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3.5h3l2.4 11.2a1.5 1.5 0 0 0 1.5 1.2h8.2a1.5 1.5 0 0 0 1.5-1.1L21 8H6.2"/></svg><span>Spesa</span></button><button class="tb" data-act="tabgo" data-t="settings" aria-label="Impostazioni"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg><span>Impostazioni</span></button></nav>
 <button id="fab" class="off" data-act="new" aria-label="Nuova ricetta"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
 <div id="tmpills"></div>
+<div id="wsh" class="off" role="dialog" aria-label="Aggiungi un pasto"><div class="tmbk" data-act="wclose"></div><div class="tmcard" id="wcard"></div></div>
 <div id="tmsh" class="off" role="dialog" aria-label="Timer"><div class="tmbk" data-act="tmclose"></div><div class="tmcard" id="tmcard"></div></div>
 <div id="toast" role="status"></div>
 <script>
@@ -784,6 +827,21 @@ button,.tb,[data-act]{touch-action:manipulation}
 var UNITS=["g","kg","ml","l","cucchiai","cucchiaini","tazze","pizzico","pezzi","spicchi","q.b."];
 var LS="quaderno-ricette-v1";
 var TABS=["list","menu","shop","settings"],dishes=[],dedit=null,dq="",recFrom="",pq="",hintUntil=0,spKey="",DK="quaderno-menu-v1",tab="list",recipes=[],selId=null,editing=null,sure=false,view="list",sq="",collapsed={},gsel="",groups=[],addingG=false,flt="tutte",scaleTo=0,shop={entries:[],checked:{}};
+var PLK="quaderno-piano-v1",MTK="ever-mtab",PDAYS=["lun","mar","mer","gio","ven","sab","dom"],PDN=["Lunedì","Martedì","Mercoledì","Giovedì","Venerdì","Sabato","Domenica"],PDS=["Lun","Mar","Mer","Gio","Ven","Sab","Dom"],
+  PSLOTS=[["b","Colazione"],["s","Spuntino"],["l","Pranzo"],["m","Merenda"],["c","Cena"]];
+function planNorm(p){
+  var o={u:(p&&p.u)||0,d:{}};
+  PDAYS.forEach(function(k){
+    var x=(p&&p.d&&p.d[k])||{};o.d[k]={};
+    PSLOTS.forEach(function(sl){o.d[k][sl[0]]=Array.isArray(x[sl[0]])?x[sl[0]].filter(function(i){return i&&i.id&&(i.t||i.did)}):[]});
+  });
+  return o;
+}
+function planHas(p){if(!p||!p.d)return false;return PDAYS.some(function(k){return PSLOTS.some(function(sl){return ((p.d[k]||{})[sl[0]]||[]).length})})}
+function loadPlan(){try{return planNorm(JSON.parse(localStorage.getItem(PLK)||"null"))}catch(e){return planNorm(null)}}
+var plan=loadPlan(),mtab=(function(){try{return localStorage.getItem(MTK)==="week"?"week":"dishes"}catch(e){return "dishes"}})(),wday=(new Date().getDay()+6)%7,wsel=null,wsure=false;
+function savePlan(){plan.u=Date.now();lsSet(PLK,plan);queuePush()}
+function planCount(i){var d=plan.d[PDAYS[i]],n=0;PSLOTS.forEach(function(sl){n+=d[sl[0]].length});return n}
 function $(s){return document.querySelector(s)}
 function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,6)}
@@ -857,6 +915,16 @@ var LANG="it",DICT={},ORIG=new WeakMap(),ORIGA=new WeakMap(),I18N_ON=false;
 (function(){var X={"Ingredienti del piatto":["Dish ingredients","Ingredientes del plato","Ingrédients du plat","菜品食材"]};["en","es","fr","zh"].forEach(function(l,j){Object.keys(X).forEach(function(k){DICT[l][k]=X[k][j]})})})();
 (function(){var X={"Rimuovi foto":["Remove photo","Quitar foto","Supprimer la photo","移除照片"],"Eliminare questo piatto? Non si può annullare.":["Delete this dish? This can\u2019t be undone.","¿Eliminar este plato? No se puede deshacer.","Supprimer ce plat ? Cette action est irréversible.","要删除这道菜品吗？此操作无法撤销。"],"Nessuna ricetta in questo piatto. Tieni premuto il piatto nell’elenco e scegli Modifica per aggiungerne.":["No recipes in this dish. Press and hold the dish in the list and choose Edit to add some.","No hay recetas en este plato. Mantén pulsado el plato en la lista y elige Editar para añadir.","Aucune recette dans ce plat. Maintenez le plat dans la liste et choisissez Modifier pour en ajouter.","这道菜品还没有食谱。在列表中长按菜品并选择“编辑”即可添加。"]};["en","es","fr","zh"].forEach(function(l,j){Object.keys(X).forEach(function(k){DICT[l][k]=X[k][j]})})})();
 (function(){var X={"Feedback tattile":["Haptic feedback","Respuesta háptica","Retour haptique","触感反馈"],"Un piccolo «tic» quando tieni premuto su qualcosa. Su iPhone richiede iOS 17.4 o successivo.":["A small tick when you press and hold something. On iPhone it needs iOS 17.4 or later.","Un pequeño toque al mantener pulsado algo. En iPhone requiere iOS 17.4 o posterior.","Un petit « tic » quand vous maintenez appuyé. Sur iPhone, il faut iOS 17.4 ou plus récent.","长按时会有轻微震动。在 iPhone 上需要 iOS 17.4 或更高版本。"],"Attivo":["On","Activo","Activé","开启"],"Non attivo":["Off","Inactivo","Désactivé","关闭"],"Prova":["Try","Probar","Essayer","试一试"],"Se senti un tic, funziona. Altrimenti serve iOS 17.4 o successivo.":["If you feel a tick, it works. Otherwise you need iOS 17.4 or later.","Si notas un toque, funciona. Si no, necesitas iOS 17.4 o posterior.","Si vous sentez un « tic », ça marche. Sinon, il faut iOS 17.4 ou plus récent.","如果感觉到震动，说明可用。否则需要 iOS 17.4 或更高版本。"],"Prova inviata.":["Test sent.","Prueba enviada.","Essai envoyé.","已发送测试。"]};["en","es","fr","zh"].forEach(function(l,j){Object.keys(X).forEach(function(k){if(!DICT[l][k])DICT[l][k]=X[k][j]})})})();
+(function(){var X={
+"Piatti":["Dishes","Platos","Plats","菜品"],"Settimana":["Week","Semana","Semaine","本周"],
+"Colazione":["Breakfast","Desayuno","Petit-déjeuner","早餐"],"Spuntino":["Snack","Tentempié","Collation","小食"],"Pranzo":["Lunch","Almuerzo","Déjeuner","午餐"],"Merenda":["Afternoon snack","Merienda","Goûter","下午茶"],"Cena":["Dinner","Cena","Dîner","晚餐"],
+"Lunedì":["Monday","Lunes","Lundi","星期一"],"Martedì":["Tuesday","Martes","Mardi","星期二"],"Mercoledì":["Wednesday","Miércoles","Mercredi","星期三"],"Giovedì":["Thursday","Jueves","Jeudi","星期四"],"Venerdì":["Friday","Viernes","Vendredi","星期五"],"Sabato":["Saturday","Sábado","Samedi","星期六"],"Domenica":["Sunday","Domingo","Dimanche","星期日"],
+"Lun":["Mon","Lun","Lun","一"],"Mar":["Tue","Mar","Mar","二"],"Mer":["Wed","Mié","Mer","三"],"Gio":["Thu","Jue","Jeu","四"],"Ven":["Fri","Vie","Ven","五"],"Sab":["Sat","Sáb","Sam","六"],"Dom":["Sun","Dom","Dim","日"],
+"Oggi":["Today","Hoy","Aujourd’hui","今天"],"Scrivi un pasto":["Write a meal","Escribe una comida","Écrivez un repas","写下一餐"],"Per esempio yogurt e frutta":["For example yogurt and fruit","Por ejemplo yogur y fruta","Par exemple yaourt et fruits","例如酸奶和水果"],
+"Oppure scegli un tuo piatto":["Or pick one of your dishes","O elige uno de tus platos","Ou choisissez un de vos plats","或选择你的菜品"],"Aggiungi anche a":["Also add to","Añadir también a","Ajouter aussi à","同时添加到"],
+"Svuota la settimana":["Clear the week","Vaciar la semana","Vider la semaine","清空本周"],"Conferma: svuota la settimana":["Confirm: clear the week","Confirmar: vaciar la semana","Confirmer : vider la semaine","确认：清空本周"],"Settimana svuotata.":["Week cleared.","Semana vaciada.","Semaine vidée.","本周已清空。"],
+"Togli":["Remove","Quitar","Retirer","移除"],"Sezioni del menù":["Menu sections","Secciones del menú","Sections du menu","菜单分区"],"Giorni":["Days","Días","Jours","日期"],"Aggiungi un pasto":["Add a meal","Añadir una comida","Ajouter un repas","添加一餐"]
+};["en","es","fr","zh"].forEach(function(l,j){Object.keys(X).forEach(function(k){if(!DICT[l][k])DICT[l][k]=X[k][j]})})})();
 function mkP(re,en,es,fr,zh){return[re,{en:en,es:es,fr:fr,zh:zh}]}
 function pl(n,a,b){return +n===1?a:b}
 var PATS=[
@@ -912,7 +980,7 @@ function trShare(l){
   if(m)return trStr("Allergeni:")+" "+m[1].split(", ").map(function(x){var mm=/^(\d+) (.*)$/.exec(x);return mm?mm[1]+" "+trStr(mm[2]):x}).join(", ");
   return l;
 }
-var NT_SEL='[data-nt],textarea,script,style,.rt,.rsub:not(.ui),.ht:not(.empty),.dcl,ul.ingr li,.soc,.pm[data-act="pmset"]:not([data-g=""]),.gchip[data-g]:not([data-g=""]),.src,.spn,.sp .rs,.dp .tl,.dtx';
+var NT_SEL='[data-nt],textarea,script,style,.rt,.rsub:not(.ui),.ht:not(.empty),.dcl,ul.ingr li,.soc,.pm[data-act="pmset"]:not([data-g=""]),.gchip[data-g]:not([data-g=""]),.src,.spn,.sp .rs,.dp .tl,.dtx,.wp .tl';
 var ATTRS=["placeholder","aria-label","title","alt"];
 function trText(n){
   var el=n.parentNode;if(!el||el.nodeType!==1)return;
@@ -1050,10 +1118,10 @@ var sb=null,sbErr="",curUser=null,syncSt={s:"idle",t:0,m:""},pushT=null,pushSeq=
 function lsGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
 function lsDel(k){try{localStorage.removeItem(k)}catch(e){}}
 function cloudOn(){return !!(sb&&curUser)}
-function payloadObj(){return{recipes:recipes,groups:groups,shop:shop,dishes:dishes,profile:profile}}
-function hasData(){return !!(recipes.length||groups.length||dishes.length||(shop&&shop.entries&&shop.entries.length)||pfHas(profile))}
-function emptyData(){return{recipes:[],groups:[],dishes:[],shop:{entries:[],checked:{}},profile:JSON.parse(JSON.stringify(DEFPF))}}
-function pHas(p){return !!p&&!!((p.recipes||[]).length||(p.groups||[]).length||(p.dishes||[]).length||((p.shop&&p.shop.entries)||[]).length||pfHas(p.profile))}
+function payloadObj(){return{recipes:recipes,groups:groups,shop:shop,dishes:dishes,profile:profile,plan:plan}}
+function hasData(){return !!(recipes.length||groups.length||dishes.length||planHas(plan)||(shop&&shop.entries&&shop.entries.length)||pfHas(profile))}
+function emptyData(){return{plan:planNorm(null),recipes:[],groups:[],dishes:[],shop:{entries:[],checked:{}},profile:JSON.parse(JSON.stringify(DEFPF))}}
+function pHas(p){return !!p&&!!((p.plan&&planHas(planNorm(p.plan)))||(p.recipes||[]).length||(p.groups||[]).length||(p.dishes||[]).length||((p.shop&&p.shop.entries)||[]).length||pfHas(p.profile))}
 function syncText(){
   if(!cloudOn())return "Non attiva";
   if(syncSt.s==="syncing")return "Sincronizzazione in corso…";
@@ -1086,6 +1154,7 @@ function applyData(p){
   recipes=Array.isArray(p.recipes)?p.recipes:[];
   groups=Array.isArray(p.groups)?p.groups:[];
   dishes=Array.isArray(p.dishes)?p.dishes:[];
+  plan=planNorm(p.plan);lsSet(PLK,plan);
   shop=(p.shop&&Array.isArray(p.shop.entries))?{entries:p.shop.entries,checked:p.shop.checked||{}}:{entries:[],checked:{}};
   if(p.profile&&typeof p.profile==='object'){profile=Object.assign(JSON.parse(JSON.stringify(DEFPF)),p.profile);if(!profile.social)profile.social={};if(!profile.dieta)profile.dieta={};lsSet(PFK,profile)}
   saveLocal();persistGroups();persistShop();saveDishes();
@@ -1096,7 +1165,7 @@ function mergeData(a,b){
   function byId(x,y){var m={};(x||[]).concat(y||[]).forEach(function(i){if(!i||!i.id)return;var o=m[i.id];if(!o||(i.updated||0)>=(o.updated||0))m[i.id]=i});return Object.keys(m).map(function(k){return m[k]})}
   var g={},gl=[];((a.groups||[]).concat(b.groups||[])).forEach(function(n){var k=String(n).toLowerCase();if(n&&!g[k]){g[k]=1;gl.push(n)}});
   var sh=(b.shop&&b.shop.entries&&b.shop.entries.length)?b.shop:(a.shop||{entries:[],checked:{}});
-  return{recipes:byId(a.recipes,b.recipes),dishes:byId(a.dishes,b.dishes),groups:gl,shop:sh,profile:(pfHas(a.profile)?a.profile:(b.profile||a.profile))};
+  return{plan:(((b.plan&&b.plan.u)||0)>=((a.plan&&a.plan.u)||0)&&planHas(planNorm(b.plan)))?b.plan:(planHas(planNorm(a.plan))?a.plan:(b.plan||a.plan)),recipes:byId(a.recipes,b.recipes),dishes:byId(a.dishes,b.dishes),groups:gl,shop:sh,profile:(pfHas(a.profile)?a.profile:(b.profile||a.profile))};
 }
 async function cloudLoad(first){
   if(!cloudOn())return;
@@ -1195,7 +1264,7 @@ async function signOutNow(){
 }
 window.addEventListener("online",function(){if(cloudOn()&&lsGet(DIRK)==="1")queuePush(true)});
 document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible"&&cloudOn()&&lsGet(DIRK)!=="1"&&Date.now()-lastLoad>15000)cloudLoad(false)});
-function backupObj(){return{app:"quaderno-ricette",v:1,recipes:recipes,groups:groups,shop:shop,dishes:dishes,profile:profile}}
+function backupObj(){return{app:"quaderno-ricette",v:1,recipes:recipes,groups:groups,shop:shop,dishes:dishes,profile:profile,plan:plan}}
 function importBackup(txt){
   var o=JSON.parse(txt),rs=Array.isArray(o)?o:(o&&o.recipes);
   if(!Array.isArray(rs))throw new Error("x");
@@ -1210,6 +1279,7 @@ function importBackup(txt){
   if(o&&o.shop&&Array.isArray(o.shop.entries)&&!shop.entries.length)shop={entries:o.shop.entries,checked:o.shop.checked||{}};
   if(o&&Array.isArray(o.dishes))o.dishes.forEach(function(d){if(!d||typeof d!=="object"||!d.id)return;var i=dishes.findIndex(function(x){return x.id===d.id});if(i<0){dishes.push(d);n++}else if((d.updated||0)>(dishes[i].updated||0)){dishes[i]=d;n++}});
   if(o&&o.profile&&typeof o.profile==="object"&&!pfHas(profile)&&pfHas(o.profile)){profile=Object.assign(JSON.parse(JSON.stringify(DEFPF)),o.profile);if(!profile.social)profile.social={};if(!profile.dieta)profile.dieta={};lsSet(PFK,profile)}
+  if(o&&o.plan&&!planHas(plan)&&planHas(planNorm(o.plan))){plan=planNorm(o.plan);lsSet(PLK,plan);n++}
   saveLocal();persistGroups();persistShop();saveDishes();queuePush(true);
   return n;
 }
@@ -1822,7 +1892,52 @@ function dishRows(){
   return l.map(function(d){var rs=dishRecs(d),nr=rs.length,al=alsOn()?dishAl(d):[],sub=d.desc&&d.desc.trim()?esc(d.desc.replace(/\s+/g," ")):(nr?esc(rs.map(function(r){return r.title||"Senza nome"}).join(", ")):"Nessuna descrizione");return '<button class="row" data-act="dopen" data-id="'+esc(d.id)+'">'+avatar(d)+'<span class="rtx"><span class="rline"><span class="rt">'+esc(d.title||"Senza nome")+'</span><span class="rs">'+(nr?nr+(nr===1?" ricetta":" ricette"):"")+'</span></span><span class="rline"><span class="rsub'+((d.desc&&d.desc.trim())||nr?"":" ui")+'">'+sub+'</span>'+(al.length?'<span class="alb" aria-label="Allergeni">'+alBadges(al)+'</span>':'')+'</span></span></button>'}).join("");
 }
 function menuHTML(){
-  return '<div class="sheet"><div class="top"><div class="hdr"><h2 class="tfx"><span>Menù</span>'+hog("menu")+'</h2></div><input id="dsearch" type="search" placeholder="Cerca un piatto" aria-label="Cerca un piatto" value="'+esc(dq)+'"></div><div id="drows">'+dishRows()+'</div></div>';
+  var wk=mtab==="week",
+  seg='<div class="mseg" role="tablist" aria-label="Sezioni del menù"><button type="button" role="tab" class="'+(wk?"":"on")+'" aria-selected="'+(!wk)+'" data-act="mtab" data-m="dishes">Piatti</button><button type="button" role="tab" class="'+(wk?"on":"")+'" aria-selected="'+wk+'" data-act="mtab" data-m="week">Settimana</button></div>',
+  hd='<div class="hdr"><h2 class="tfx"><span>Menù</span>'+hog("menu")+'</h2></div>';
+  if(wk)return '<div class="sheet"><div class="top">'+hd+seg+'</div>'+weekHTML()+'</div>';
+  return '<div class="sheet"><div class="top">'+hd+seg+'<input id="dsearch" type="search" placeholder="Cerca un piatto" aria-label="Cerca un piatto" value="'+esc(dq)+'"></div><div id="drows">'+dishRows()+'</div></div>';
+}
+function planItemHTML(it,slot){
+  var d=it.did?dishes.find(function(x){return x.id===it.did}):null,x='<button type="button" class="wpx" data-act="wrm" data-i="'+esc(it.id)+'" data-s="'+slot+'" aria-label="Togli">✕</button>';
+  if(d)return '<span class="wp dsh rc'+tintIdx(d)+'"><button type="button" class="wpo" data-act="dopen" data-id="'+esc(d.id)+'"><span class="tl">'+esc(d.title||"Senza nome")+'</span></button>'+x+'</span>';
+  return '<span class="wp"><span class="tl">'+esc(it.t||"")+'</span>'+x+'</span>';
+}
+function weekHTML(){
+  var k=PDAYS[wday],today=(new Date().getDay()+6)%7;
+  var strip='<div class="wstrip" role="tablist" aria-label="Giorni">'+PDAYS.map(function(_,i){var n=planCount(i);return '<button type="button" role="tab" class="wd'+(i===wday?" on":"")+(i===today?" td":"")+'" data-act="wday" data-i="'+i+'" aria-selected="'+(i===wday)+'" aria-label="'+PDN[i]+'"><span class="wdn">'+PDS[i]+'</span>'+(n?'<span class="wdc">'+n+'</span>':'')+'</button>'}).join("")+'</div>';
+  var slots=PSLOTS.map(function(sl,si){
+    var items=plan.d[k][sl[0]];
+    return '<section class="wslot ps'+si+'"><div class="wsh"><span class="wdot"></span><h4>'+sl[1]+'</h4></div><div class="wpills">'+items.map(function(it){return planItemHTML(it,sl[0])}).join("")+'<button type="button" class="wadd" data-act="wadd" data-s="'+sl[0]+'"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Aggiungi</span></button></div></section>';
+  }).join("");
+  var any=PDAYS.some(function(_,i){return planCount(i)>0});
+  return '<div class="wk">'+strip+'<div class="wtitle"><h3>'+PDN[wday]+'</h3>'+(wday===today?'<span class="wtoday">Oggi</span>':'')+'</div>'+slots+
+    (any?'<div class="acts wfoot"><button type="button" class="b d'+(wsure?" sure":"")+'" data-act="'+(wsure?"wclrok":"wclr")+'">'+(wsure?"Conferma: svuota la settimana":"Svuota la settimana")+'</button></div>':'')+'</div>';
+}
+function wOpen(slot){
+  wsel={slot:slot,days:{}};wsel.days[wday]=true;wRender();$("#wsh").classList.remove("off");
+}
+function wClose(){$("#wsh").classList.add("off");wsel=null}
+function wDishList(q){
+  q=(q||"").trim().toLowerCase();
+  var l=dishes.slice().sort(function(a,b){return (b.updated||0)-(a.updated||0)});
+  if(q)l=l.filter(function(d){return (d.title||"").toLowerCase().indexOf(q)>=0});
+  return l.length?l.map(function(d){return '<button type="button" class="dp rc'+tintIdx(d)+'" data-act="wdish" data-id="'+esc(d.id)+'"><span class="tl">'+esc(d.title||"Senza nome")+'</span></button>'}).join(""):'<span class="sh">Nessun piatto trovato.</span>';
+}
+function wRender(){
+  if(!wsel)return;
+  var sl=PSLOTS.filter(function(x){return x[0]===wsel.slot})[0];
+  var h='<div class="tmh"><h3>'+sl[1]+'</h3><button class="tmx" data-act="wclose" aria-label="Chiudi">✕</button></div><p class="wsubt">'+PDN[wday]+'</p>'+
+  '<label class="l" for="w-t">Scrivi un pasto</label><div class="wrow"><input id="w-t" type="text" maxlength="80" enterkeyhint="done" autocomplete="off" placeholder="Per esempio yogurt e frutta" aria-label="Scrivi un pasto"><button type="button" class="b p" data-act="wtext">Aggiungi</button></div>';
+  if(dishes.length)h+='<p class="tml">Oppure scegli un tuo piatto</p>'+(dishes.length>6?'<input id="w-q" type="search" class="tmlab" placeholder="Cerca un piatto" aria-label="Cerca un piatto">':'')+'<div class="wdl dpills" id="w-dl">'+wDishList("")+'</div>';
+  h+='<p class="tml">Aggiungi anche a</p><div class="wxd">'+PDAYS.map(function(_,i){var on=!!wsel.days[i];return '<button type="button" class="wxc'+(on?" on":"")+(i===wday?" lock":"")+'" data-act="wxd" data-i="'+i+'" aria-pressed="'+on+'" aria-label="'+PDN[i]+'">'+PDS[i]+'</button>'}).join("")+'</div>';
+  $("#wcard").innerHTML=h;
+}
+function wAdd(item){
+  if(!wsel)return;
+  var slot=wsel.slot;
+  PDAYS.forEach(function(k,i){if(wsel.days[i]){var o={id:uid()};if(item.did){o.did=item.did;o.t=item.t}else o.t=item.t;plan.d[k][slot].push(o)}});
+  savePlan();wClose();render(false);
 }
 function collectDish(){if(!dedit)return;var t=$("#d-title"),x=$("#d-desc");if(t)dedit.title=t.value;if(x)dedit.desc=x.value}
 function dishHTML(){
@@ -1866,7 +1981,7 @@ function render(withForm){
   $("#v-pick").classList.toggle("on",view==="pick");
 }
 function setPage(i,smooth){var p=$("#pager");p.scrollTo({left:i*p.clientWidth,behavior:smooth?"smooth":"auto"})}
-function fabUI(p){var f=$("#fab");if(!f)return;if(p===undefined)p=TABS.indexOf(tab);var n=Math.round(p),show=TABS.indexOf(view)>=0&&n<=1&&Math.abs(p-n)<.4;f.classList.toggle("off",!show);if(show){f.setAttribute("data-act",n===1?"dnew":"new");f.setAttribute("aria-label",n===1?"Nuovo piatto":"Nuova ricetta")}}
+function fabUI(p){var f=$("#fab");if(!f)return;if(p===undefined)p=TABS.indexOf(tab);var n=Math.round(p),show=TABS.indexOf(view)>=0&&n<=1&&Math.abs(p-n)<.4&&!(n===1&&mtab==="week");f.classList.toggle("off",!show);if(show){f.setAttribute("data-act",n===1?"dnew":"new");f.setAttribute("aria-label",n===1?"Nuovo piatto":"Nuova ricetta")}}
 function tabUI(p){
   fabUI(p);
   var ind=$("#tabind");if(ind)ind.style.transform="translateX("+(p*100)+"%)";
@@ -1874,6 +1989,8 @@ function tabUI(p){
 }
 var HOG={"menu": "<svg viewBox=\"-3 1 70 63\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\"><defs><linearGradient id=\"hsmenu\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#9A6A3F\"/><stop offset=\"1\" stop-color=\"#6D4527\"/></linearGradient></defs><path d=\"M5.0 51.6 L9.4 45.0 L1.2 42.3 L8.0 37.5 L1.5 32.3 L9.8 30.0 L5.8 23.1 L14.6 23.5 L13.7 15.9 L21.7 19.0 L23.9 11.6 L30.1 17.1 L35.3 10.8 L38.8 17.9 L46.2 13.7 L46.6 21.3 L55.2 19.7 L52.5 27.0 L61.1 28.2 L55.6 34.2 L63.2 38.0 L55.6 41.8 L61.1 47.8 Z\" fill=\"#5E3A20\" stroke=\"#5E3A20\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M7.2 43.8 L11.0 39.4 L7.5 34.8 L13.1 32.1 L12.1 26.7 L18.5 26.2 L20.2 20.9 L26.2 22.7 L30.2 18.5 L34.9 22.2 L40.6 19.7 L43.1 24.7 L49.5 24.5 L49.4 29.9 L55.4 31.9 L52.7 36.9 L57.2 40.8 Z\" fill=\"url(#hsmenu)\" stroke=\"url(#hsmenu)\" stroke-width=\"1.6\" stroke-linejoin=\"round\"/><ellipse cx=\"32\" cy=\"41\" rx=\"19.5\" ry=\"17.5\" fill=\"url(#hsmenu)\"/><circle cx=\"15.5\" cy=\"31\" r=\"5.2\" fill=\"#F3D9B4\"/><circle cx=\"15.5\" cy=\"31.4\" r=\"2.6\" fill=\"#F4A9A0\"/><circle cx=\"48.5\" cy=\"31\" r=\"5.2\" fill=\"#F3D9B4\"/><circle cx=\"48.5\" cy=\"31.4\" r=\"2.6\" fill=\"#F4A9A0\"/><path d=\"M32 27.5c9.5 0 16 6.2 16 14.2 0 7.2-6.8 12.3-16 12.3S16 48.9 16 41.7c0-8 6.5-14.2 16-14.2z\" fill=\"#F8E6CB\"/><ellipse cx=\"32\" cy=\"46.5\" rx=\"9\" ry=\"6.6\" fill=\"#FFF3E0\"/><circle cx=\"25\" cy=\"39\" r=\"2.5\" fill=\"#2B1B12\"/><circle cx=\"39\" cy=\"39\" r=\"2.5\" fill=\"#2B1B12\"/><circle cx=\"25.9\" cy=\"38.1\" r=\".9\" fill=\"#fff\"/><circle cx=\"39.9\" cy=\"38.1\" r=\".9\" fill=\"#fff\"/><ellipse cx=\"32\" cy=\"44.4\" rx=\"3.2\" ry=\"2.4\" fill=\"#2B1B12\"/><ellipse cx=\"31.2\" cy=\"43.6\" rx=\".9\" ry=\".6\" fill=\"#fff\" opacity=\".8\"/><path d=\"M29.5 48.2q2.5 2.2 5 0\" fill=\"none\" stroke=\"#2B1B12\" stroke-width=\"1.3\" stroke-linecap=\"round\"/><circle cx=\"20.5\" cy=\"45.5\" r=\"3\" fill=\"#F6A5A5\" opacity=\".65\"/><circle cx=\"43.5\" cy=\"45.5\" r=\"3\" fill=\"#F6A5A5\" opacity=\".65\"/><ellipse cx=\"23.5\" cy=\"57.8\" rx=\"5.2\" ry=\"2.8\" fill=\"#F3D9B4\"/><ellipse cx=\"40.5\" cy=\"57.8\" rx=\"5.2\" ry=\"2.8\" fill=\"#F3D9B4\"/><g transform=\"rotate(-6 32 14)\"><path d=\"M21 22.5h22l-1.5-7h-19z\" fill=\"#fff\" stroke=\"#DDE1E7\" stroke-width=\"1\"/><circle cx=\"23.5\" cy=\"12.5\" r=\"5.5\" fill=\"#fff\" stroke=\"#DDE1E7\" stroke-width=\"1\"/><circle cx=\"32\" cy=\"9.5\" r=\"6.5\" fill=\"#fff\" stroke=\"#DDE1E7\" stroke-width=\"1\"/><circle cx=\"40.5\" cy=\"12.5\" r=\"5.5\" fill=\"#fff\" stroke=\"#DDE1E7\" stroke-width=\"1\"/><rect x=\"21\" y=\"18.5\" width=\"22\" height=\"4.6\" rx=\"1.8\" fill=\"#fff\" stroke=\"#DDE1E7\" stroke-width=\"1\"/></g></svg>", "spesa": "<svg viewBox=\"-3 1 70 63\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\"><defs><linearGradient id=\"hsspesa\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#9A6A3F\"/><stop offset=\"1\" stop-color=\"#6D4527\"/></linearGradient></defs><path d=\"M5.0 51.6 L9.4 45.0 L1.2 42.3 L8.0 37.5 L1.5 32.3 L9.8 30.0 L5.8 23.1 L14.6 23.5 L13.7 15.9 L21.7 19.0 L23.9 11.6 L30.1 17.1 L35.3 10.8 L38.8 17.9 L46.2 13.7 L46.6 21.3 L55.2 19.7 L52.5 27.0 L61.1 28.2 L55.6 34.2 L63.2 38.0 L55.6 41.8 L61.1 47.8 Z\" fill=\"#5E3A20\" stroke=\"#5E3A20\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M7.2 43.8 L11.0 39.4 L7.5 34.8 L13.1 32.1 L12.1 26.7 L18.5 26.2 L20.2 20.9 L26.2 22.7 L30.2 18.5 L34.9 22.2 L40.6 19.7 L43.1 24.7 L49.5 24.5 L49.4 29.9 L55.4 31.9 L52.7 36.9 L57.2 40.8 Z\" fill=\"url(#hsspesa)\" stroke=\"url(#hsspesa)\" stroke-width=\"1.6\" stroke-linejoin=\"round\"/><ellipse cx=\"32\" cy=\"41\" rx=\"19.5\" ry=\"17.5\" fill=\"url(#hsspesa)\"/><circle cx=\"15.5\" cy=\"31\" r=\"5.2\" fill=\"#F3D9B4\"/><circle cx=\"15.5\" cy=\"31.4\" r=\"2.6\" fill=\"#F4A9A0\"/><circle cx=\"48.5\" cy=\"31\" r=\"5.2\" fill=\"#F3D9B4\"/><circle cx=\"48.5\" cy=\"31.4\" r=\"2.6\" fill=\"#F4A9A0\"/><path d=\"M32 27.5c9.5 0 16 6.2 16 14.2 0 7.2-6.8 12.3-16 12.3S16 48.9 16 41.7c0-8 6.5-14.2 16-14.2z\" fill=\"#F8E6CB\"/><ellipse cx=\"32\" cy=\"46.5\" rx=\"9\" ry=\"6.6\" fill=\"#FFF3E0\"/><circle cx=\"25\" cy=\"39\" r=\"2.5\" fill=\"#2B1B12\"/><circle cx=\"39\" cy=\"39\" r=\"2.5\" fill=\"#2B1B12\"/><circle cx=\"25.9\" cy=\"38.1\" r=\".9\" fill=\"#fff\"/><circle cx=\"39.9\" cy=\"38.1\" r=\".9\" fill=\"#fff\"/><ellipse cx=\"32\" cy=\"44.4\" rx=\"3.2\" ry=\"2.4\" fill=\"#2B1B12\"/><ellipse cx=\"31.2\" cy=\"43.6\" rx=\".9\" ry=\".6\" fill=\"#fff\" opacity=\".8\"/><path d=\"M29.5 48.2q2.5 2.2 5 0\" fill=\"none\" stroke=\"#2B1B12\" stroke-width=\"1.3\" stroke-linecap=\"round\"/><circle cx=\"20.5\" cy=\"45.5\" r=\"3\" fill=\"#F6A5A5\" opacity=\".65\"/><circle cx=\"43.5\" cy=\"45.5\" r=\"3\" fill=\"#F6A5A5\" opacity=\".65\"/><ellipse cx=\"23.5\" cy=\"57.8\" rx=\"5.2\" ry=\"2.8\" fill=\"#F3D9B4\"/><ellipse cx=\"40.5\" cy=\"57.8\" rx=\"5.2\" ry=\"2.8\" fill=\"#F3D9B4\"/><g><path d=\"M44 47h15l-2 11H46z\" fill=\"#E7B602\" stroke=\"#B88C00\" stroke-width=\"1.1\" stroke-linejoin=\"round\"/><path d=\"M46.5 47c0-5 8-5 8 0\" fill=\"none\" stroke=\"#B88C00\" stroke-width=\"1.6\" stroke-linecap=\"round\"/><path d=\"M49 47l-1-6\" stroke=\"#2F9E5B\" stroke-width=\"2\" stroke-linecap=\"round\"/><path d=\"M51.5 47l2-5\" stroke=\"#2F9E5B\" stroke-width=\"2\" stroke-linecap=\"round\"/><path d=\"M49 47l2-8\" stroke=\"#F28C28\" stroke-width=\"3\" stroke-linecap=\"round\"/></g></svg>", "set": "<svg viewBox=\"-3 1 70 63\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\"><defs><linearGradient id=\"hsset\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#9A6A3F\"/><stop offset=\"1\" stop-color=\"#6D4527\"/></linearGradient></defs><path d=\"M5.0 51.6 L9.4 45.0 L1.2 42.3 L8.0 37.5 L1.5 32.3 L9.8 30.0 L5.8 23.1 L14.6 23.5 L13.7 15.9 L21.7 19.0 L23.9 11.6 L30.1 17.1 L35.3 10.8 L38.8 17.9 L46.2 13.7 L46.6 21.3 L55.2 19.7 L52.5 27.0 L61.1 28.2 L55.6 34.2 L63.2 38.0 L55.6 41.8 L61.1 47.8 Z\" fill=\"#5E3A20\" stroke=\"#5E3A20\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M7.2 43.8 L11.0 39.4 L7.5 34.8 L13.1 32.1 L12.1 26.7 L18.5 26.2 L20.2 20.9 L26.2 22.7 L30.2 18.5 L34.9 22.2 L40.6 19.7 L43.1 24.7 L49.5 24.5 L49.4 29.9 L55.4 31.9 L52.7 36.9 L57.2 40.8 Z\" fill=\"url(#hsset)\" stroke=\"url(#hsset)\" stroke-width=\"1.6\" stroke-linejoin=\"round\"/><ellipse cx=\"32\" cy=\"41\" rx=\"19.5\" ry=\"17.5\" fill=\"url(#hsset)\"/><circle cx=\"15.5\" cy=\"31\" r=\"5.2\" fill=\"#F3D9B4\"/><circle cx=\"15.5\" cy=\"31.4\" r=\"2.6\" fill=\"#F4A9A0\"/><circle cx=\"48.5\" cy=\"31\" r=\"5.2\" fill=\"#F3D9B4\"/><circle cx=\"48.5\" cy=\"31.4\" r=\"2.6\" fill=\"#F4A9A0\"/><path d=\"M32 27.5c9.5 0 16 6.2 16 14.2 0 7.2-6.8 12.3-16 12.3S16 48.9 16 41.7c0-8 6.5-14.2 16-14.2z\" fill=\"#F8E6CB\"/><ellipse cx=\"32\" cy=\"46.5\" rx=\"9\" ry=\"6.6\" fill=\"#FFF3E0\"/><circle cx=\"25\" cy=\"39\" r=\"2.5\" fill=\"#2B1B12\"/><circle cx=\"39\" cy=\"39\" r=\"2.5\" fill=\"#2B1B12\"/><circle cx=\"25.9\" cy=\"38.1\" r=\".9\" fill=\"#fff\"/><circle cx=\"39.9\" cy=\"38.1\" r=\".9\" fill=\"#fff\"/><ellipse cx=\"32\" cy=\"44.4\" rx=\"3.2\" ry=\"2.4\" fill=\"#2B1B12\"/><ellipse cx=\"31.2\" cy=\"43.6\" rx=\".9\" ry=\".6\" fill=\"#fff\" opacity=\".8\"/><path d=\"M29.5 48.2q2.5 2.2 5 0\" fill=\"none\" stroke=\"#2B1B12\" stroke-width=\"1.3\" stroke-linecap=\"round\"/><circle cx=\"20.5\" cy=\"45.5\" r=\"3\" fill=\"#F6A5A5\" opacity=\".65\"/><circle cx=\"43.5\" cy=\"45.5\" r=\"3\" fill=\"#F6A5A5\" opacity=\".65\"/><ellipse cx=\"23.5\" cy=\"57.8\" rx=\"5.2\" ry=\"2.8\" fill=\"#F3D9B4\"/><ellipse cx=\"40.5\" cy=\"57.8\" rx=\"5.2\" ry=\"2.8\" fill=\"#F3D9B4\"/><g transform=\"translate(49 14) rotate(12)\"><g fill=\"#E7B602\" stroke=\"#B88C00\" stroke-width=\"1\" stroke-linejoin=\"round\"><rect x=\"-1.7\" y=\"-9.2\" width=\"3.4\" height=\"4\" rx=\"1\" transform=\"rotate(0)\"/><rect x=\"-1.7\" y=\"-9.2\" width=\"3.4\" height=\"4\" rx=\"1\" transform=\"rotate(45)\"/><rect x=\"-1.7\" y=\"-9.2\" width=\"3.4\" height=\"4\" rx=\"1\" transform=\"rotate(90)\"/><rect x=\"-1.7\" y=\"-9.2\" width=\"3.4\" height=\"4\" rx=\"1\" transform=\"rotate(135)\"/><rect x=\"-1.7\" y=\"-9.2\" width=\"3.4\" height=\"4\" rx=\"1\" transform=\"rotate(180)\"/><rect x=\"-1.7\" y=\"-9.2\" width=\"3.4\" height=\"4\" rx=\"1\" transform=\"rotate(225)\"/><rect x=\"-1.7\" y=\"-9.2\" width=\"3.4\" height=\"4\" rx=\"1\" transform=\"rotate(270)\"/><rect x=\"-1.7\" y=\"-9.2\" width=\"3.4\" height=\"4\" rx=\"1\" transform=\"rotate(315)\"/><circle r=\"6.6\"/></g><circle r=\"2.6\" fill=\"#FBF7EC\" stroke=\"#B88C00\" stroke-width=\"1\"/></g></svg>"};
 function hog(k){return '<span class="hog" aria-hidden="true">'+HOG[k]+'</span>'}
+document.addEventListener("keydown",function(e){if(e.key==="Enter"&&e.target&&e.target.id==="w-t"&&!e.isComposing){e.preventDefault();var v=(e.target.value||"").trim();if(v)wAdd({t:v})}});
+document.addEventListener("input",function(e){if(e.target&&e.target.id==="w-q"){var l=$("#w-dl");if(l)l.innerHTML=wDishList(e.target.value)}});
 var SM=null,editFrom="";
 document.addEventListener("input",function(e){if(e.target&&e.target.id==="d-title")dishLive()});
 function stepsAuto(t){t=(t||"").trim();if(!t)return true;return t.split("\n").filter(function(l){return l.trim()}).every(function(l){return /^\s*\d+[.)]\s/.test(l)})}
@@ -1967,7 +2084,7 @@ tmLoad();tmEnsure();tmPills();
 document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")tmTick()});
 /* ===== Micro-animazioni dei tasti (stile iOS): pressione + rimbalzo morbido ===== */
 (function(){
-  var PR=".b,.back,.gchip,.tb,#fab,.tmpill,.sm button,.tmx,.lrow,.hdr .glass";
+  var PR=".b,.back,.gchip,.tb,#fab,.tmpill,.sm button,.tmx,.lrow,.hdr .glass,.mseg button,.wd,.wadd,.wxc";
   if(!Element.prototype.animate||(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches))return;
   var cur=null,sc=1;
   function scaleFor(el){return el.matches("#fab")?.9:el.matches(".tmx")?.88:el.matches(".tb")?.93:el.matches(".lrow")?.985:.95}
@@ -2012,6 +2129,16 @@ document.addEventListener("click",function(e){
   if(a==="flt"){flt=el.dataset.f;render();return}
   if(a==="settings")return go("settings",true);
   if(a==="set"){var k2=el.dataset.k,v2=el.dataset.v;settings[k2]=(k2==="serv")?(parseInt(v2,10)||0):v2;saveSettings();applySettings();render();var lg0=$("#v-login");if(lg0&&lg0.className!=="hide")showLogin();return}
+  if(a==="mtab"){mtab=el.dataset.m==="week"?"week":"dishes";try{localStorage.setItem(MTK,mtab)}catch(e){}wsure=false;render(false);fabUI();return}
+  if(a==="wday"){wday=parseInt(el.dataset.i,10)||0;wsure=false;render(false);return}
+  if(a==="wadd"){wOpen(el.dataset.s);return}
+  if(a==="wclose"){wClose();return}
+  if(a==="wxd"){var wi=parseInt(el.dataset.i,10)||0;if(wi!==wday&&wsel){var on=!wsel.days[wi];if(on)wsel.days[wi]=true;else delete wsel.days[wi];el.classList.toggle("on",on);el.setAttribute("aria-pressed",on?"true":"false")}return}
+  if(a==="wtext"){var wt=($("#w-t")||{}).value;wt=(wt||"").trim();if(!wt)return;wAdd({t:wt});return}
+  if(a==="wdish"){var wd=dishes.find(function(x){return x.id===el.dataset.id});if(wd)wAdd({did:wd.id,t:wd.title||""});return}
+  if(a==="wrm"){var wk=PDAYS[wday],ws=el.dataset.s;plan.d[wk][ws]=plan.d[wk][ws].filter(function(x){return x.id!==el.dataset.i});savePlan();render(false);return}
+  if(a==="wclr"){wsure=true;render(false);return}
+  if(a==="wclrok"){plan=planNorm(null);wsure=false;savePlan();render(false);flash("Settimana svuotata.");return}
   if(a==="swap"){settings.awake=!settings.awake;saveSettings();wakeUpdate();render();return}
   if(a==="bkfile"){exportBackup();return}
   if(a==="bkpick"){var bf=$("#bk-file");if(bf)bf.click();return}
@@ -2019,7 +2146,7 @@ document.addEventListener("click",function(e){
   if(a==="bkimp"){var tx=($("#bk-text").value||"").trim();if(!tx){flash("Incolla prima il backup.");return}try{var n2=importBackup(tx);render(false);flash(n2?"Importati "+n2+(n2===1?" elemento.":" elementi."):"Niente di nuovo da importare.")}catch(x){flash("Il backup non è valido.")}return}
   if(a==="wipe0"){sure=true;render();return}
   if(a==="wipeno"){sure=false;render();return}
-  if(a==="wipe"){recipes=[];groups=[];dishes=[];saveDishes();shop={entries:[],checked:{}};saveLocal();persistGroups();persistShop();dropDraft();setOpen.wipe=false;sure=false;editing=newDraft();render(true);flash("Dati cancellati.");return}
+  if(a==="wipe"){recipes=[];groups=[];dishes=[];plan=planNorm(null);lsSet(PLK,plan);saveDishes();shop={entries:[],checked:{}};saveLocal();persistGroups();persistShop();dropDraft();setOpen.wipe=false;sure=false;editing=newDraft();render(true);flash("Dati cancellati.");return}
   if(a==="phcam"){closeMenu();$("#ph-cam").click();return}
   if(a==="phlib"){closeMenu();$("#ph-lib").click();return}
   if(a==="phrm"){closeMenu();collect();editing.photo="";render(true);saveDraft();return}
