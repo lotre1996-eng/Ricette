@@ -944,6 +944,7 @@ var LANG="it",DICT={},ORIG=new WeakMap(),ORIGA=new WeakMap(),I18N_ON=false;
 "Togli":["Remove","Quitar","Retirer","移除"],"Sezioni del menù":["Menu sections","Secciones del menú","Sections du menu","菜单分区"],"Giorni":["Days","Días","Jours","日期"],"Aggiungi un pasto":["Add a meal","Añadir una comida","Ajouter un repas","添加一餐"]
 };["en","es","fr","zh"].forEach(function(l,j){Object.keys(X).forEach(function(k){if(!DICT[l][k])DICT[l][k]=X[k][j]})})})();
 (function(){var X={"Grammatura (facoltativa)":["Amount (optional)","Cantidad (opcional)","Quantité (facultative)","分量（可选）"],"Per esempio 80 g":["For example 80 g","Por ejemplo 80 g","Par exemple 80 g","例如 80 克"],"Modifica pasto":["Edit meal","Editar comida","Modifier le repas","编辑这一餐"],"Elimina pasto":["Delete meal","Eliminar comida","Supprimer le repas","删除这一餐"],"Eliminare questo pasto? Non si può annullare.":["Delete this meal? This can\u2019t be undone.","¿Eliminar esta comida? No se puede deshacer.","Supprimer ce repas ? Cette action est irréversible.","要删除这一餐吗？此操作无法撤销。"],"Tieni premuto un pasto per modificarlo o eliminarlo.":["Press and hold a meal to edit or delete it.","Mantén pulsada una comida para editarla o eliminarla.","Maintenez un repas pour le modifier ou le supprimer.","长按某一餐即可编辑或删除。"],"Pasto eliminato.":["Meal deleted.","Comida eliminada.","Repas supprimé.","已删除这一餐。"],"Oppure cambia con un tuo piatto":["Or switch to one of your dishes","O cámbialo por uno de tus platos","Ou remplacez par un de vos plats","或换成你的菜品"]};["en","es","fr","zh"].forEach(function(l,j){Object.keys(X).forEach(function(k){if(!DICT[l][k])DICT[l][k]=X[k][j]})})})();
+(function(){var X={"Aggiungi tutta la settimana":["Add the whole week","Añadir toda la semana","Ajouter toute la semaine","添加整周"],"Aggiungi solo":["Add only","Añadir solo","Ajouter seulement","仅添加"],"Includi i pasti scritti a mano":["Include meals I typed myself","Incluir las comidas escritas a mano","Inclure les repas saisis à la main","包含手写的餐食"],"Non ci sono pasti da aggiungere.":["There are no meals to add.","No hay comidas que añadir.","Aucun repas à ajouter.","没有可添加的餐食。"]};["en","es","fr","zh"].forEach(function(l,j){Object.keys(X).forEach(function(k){if(!DICT[l][k])DICT[l][k]=X[k][j]})})})();
 function mkP(re,en,es,fr,zh){return[re,{en:en,es:es,fr:fr,zh:zh}]}
 function pl(n,a,b){return +n===1?a:b}
 var PATS=[
@@ -1932,6 +1933,47 @@ function menuHTML(){
   if(wk)return '<div class="sheet"><div class="top">'+hd+seg+'</div>'+weekHTML()+'</div>';
   return '<div class="sheet"><div class="top">'+hd+seg+'<input id="dsearch" type="search" placeholder="Cerca un piatto" aria-label="Cerca un piatto" value="'+esc(dq)+'"></div><div id="drows">'+dishRows()+'</div></div>';
 }
+var WINCL=(function(){try{return localStorage.getItem("ever-wincl")!=="0"}catch(e){return true}})();
+var QMAP={g:"g",gr:"g",grammi:"g",grammo:"g",kg:"kg",chili:"kg",chilo:"kg",ml:"ml",l:"l",lt:"l",litro:"l",litri:"l",cucchiaio:"cucchiai",cucchiai:"cucchiai",cucchiaino:"cucchiaini",cucchiaini:"cucchiaini",tazza:"tazze",tazze:"tazze",pz:"pezzi",pezzo:"pezzi",pezzi:"pezzi",spicchio:"spicchi",spicchi:"spicchi"};
+function parseQty(q){
+  var m=/^\s*(\d+(?:[.,]\d+)?)\s*([A-Za-zàèéìòù.]*)\s*$/.exec(q||"");if(!m)return null;
+  var u=m[2].toLowerCase().replace(/\.$/,"");
+  if(!u)return{q:m[1].replace(",","."),u:""};
+  return QMAP[u]?{q:m[1].replace(",","."),u:QMAP[u]}:null;
+}
+function planDayLines(i){
+  var d=plan.d[PDAYS[i]],lines=[],nd=0,nf=0;
+  PSLOTS.forEach(function(sl){d[sl[0]].forEach(function(it){
+    var dd=it.did?dishes.find(function(x){return x.id===it.did}):null;
+    if(dd){nd++;dishRecs(dd).forEach(function(r){(r.ingredients||[]).forEach(function(g){if(g.n)lines.push({n:g.n,m:g.m||"",u:g.u||"",q:g.q||""})})})}
+    else if(WINCL&&it.t){nf++;var p=parseQty(it.q);lines.push(p?{n:it.t,m:"",u:p.u,q:p.q}:{n:it.t+(it.q?" ("+it.q+")":""),m:"",u:"",q:""})}
+  })});
+  return {lines:lines,nd:nd,nf:nf};
+}
+function wShop(days){
+  var added=0;
+  days.forEach(function(i){
+    shop.entries=shop.entries.filter(function(x){return x.rid!=="w:"+i});
+    var r=planDayLines(i);
+    if(r.lines.length){shop.entries.push({rid:"w:"+i,title:PDN[i],people:0,lines:r.lines});added++}
+  });
+  if(added){persistShop();render(false);flash("Aggiunta alla spesa.")}else flash("Non ci sono pasti da aggiungere.");
+}
+function wshBody(){
+  return '<button class="pm" data-act="wshall">'+pmi("cart","y")+'<span class="pml">Aggiungi tutta la settimana</span></button>'+
+  '<button class="pm" data-act="wshday">'+pmi("cart","y")+'<span class="pml"><span>Aggiungi solo</span> <span>'+PDN[wday]+'</span></span></button><div class="pmd"></div>'+
+  '<button class="pm" data-act="wshtog" role="switch" aria-checked="'+WINCL+'">'+(WINCL?pmi("chk","y"):'<span class="pmi g" aria-hidden="true"></span>')+'<span class="pml">Includi i pasti scritti a mano</span></button>';
+}
+function openWeekShopMenu(btn){
+  closeMenu();pmS=null;
+  var mask=document.createElement("div");mask.id="pmask";mask.setAttribute("data-act","pmclose");
+  var m=document.createElement("div");m.id="pmenu";m.setAttribute("role","menu");m.innerHTML=wshBody();
+  document.body.appendChild(mask);document.body.appendChild(m);
+  var r=btn.getBoundingClientRect(),vw=window.innerWidth,vh=window.innerHeight,w=m.offsetWidth,hh=m.offsetHeight;
+  var left=Math.max(12,Math.min(vw-w-12,r.left)),top=r.top-hh-8;
+  if(top<12)top=Math.min(vh-hh-12,r.bottom+8);
+  m.style.left=left+"px";m.style.top=top+"px";
+}
 function planFind(slot,id){var l=(plan.d[PDAYS[wday]]||{})[slot]||[];for(var i=0;i<l.length;i++)if(l[i].id===id)return l[i];return null}
 function planItemHTML(it,slot){
   var d=it.did?dishes.find(function(x){return x.id===it.did}):null,q=it.q?'<span class="wq">'+esc(it.q)+'</span>':'',at=' data-i="'+esc(it.id)+'" data-s="'+slot+'"';
@@ -1947,7 +1989,7 @@ function weekHTML(){
   }).join("");
   var any=PDAYS.some(function(_,i){return planCount(i)>0});
   return '<div class="wk">'+strip+'<div class="wtitle"><h3>'+PDN[wday]+'</h3>'+(wday===today?'<span class="wtoday">Oggi</span>':'')+'</div>'+(planCount(wday)?'<p class="whint">Tieni premuto un pasto per modificarlo o eliminarlo.</p>':'')+slots+
-    (any?'<div class="acts wfoot"><button type="button" class="b d'+(wsure?" sure":"")+'" data-act="'+(wsure?"wclrok":"wclr")+'">'+(wsure?"Conferma: svuota la settimana":"Svuota la settimana")+'</button></div>':'')+'</div>';
+    (any?'<div class="acts wfoot"><button type="button" class="b p wshp" data-act="wshop">Aggiungi alla spesa</button><button type="button" class="b d'+(wsure?" sure":"")+'" data-act="'+(wsure?"wclrok":"wclr")+'">'+(wsure?"Conferma: svuota la settimana":"Svuota la settimana")+'</button></div>':'')+'</div>';
 }
 function wOpen(slot,edit){
   wsel={slot:slot,days:{},edit:edit||null,pick:"",text:"",q:""};
@@ -2186,6 +2228,10 @@ document.addEventListener("click",function(e){
   if(a==="wadd"){wOpen(el.dataset.s);return}
   if(a==="wclose"){wClose();return}
   if(a==="wxd"){var wi=parseInt(el.dataset.i,10)||0;if(wi!==wday&&wsel){var on=!wsel.days[wi];if(on)wsel.days[wi]=true;else delete wsel.days[wi];el.classList.toggle("on",on);el.setAttribute("aria-pressed",on?"true":"false")}return}
+  if(a==="wshop"){openWeekShopMenu(el);return}
+  if(a==="wshall"){closeMenu();wShop([0,1,2,3,4,5,6]);return}
+  if(a==="wshday"){closeMenu();wShop([wday]);return}
+  if(a==="wshtog"){WINCL=!WINCL;try{localStorage.setItem("ever-wincl",WINCL?"1":"0")}catch(e){}var pmw=document.getElementById("pmenu");if(pmw)pmw.innerHTML=wshBody();return}
   if(a==="wsubmit"){wSubmit();return}
   if(a==="wdish"){
     var wd=dishes.find(function(x){return x.id===el.dataset.id});if(!wd||!wsel)return;
@@ -2307,6 +2353,8 @@ var PMI={
  unfolder:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 7.5A1.5 1.5 0 0 1 5 6h4l2 2.5h8a1.5 1.5 0 0 1 1.5 1.5v8a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 18z"/><path d="M9 14h6"/></svg>',
  trash:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7h14M10 7V5h4v2M7 7l1 12h8l1-12M10.5 11v5M13.5 11v5"/></svg>',
  x:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+ cart:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M3 4h2.5l2 11h10.5l2-8H6.5"/></svg>',
+ chk:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
  cam:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.4"/></svg>',
  lib:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="14" rx="2.5"/><circle cx="9" cy="10.5" r="1.6"/><path d="M4 17l5-4.5 3.5 3 3-2.5 4.5 4"/></svg>'
 };
